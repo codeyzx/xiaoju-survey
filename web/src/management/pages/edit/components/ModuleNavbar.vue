@@ -12,22 +12,14 @@
         <template #content="{ onCooper }">
           <div class="btn" @click="onCooper">
             <i-ep-connection class="view-icon" :size="20" />
-            <span class="btn-txt">协作</span>
+            <span class="btn-txt">{{ $t('editor.collaborate') }}</span>
           </div>
         </template>
       </CooperationPanel>
       <PreviewPanel></PreviewPanel>
       <HistoryPanel></HistoryPanel>
-      <SavePanel
-        :updateLogicConf="updateLogicConf"
-        :updateWhiteConf="updateWhiteConf"
-        :seize="seize"
-      ></SavePanel>
-      <PublishPanel
-        :updateLogicConf="updateLogicConf"
-        :updateWhiteConf="updateWhiteConf"
-        :seize="seize"
-      ></PublishPanel>
+      <SavePanel :updateLogicConf="updateLogicConf" :updateWhiteConf="updateWhiteConf" :seize="seize"></SavePanel>
+      <PublishPanel :updateLogicConf="updateLogicConf" :updateWhiteConf="updateWhiteConf" :seize="seize"></PublishPanel>
     </div>
   </div>
 </template>
@@ -145,11 +137,13 @@ const seize = async (sessionId: string) => {
 </script>
 <style lang="scss" scoped>
 @import url('@/management/styles/edit-btn.scss');
+
 .view-icon {
   font-size: 20px;
   height: 29px;
   line-height: 29px;
 }
+
 .nav {
   width: 100%;
   height: 56px;
@@ -158,16 +152,19 @@ const seize = async (sessionId: string) => {
   justify-content: center;
   align-items: center;
   background-color: #fff;
-  > div {
+
+  >div {
     display: flex;
     flex-direction: row;
     align-items: center;
   }
+
   .center-group {
     height: 100%;
     flex: 1;
     justify-content: center;
   }
+
   .left-group,
   .right-group {
     position: absolute;
@@ -179,6 +176,7 @@ const seize = async (sessionId: string) => {
 .left-group {
   left: 18px;
 }
+
 .right-group {
   right: 18px;
 }

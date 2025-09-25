@@ -9,117 +9,62 @@
             {{ tableTitle }}
           </h2>
           <div class="operation">
-            <el-button
-              class="btn create-btn"
-              type="default"
-              @click="onSpaceCreate"
-              v-if="menuType === MenuType.SpaceGroup && !workSpaceId"
-            >
+            <el-button class="btn create-btn" type="default" @click="onSpaceCreate"
+              v-if="menuType === MenuType.SpaceGroup && !workSpaceId">
               <i class="iconfont icon-chuangjian"></i>
-              <span>创建团队空间</span>
+              <span>{{ $t('surveyList.createSpace') }}</span>
             </el-button>
-            <el-button
-              class="btn create-btn"
-              type="default"
-              @click="onGroupCreate"
-              v-if="menuType === MenuType.PersonalGroup && !groupId"
-            >
+            <el-button class="btn create-btn" type="default" @click="onGroupCreate"
+              v-if="menuType === MenuType.PersonalGroup && !groupId">
               <i class="iconfont icon-chuangjian"></i>
-              <span>创建分组</span>
+              <span>{{ $t('surveyList.createGroup') }}</span>
             </el-button>
-            <el-button
-              type="default"
-              class="btn"
-              @click="onSetGroup"
-              v-if="workSpaceId && menuType === MenuType.SpaceGroup"
-            >
+            <el-button type="default" class="btn" @click="onSetGroup"
+              v-if="workSpaceId && menuType === MenuType.SpaceGroup">
               <i class="iconfont icon-shujuliebiao"></i>
-              <span>团队管理</span>
+              <span>{{ $t('surveyList.spaceManagement') }}</span>
             </el-button>
-            <el-button
-              class="btn create-btn"
-              type="default"
-              @click="onCreate"
-              v-if="workSpaceId || groupId"
-            >
+            <el-button class="btn create-btn" type="default" @click="onCreate" v-if="workSpaceId || groupId">
               <i class="iconfont icon-chuangjian"></i>
-              <span>创建问卷</span>
+              <span>{{ $t('surveyList.createSurvey') }}</span>
             </el-button>
           </div>
         </div>
-        <BaseList
-          :loading="loading"
-          :data="surveyList"
-          :total="surveyTotal"
-          @refresh="fetchSurveyList"
-          ref="listRef"
-          v-if="workSpaceId || groupId"
-        ></BaseList>
-        <RecycleBinList
-          :loading="loading"
-          :data="surveyList"
-          :total="surveyTotal"
-          @refresh="fetchSurveyList"
-          ref="listRef"
-          v-if="menuType === MenuType.RecycleBin"
-        ></RecycleBinList>
-        <SpaceList
-          ref="spaceListRef"
-          @refresh="fetchSpaceList"
-          :loading="spaceLoading"
-          :data="workSpaceList"
-          :total="workSpaceListTotal"
-          v-if="menuType === MenuType.SpaceGroup && !workSpaceId"
-        ></SpaceList>
-        <GroupList
-          ref="groupListRef"
-          @refresh="fetchGroupList"
-          :loading="groupLoading"
-          :data="groupList"
-          :total="groupListTotal"
-          v-if="menuType === MenuType.PersonalGroup && !groupId"
-        ></GroupList>
-  
+        <BaseList :loading="loading" :data="surveyList" :total="surveyTotal" @refresh="fetchSurveyList" ref="listRef"
+          v-if="workSpaceId || groupId"></BaseList>
+        <RecycleBinList :loading="loading" :data="surveyList" :total="surveyTotal" @refresh="fetchSurveyList"
+          ref="listRef" v-if="menuType === MenuType.RecycleBin"></RecycleBinList>
+        <SpaceList ref="spaceListRef" @refresh="fetchSpaceList" :loading="spaceLoading" :data="workSpaceList"
+          :total="workSpaceListTotal" v-if="menuType === MenuType.SpaceGroup && !workSpaceId"></SpaceList>
+        <GroupList ref="groupListRef" @refresh="fetchGroupList" :loading="groupLoading" :data="groupList"
+          :total="groupListTotal" v-if="menuType === MenuType.PersonalGroup && !groupId"></GroupList>
+
       </div>
     </div>
-    <SpaceModify
-      v-if="showSpaceModify"
-      :type="modifyType"
-      :visible="showSpaceModify"
-      @on-close-codify="onCloseSpaceModify"
-      @update-data="onCloseModifyInTeamWork"
-    />
-    <GroupModify
-      v-if="showGroupModify"
-      type="add"
-      :visible="showGroupModify"
-      @on-close-codify="onCloseGroupModify"
-    />
+    <SpaceModify v-if="showSpaceModify" :type="modifyType" :visible="showSpaceModify"
+      @on-close-codify="onCloseSpaceModify" @update-data="onCloseModifyInTeamWork" />
+    <GroupModify v-if="showGroupModify" type="add" :visible="showGroupModify" @on-close-codify="onCloseGroupModify" />
 
-    <el-dialog
-      title="请选择创建方式"
-      v-model="showCreateMethod"
-      :before-close="handleCloseCreateDialog"
-      :width="515"
-    >
+    <el-dialog :title="$t('surveyList.selectCreateMethod')" v-model="showCreateMethod"
+      :before-close="handleCloseCreateDialog" :width="515">
       <div class="create-method-list">
         <div class="create-method-item" @click="toCreate">
           <div class="icon">
             <i class="iconfont icon-kongbaichuangjian"></i>
           </div>
-          <span>空白创建</span>
+          <span>{{ $t('editor.createBlank') }}</span>
         </div>
         <div class="create-method-item" @click="openTextImport">
           <div class="icon">
             <i class="iconfont icon-wenbendaoru"></i>
           </div>
-          <span>文本导入</span>
+          <span>{{ $t('editor.textImport') }}</span>
         </div>
         <div class="create-method-item" @click="opemAIGenerate">
           <div class="icon">
             <i class="iconfont icon-AIshengcheng"></i>
           </div>
-          <span>AI生成</span>
+          <span>{{ $t('editor.aiGenerate') }}</span>
         </div>
         <div class="create-method-item" @click="openExcelImport">
           <div class="icon">
@@ -141,33 +86,24 @@
     </div>
     <div class="fiexed-ai-generate-wrapper" v-if="showAIGenerate">
       <div class="ai-generate-header">
-        
+
         <div class="nav-left">
-         <img src="/imgs/s-logo.webp" class="logo" />
-          <el-button link  @click="showAIGenerate = false">
+          <img src="/imgs/s-logo.webp" class="logo" />
+          <el-button link @click="showAIGenerate = false">
             <i class="iconfont icon-fanhui"></i>
             返回
           </el-button>
         </div>
-      <h2 class="nav-title">AI智能生成问卷</h2>
-      <el-button type="primary"  class="publish-btn"  @click="onShowCreateForm">确定创建</el-button>
+        <h2 class="nav-title">AI智能生成问卷</h2>
+        <el-button type="primary" class="publish-btn" @click="onShowCreateForm">确定创建</el-button>
       </div>
       <AIGenerate @change="onAIGenerteChange"></AIGenerate>
     </div>
-    <el-dialog
-      v-model="showCreateForm"
-      title="确定创建"
-      width="500"
-    >
+    <el-dialog v-model="showCreateForm" title="确定创建" width="500">
       <CreateForm @cancel="showCreateForm = false" @confirm="onConfirmCreate"></CreateForm>
     </el-dialog>
-    <ExcelImport
-      v-if="showExcelImport"
-      :visible="showExcelImport"
-      @on-close-excel-import="onCloseExcelImport"
-      @on-excel-upload-success="onExcelUploadSuccess"
-      @on-show-create-form-excel-import="onShowCreateFormExcelImport"
-    />
+    <ExcelImport v-if="showExcelImport" :visible="showExcelImport" @on-close-excel-import="onCloseExcelImport"
+      @on-excel-upload-success="onExcelUploadSuccess" @on-show-create-form-excel-import="onShowCreateFormExcelImport" />
   </div>
 </template>
 
@@ -407,7 +343,7 @@ const openTextImport = () => {
   createMethod.value = 'textImport'
 }
 
-const opemAIGenerate = () => { 
+const opemAIGenerate = () => {
   showCreateMethod.value = false;
   showAIGenerate.value = true;
   createMethod.value = 'AIGenerate'
@@ -426,9 +362,9 @@ const onShowCreateForm = () => {
 
 const onConfirmCreate = async (formValue: { title: string; remark?: string; surveyType: string; groupId?: string }, callback: (success: boolean) => void) => {
   try {
-    switch(createMethod.value) {
+    switch (createMethod.value) {
       case 'ExcelImport':
-      case 'textImport':{
+      case 'textImport': {
         const payload: any = {
           ...formValue,
           createMethod: createMethod.value,
@@ -454,7 +390,7 @@ const onConfirmCreate = async (formValue: { title: string; remark?: string; surv
         }
         break;
       }
-      case 'AIGenerate':{
+      case 'AIGenerate': {
         const payload: any = {
           ...formValue,
           createMethod: createMethod.value,
@@ -524,10 +460,12 @@ const onAIGenerteChange = (newQuestionList: Array<any>) => {
 .question-list-root {
   height: 100%;
   background-color: #f6f7f9;
+
   .content-wrap {
     position: relative;
     height: calc(100% - 56px);
   }
+
   .list-content {
     position: relative;
     height: 100%;
@@ -542,6 +480,7 @@ const onAIGenerteChange = (newQuestionList: Array<any>) => {
       justify-content: space-between;
       align-items: center;
       margin-bottom: 24px;
+
       .operation {
         flex: 0 1 auto;
         display: flex;
@@ -576,6 +515,7 @@ const onAIGenerteChange = (newQuestionList: Array<any>) => {
     }
   }
 }
+
 .create-method-list {
   display: grid;
   grid-template-columns: 210px 210px;
@@ -583,6 +523,7 @@ const onAIGenerteChange = (newQuestionList: Array<any>) => {
   grid-gap: 20px;
   width: 100%;
   padding: 10px 20px 30px 20px;
+
   .create-method-item {
     display: flex;
     flex-direction: row;
@@ -592,6 +533,7 @@ const onAIGenerteChange = (newQuestionList: Array<any>) => {
     background-color: #f6f7f9;
     border-radius: 4px;
     cursor: pointer;
+
     .icon {
       width: 30px;
       height: 30px;
@@ -600,15 +542,18 @@ const onAIGenerteChange = (newQuestionList: Array<any>) => {
       background-color: #fff;
       margin-right: 15px;
       box-shadow: 1px 1px 5px 0 $primary-color;
+
       .iconfont {
         color: $primary-color;
       }
     }
+
     span {
       font-weight: 500;
     }
   }
 }
+
 .fiexed-text-import-wrapper {
   position: fixed;
   left: 0;
@@ -619,6 +564,7 @@ const onAIGenerteChange = (newQuestionList: Array<any>) => {
   z-index: 999;
   display: flex;
   flex-direction: column;
+
   .text-import-header {
     width: 100%;
     padding: 0 30px;
@@ -627,6 +573,7 @@ const onAIGenerteChange = (newQuestionList: Array<any>) => {
     align-items: center;
     justify-content: space-between;
     box-shadow: 0 4px 8px 0 rgba(74, 76, 91, 0.08);
+
     .return {
       margin-left: 20px;
       line-height: 56px;
@@ -634,6 +581,7 @@ const onAIGenerteChange = (newQuestionList: Array<any>) => {
       color: #6e707c;
       position: relative;
       cursor: pointer;
+
       &::before {
         position: absolute;
         left: -20px;
@@ -642,11 +590,13 @@ const onAIGenerteChange = (newQuestionList: Array<any>) => {
         content: '<';
       }
     }
+
     .title {
       font-size: 16px;
     }
   }
 }
+
 .fiexed-ai-generate-wrapper {
   display: flex;
   flex-direction: column;
@@ -671,7 +621,7 @@ const onAIGenerteChange = (newQuestionList: Array<any>) => {
     border-bottom: 1px solid #eee;
     flex-grow: 0;
     flex-shrink: 0;
- 
+
     .nav-left {
       display: flex;
       align-items: center;

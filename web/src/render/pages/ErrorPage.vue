@@ -12,11 +12,13 @@
 <script setup>
 import { computed } from 'vue'
 import { storeToRefs } from 'pinia'
+import { useI18n } from 'vue-i18n'
 
 import communalLoader from '@materials/communals/communalLoader.js'
 import { useErrorInfo } from '../stores/errorInfo'
 import { useSurveyStore } from '../stores/survey'
 
+const { t } = useI18n()
 const LogoIcon = communalLoader.loadComponent('LogoIcon')
 
 const surveyStore = useSurveyStore()
@@ -34,7 +36,7 @@ const errorImage = computed(() => {
 })
 
 const errorMsg = computed(() => {
-  return errorInfo.value.errorMsg || '提交失败'
+  return errorInfo.value.errorMsg || t('error.unknown')
 })
 const logoConf = computed(() => surveyStore.bottomConf || {})
 </script>
@@ -47,6 +49,7 @@ const logoConf = computed(() => surveyStore.bottomConf || {})
   background: var(--primary-background-color);
 
   padding: 0 0.3rem;
+
   .result-page {
     background: rgba(255, 255, 255, var(--opacity));
     display: flex;
@@ -54,6 +57,7 @@ const logoConf = computed(() => surveyStore.bottomConf || {})
     height: 100%;
   }
 }
+
 .page-content {
   position: relative;
   max-width: 920px;

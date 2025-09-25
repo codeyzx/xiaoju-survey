@@ -2,7 +2,7 @@
   <div class="mask" v-if="visible">
     <div class="box">
       <div class="title">{{ title }}</div>
-      <div class="btn btn-primary btn-base" @click="handleConfirm">{{ btnText }}</div>
+      <div class="btn btn-primary btn-base" @click="handleConfirm">{{ btnText || $t('login.knownText') }}</div>
     </div>
   </div>
 </template>
@@ -22,7 +22,7 @@ const emit = defineEmits<Emit>()
 
 withDefaults(defineProps<Props>(), {
   visible: false,
-  btnText: '我知道了',
+  btnText: '',
   title: ''
 })
 

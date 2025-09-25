@@ -1,7 +1,7 @@
 <template>
   <div class="btn" @click="handleSave" v-loading="isSaving">
     <i class="iconfont icon-baocun"></i>
-    <span class="btn-txt">保存</span>
+    <span class="btn-txt">{{ $t('common.save') }}</span>
     <transition name="fade">
       <div class="auto-save-wrapper" v-if="isShowAutoSave">
         <span class="sv-text">
@@ -17,6 +17,7 @@
 import { ref, computed, nextTick, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { storeToRefs } from 'pinia'
+import { useI18n } from 'vue-i18n'
 import { useEditStore } from '@/management/stores/edit'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import 'element-plus/theme-chalk/src/message.scss'
@@ -30,6 +31,7 @@ interface Props {
   seize: any
 }
 
+const { t } = useI18n()
 const route = useRoute()
 const props = defineProps<Props>()
 const isSaving = ref<boolean>(false)
@@ -38,9 +40,9 @@ const autoSaveStatus = ref<'succeed' | 'saving' | 'failed'>('succeed')
 const saveText = computed(
   () =>
     ({
-      saving: '保存中',
-      succeed: '保存成功',
-      failed: '保存失败'
+      saving: t('common.loading'),
+      succeed: t('success.saved'),
+      failed: t('error.saveFailed')
     })[autoSaveStatus.value]
 )
 
@@ -71,12 +73,12 @@ const validate = () => {
 const onSave = async () => {
   const saveData = buildData(schema.value, sessionId.value)
   if (!saveData.sessionId) {
-    ElMessage.error('sessionId有误')
+    ElMessage.error(t('error.sessionInvalid'))
     return null
   }
 
   if (!saveData.surveyId) {
-    ElMessage.error('未获取到问卷id')
+    ElMessage.error(t('error.surveyIdNotFound'))
     return null
   }
 

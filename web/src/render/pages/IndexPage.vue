@@ -4,12 +4,14 @@
 <script setup lang="ts">
 import { watch, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import { getPublishedSurveyInfo, getPreviewSchema } from '../api/survey'
 import AlertDialog from '../components/AlertDialog.vue'
 import { useSurveyStore } from '../stores/survey'
 import useCommandComponent from '../hooks/useCommandComponent'
 
 const route = useRoute()
+const { t } = useI18n()
 const surveyStore = useSurveyStore()
 
 watch(
@@ -81,7 +83,7 @@ const getDetail = async (surveyPath: string) => {
     }
   } catch (error: any) {
     console.log(error)
-    alert({ title: error.message || '获取问卷失败' })
+    alert({ title: error.message || t('submission.getSurveyFailed') })
   }
 }
 </script>

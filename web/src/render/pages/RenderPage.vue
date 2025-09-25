@@ -6,14 +6,8 @@
       <div class="content">
         <MainTitle v-if="pageIndex == 1" :bannerConf="bannerConf" :readonly="true"></MainTitle>
         <MainRenderer ref="mainRef"></MainRenderer>
-        <SubmitButton
-          :validate="validate"
-          :submitConf="submitConf"
-          :readonly="true"
-          :isFinallyPage="isFinallyPage"
-          :renderData="renderData"
-          @submit="handleSubmit"
-        ></SubmitButton>
+        <SubmitButton :validate="validate" :submitConf="submitConf" :readonly="true" :isFinallyPage="isFinallyPage"
+          :renderData="renderData" @submit="handleSubmit"></SubmitButton>
       </div>
       <LogoIcon :logo-conf="logoConf" :readonly="true" />
       <VerifyDialog />
@@ -24,6 +18,7 @@
 import { computed, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 // @ts-ignore
 import communalLoader from '@materials/communals/communalLoader.js'
 
@@ -68,6 +63,7 @@ const alert = useCommandComponent(AlertDialog)
 const confirm = useCommandComponent(ConfirmDialog)
 
 const router = useRouter()
+const { t } = useI18n()
 const surveyStore = useSurveyStore()
 const questionStore = useQuestionStore()
 
@@ -136,7 +132,7 @@ const submitSurvey = async () => {
       router.replace({ name: 'successPage' })
     } else {
       alert({
-        title: res.errmsg || '提交失败'
+        title: res.errmsg || t('submission.submitFailed')
       })
       if (res.code === 9003 && res.data) {
         surveyStore.changeData({ key: res.data.field, value: null })

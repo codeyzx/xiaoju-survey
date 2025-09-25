@@ -1,8 +1,11 @@
 <template>
-  <router-view></router-view>
+  <LocaleProvider>
+    <router-view></router-view>
+  </LocaleProvider>
 </template>
 <script setup lang="ts">
 import { watch } from 'vue'
+import LocaleProvider from '@/common/components/LocaleProvider.vue'
 import { storeToRefs } from 'pinia'
 
 import { useSurveyStore } from './stores/survey'
@@ -58,6 +61,7 @@ html {
     padding-top: 40px;
     background: var(--primary-background);
   }
+
   #app {
     border-radius: 8px 8px 0 0;
     box-shadow: var(--el-box-shadow);

@@ -1,6 +1,6 @@
 <template>
   <span type="primary" :loading="isPublishing" class="publish-btn" @click="handlePublish">
-    发布
+    {{ $t('common.publish') }}
   </span>
 </template>
 <script setup lang="ts">
@@ -149,6 +149,6 @@ const handlePublish = async () => {
   line-height: 36px;
   padding: 0;
   font-size: 14px;
-  user-select: auto!important;
+  user-select: auto !important;
 }
 </style>

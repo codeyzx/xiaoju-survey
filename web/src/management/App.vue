@@ -1,30 +1,39 @@
 <template>
-  <router-view></router-view>
+  <LocaleProvider>
+    <router-view></router-view>
+  </LocaleProvider>
 </template>
 
 <script setup lang="ts">
 import { watch, onBeforeUnmount } from 'vue'
+import { useI18n } from 'vue-i18n'
+import LocaleProvider from '@/common/components/LocaleProvider.vue'
 import { useUserStore } from '@/management/stores/user'
 import { useRouter } from 'vue-router'
 import { ElMessageBox, ElMessage, type Action } from 'element-plus'
 import { checkIsTokenValid } from '@/management/api/auth'
 
+const { t } = useI18n()
 const userStore = useUserStore()
 const router = useRouter()
 
 let timer: any
 
 const showConfirmBox = () => {
-  ElMessageBox.alert('登录状态已失效，请重新登录。', '提示', {
-    confirmButtonText: '确认',
-    showClose: false,
-    callback: (action: Action) => {
-      if (action === 'confirm') {
-        userStore.logout()
-        router.replace({ name: 'login' })
+  ElMessageBox.alert(
+    t('error.permissionDenied') + '，' + t('login.title'),
+    t('common.info'),
+    {
+      confirmButtonText: t('common.confirm'),
+      showClose: false,
+      callback: (action: Action) => {
+        if (action === 'confirm') {
+          userStore.logout()
+          router.replace({ name: 'login' })
+        }
       }
     }
-  })
+  )
 }
 
 const checkAuth = async () => {

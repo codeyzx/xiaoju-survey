@@ -4,17 +4,13 @@
       <div class="result-content">
         <img src="/imgs/icons/success.webp" />
         <div class="msg" v-html="successMsg"></div>
-        <router-link
-          :to="{
-            name: 'renderPage',
-            query: {
-              t: new Date().getTime()
-            }
-          }"
-          replace
-          class="reset-link"
-        >
-          重新填写
+        <router-link :to="{
+          name: 'renderPage',
+          query: {
+            t: new Date().getTime()
+          }
+        }" replace class="reset-link">
+          {{ $t('submission.resetForm') }}
         </router-link>
       </div>
       <LogoIcon :logo-conf="logoConf" :readonly="true" />
@@ -24,18 +20,20 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useSurveyStore } from '../stores/survey'
+import { useI18n } from 'vue-i18n'
 // @ts-ignore
 import communalLoader from '@materials/communals/communalLoader.js'
 
 const LogoIcon = communalLoader.loadComponent('LogoIcon')
 const surveyStore = useSurveyStore()
+const { t } = useI18n()
 
 const logoConf = computed(() => {
   return surveyStore?.bottomConf || {}
 })
 const successMsg = computed(() => {
   const msgContent = (surveyStore?.submitConf as any)?.msgContent || {}
-  return msgContent?.msg_200 || '提交成功'
+  return msgContent?.msg_200 || t('submission.submitSuccess')
 })
 </script>
 <style lang="scss" scoped>
@@ -49,6 +47,7 @@ const successMsg = computed(() => {
   background: var(--primary-background-color);
 
   padding: 0 0.3rem;
+
   .result-page {
     background: rgba(255, 255, 255, var(--opacity));
     display: flex;

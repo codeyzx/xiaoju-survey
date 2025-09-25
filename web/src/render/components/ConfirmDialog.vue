@@ -9,12 +9,7 @@
         <div v-if="formValues && formValues.length" class="body-content">
           <div class="form-item" v-for="item in formValues" :key="item.key">
             <div class="input-wrapper">
-              <input
-                class="input-inner"
-                :name="item.key"
-                v-model="item.value"
-                :placeholder="item.placeholder"
-              />
+              <input class="input-inner" :name="item.key" v-model="item.value" :placeholder="item.placeholder" />
             </div>
           </div>
         </div>
@@ -23,9 +18,9 @@
 
       <div class="btn-wrapper">
         <div class="btn btn-shallow btn-base" v-if="cancel" @click="handleCancel">
-          {{ cancelBtnText }}
+          {{ cancelBtnText || $t('common.cancel') }}
         </div>
-        <div class="btn btn-primary btn-base" @click="handleConfirm">{{ confirmBtnText }}</div>
+        <div class="btn btn-primary btn-base" @click="handleConfirm">{{ confirmBtnText || $t('common.confirm') }}</div>
       </div>
     </div>
   </div>
@@ -60,8 +55,8 @@ const emit = defineEmits<Emit>()
 const props = withDefaults(defineProps<Props>(), {
   visible: false,
   cancel: true,
-  cancelBtnText: '取消',
-  confirmBtnText: '确定',
+  cancelBtnText: '',
+  confirmBtnText: '',
   title: '',
   tips: '',
   autoClose: true

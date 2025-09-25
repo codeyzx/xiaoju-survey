@@ -1,64 +1,47 @@
 <template>
-  <div
-    class="login-page"
-    :style="{
-      background: `url('/imgs/create/background.webp') no-repeat bottom right`,
-      'background-size': 'cover'
-    }"
-  >
+  <div class="login-page" :style="{
+    background: `url('/imgs/create/background.webp') no-repeat bottom right`,
+    'background-size': 'cover'
+  }">
     <div class="login-top">
       <img src="/imgs/Logo.webp" alt="logo" />
-      <span>您好，请登录</span>
+      <div class="login-top-right">
+        <LanguageSelector />
+        <span>{{ $t('login.title') }}</span>
+      </div>
     </div>
     <div class="login-box">
-      <el-form
-        :model="formData"
-        :rules="rules"
-        ref="formDataRef"
-        label-width="100px"
-        class="login-form"
-        @submit.prevent
-      >
-        <el-form-item label="账号" prop="name">
-          <el-input v-model="formData.name" size="large"></el-input>
+      <el-form :model="formData" :rules="rules" ref="formDataRef" label-width="100px" class="login-form"
+        @submit.prevent>
+        <el-form-item :label="$t('login.account')" prop="name">
+          <el-input v-model="formData.name" size="large" :placeholder="$t('login.accountPlaceholder')"></el-input>
         </el-form-item>
 
-        <el-form-item label="密码" prop="password">
-          <el-input type="password" v-model="formData.password" size="large"></el-input>
+        <el-form-item :label="$t('login.password')" prop="password">
+          <el-input type="password" v-model="formData.password" size="large"
+            :placeholder="$t('login.passwordPlaceholder')"></el-input>
         </el-form-item>
 
         <el-form-item label="" v-if="passwordStrength">
-          <span
-            class="strength"
-            v-for="item in 3"
-            :key="item"
-            :style="{ backgroundColor: strengthColor[item - 1][passwordStrength] }"
-          ></span>
+          <span class="strength" v-for="item in 3" :key="item"
+            :style="{ backgroundColor: strengthColor[item - 1][passwordStrength] }"></span>
         </el-form-item>
 
-        <el-form-item label="验证码" prop="captcha">
+        <el-form-item :label="$t('login.captcha')" prop="captcha">
           <div class="captcha-wrapper">
-            <el-input style="width: 280px" v-model="formData.captcha" size="large"></el-input>
-            <div class="captcha-img" @click="refreshCaptcha" v-html="captchaImgData"></div>
+            <el-input style="width: 280px" v-model="formData.captcha" size="large"
+              :placeholder="$t('login.captchaPlaceholder')"></el-input>
+            <div class="captcha-img" @click="refreshCaptcha" v-html="captchaImgData"
+              :title="$t('login.refreshCaptcha')"></div>
           </div>
         </el-form-item>
 
         <el-form-item class="button-group">
-          <el-button
-            :loading="pending.register"
-            class="button register-button"
-            @click="submitForm('register')"
-          >
-            注册
+          <el-button :loading="pending.register" class="button register-button" @click="submitForm('register')">
+            {{ $t('login.registerBtn') }}
           </el-button>
-          <el-button
-            :loading="pending.login"
-            size="small"
-            type="primary"
-            class="button"
-            @click="submitForm('login')"
-          >
-            登录
+          <el-button :loading="pending.login" size="small" type="primary" class="button" @click="submitForm('login')">
+            {{ $t('login.loginBtn') }}
           </el-button>
         </el-form-item>
       </el-form>
@@ -69,11 +52,13 @@
 <script setup lang="ts">
 import { onMounted, ref, reactive } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 
 import { ElMessage } from 'element-plus'
 import 'element-plus/theme-chalk/src/message.scss'
 
 import { debounce } from 'lodash-es'
+import LanguageSelector from '@/common/components/LanguageSelector.vue'
 
 import { getPasswordStrength, login, register } from '@/management/api/auth'
 import { refreshCaptcha as refreshCaptchaApi } from '@/management/api/captcha'
@@ -82,6 +67,7 @@ import { useUserStore } from '@/management/stores/user'
 
 const route = useRoute()
 const router = useRouter()
+const { t } = useI18n()
 
 interface FormData {
   name: string
@@ -124,19 +110,19 @@ const strengthColor = reactive([
 // 密码内容校验
 const passwordValidator = (_: any, value: any, callback: any) => {
   if (!value) {
-    callback(new Error('请输入密码'))
+    callback(new Error(t('login.passwordRequired')))
     passwordStrength.value = undefined
     return
   }
 
   if (value.length < 6 || value.length > 16) {
-    callback(new Error('长度在 6 到 16 个字符'))
+    callback(new Error(t('login.passwordLength')))
     passwordStrength.value = undefined
     return
   }
 
   if (!/^[a-zA-Z0-9!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+$/.test(value)) {
-    callback(new Error('只能输入数字、字母、特殊字符'))
+    callback(new Error(t('login.passwordFormat')))
     passwordStrength.value = undefined
     return
   }
@@ -151,13 +137,13 @@ const passwordStrengthHandle = async (value: string) => {
   }
 }
 
-const rules = {
+const rules = reactive({
   name: [
-    { required: true, message: '请输入账号', trigger: 'blur' },
+    { required: true, message: () => t('login.accountRequired'), trigger: 'blur' },
     {
       min: 3,
       max: 10,
-      message: '长度在 3 到 10 个字符',
+      message: () => t('login.accountLength'),
       trigger: 'blur'
     }
   ],
@@ -165,11 +151,11 @@ const rules = {
   captcha: [
     {
       required: true,
-      message: '请输入验证码',
+      message: () => t('login.captchaRequired'),
       trigger: 'blur'
     }
   ]
-}
+})
 
 onMounted(() => {
   refreshCaptcha()
@@ -202,7 +188,7 @@ const submitForm = (type: 'login' | 'register') => {
         pending[type] = false
         if (res.code !== CODE_MAP.SUCCESS) {
           ElMessage.error(res.errmsg)
-          throw new Error('登录/注册失败' + res.errmsg)
+          throw new Error(t(type === 'login' ? 'login.loginFailed' : 'login.registerFailed') + res.errmsg)
         }
         const userStore = useUserStore()
         userStore.login({
@@ -237,7 +223,7 @@ const refreshCaptcha = async () => {
       captchaImgData.value = img
     }
   } catch (error) {
-    ElMessage.error('获取验证码失败')
+    ElMessage.error(t('login.getCaptchaFailed'))
   }
 }
 </script>
@@ -258,6 +244,12 @@ const refreshCaptcha = async () => {
 
     img {
       width: 90px;
+    }
+
+    .login-top-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
     }
   }
 
@@ -305,9 +297,11 @@ const refreshCaptcha = async () => {
   .captcha-wrapper {
     display: flex;
     align-items: center;
+
     .captcha-img {
       height: 40px;
       cursor: pointer;
+
       :deep(> svg) {
         max-height: 40px;
         width: 120px;
@@ -322,6 +316,7 @@ const refreshCaptcha = async () => {
     height: 6px;
     border-radius: 8px;
     background: red;
+
     &:not(:first-child) {
       margin-left: 8px;
     }
