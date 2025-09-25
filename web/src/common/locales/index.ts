@@ -1,7 +1,7 @@
 import { createI18n } from 'vue-i18n'
-import zhCN from './zh-CN'
-import enUS from './en-US'
-import idID from './id-ID'
+import zhCN from './zh-CN.js'
+import enUS from './en-US.js'
+import idID from './id-ID.js'
 
 // 支持的语言列表
 export const supportedLocales = [
