@@ -28,8 +28,7 @@
       </el-menu-item>
 
 
-      <div v-else> 
-        <el-menu-item
+      <el-menu-item
         :class="[
           index === 0 ? 'bottom' : '',
           index > 2 ? 'sub-item' : 'main-item',
@@ -37,7 +36,7 @@
           activeValue == menu.id ? 'check-item' : ''
         ]"
         :index="menu.id.toString()"
-        v-if="!menu.children?.length"
+        v-else-if="!menu.children?.length"
       >
         <template #title>
           <div class="title-content">
@@ -46,7 +45,6 @@
           </div>
         </template>
       </el-menu-item>
-      </div>
       <el-sub-menu
         v-else
         :index="menu.id.toString()"
