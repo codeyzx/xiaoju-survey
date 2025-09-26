@@ -1,32 +1,16 @@
 <template>
   <div class="search">
-    <TextSearch placeholder="请输入空间名称" :value="searchVal" @search="onSearchText" />
+    <TextSearch :placeholder="$t('surveyList.spaceSearchPlaceholder')" :value="searchVal" @search="onSearchText" />
   </div>
   <template v-if="total > 0">
     <div class="list-wrap">
-      <el-table
-        ref="multipleListTable"
-        class="list-table"
-        :data="data"
-        empty-text="暂无数据"
-        row-key="_id"
-        header-row-class-name="tableview-header"
-        row-class-name="tableview-row"
-        cell-class-name="tableview-cell"
-        v-loading="loading"
-        :height="550"
-        style="width: 100%"
-      >
+      <el-table ref="multipleListTable" class="list-table" :data="data" :empty-text="$t('common.noData')" row-key="_id"
+        header-row-class-name="tableview-header" row-class-name="tableview-row" cell-class-name="tableview-cell"
+        v-loading="loading" :height="550" style="width: 100%">
         <el-table-column column-key="space" width="20" />
-        <el-table-column
-          v-for="field in fieldList"
-          :key="(field as any)?.key"
-          :label="(field as any).title"
-          :column-key="(field as any).key"
-          :width="(field as any).width"
-          :min-width="(field as any).width || (field as any).minWidth"
-          class-name="link"
-        >
+        <el-table-column v-for="field in fieldList" :key="(field as any)?.key" :label="(field as any).title"
+          :column-key="(field as any).key" :width="(field as any).width"
+          :min-width="(field as any).width || (field as any).minWidth" class-name="link">
           <template #default="scope">
             <template v-if="(field as any).comp">
               <component :is="(field as any).comp" type="table" :value="scope.row" />
@@ -36,53 +20,35 @@
             </template>
           </template>
         </el-table-column>
-        <el-table-column
-          label="操作"
-          :width="200"
-          label-class-name="operation"
-          class-name="table-options"
-        >
+        <el-table-column :label="$t('surveyList.actions')" :width="200" label-class-name="operation"
+          class-name="table-options">
           <template #default="scope">
             <div class="space-tool-bar">
-              <ToolBar
-                :data="scope.row"
-                :tool-width="50"
-                :tools="getTools(scope.row)"
-                @click="handleClick"
-              />
+              <ToolBar :data="scope.row" :tool-width="50" :tools="getTools(scope.row)" @click="handleClick" />
             </div>
           </template>
         </el-table-column>
       </el-table>
     </div>
     <div class="list-pagination">
-      <el-pagination
-        v-model:current-page="curPage"
-        background
-        @current-change="handleCurrentChange"
-        layout="prev, pager, next"
-        :total="props.total"
-      >
+      <el-pagination v-model:current-page="curPage" background @current-change="handleCurrentChange"
+        layout="prev, pager, next" :total="props.total">
       </el-pagination>
     </div>
   </template>
 
   <div v-else>
-    <EmptyIndex :data="!searchVal ? noSpaceDataConfig : noSpaceSearchDataConfig" />
+    <EmptyIndex :data="emptyData" />
   </div>
 
-  <SpaceModify
-    v-if="showSpaceModify"
-    :type="modifyType"
-    :visible="showSpaceModify"
-    @on-close-codify="onCloseModify"
-  />
+  <SpaceModify v-if="showSpaceModify" :type="modifyType" :visible="showSpaceModify" @on-close-codify="onCloseModify" />
 </template>
 <script lang="ts" setup>
 import { ref, computed } from 'vue'
 import { ElMessageBox } from 'element-plus'
 import 'element-plus/theme-chalk/src/message-box.scss'
 import { get, map } from 'lodash-es'
+import { useI18n } from 'vue-i18n'
 import {
   noSpaceDataConfig,
   noSpaceSearchDataConfig,
@@ -113,11 +79,28 @@ const props = defineProps({
 })
 const emit = defineEmits(['refresh'])
 const workSpaceStore = useWorkSpaceStore()
+const { t } = useI18n()
 const fields = ['name', 'surveyTotal', 'memberTotal', 'owner', 'createdAt']
 const fieldList = computed(() => {
   return map(fields, (f) => {
-    return get(spaceListConfig, f, null)
+    const config = get(spaceListConfig, f, null)
+    if (config) {
+      return {
+        ...(config as object),
+        title: t((config as any).title)
+      } as any
+    }
+    return null
   })
+})
+
+const emptyData = computed(() => {
+  const config = searchVal.value ? noSpaceSearchDataConfig : noSpaceDataConfig
+  return {
+    ...config,
+    title: t(config.title),
+    desc: t(config.desc)
+  }
 })
 
 const isAdmin = (id: string) => {
@@ -171,7 +154,7 @@ const handleDelete = (id: string) => {
       await workSpaceStore.deleteSpace(id)
       await workSpaceStore.getSpaceList()
     })
-    .catch(() => {})
+    .catch(() => { })
 }
 
 const handleClick = (key: string, data: any) => {
@@ -195,13 +178,16 @@ defineExpose({ onCloseModify })
   justify-content: flex-end;
   margin-bottom: 20px;
 }
+
 .list-pagination {
   margin-top: 20px;
+
   :deep(.el-pagination) {
     display: flex;
     justify-content: flex-end;
   }
 }
+
 .list-wrap {
   padding: 20px;
   background: #fff;

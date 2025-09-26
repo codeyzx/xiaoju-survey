@@ -70,16 +70,16 @@
           <div class="icon">
             <i class="iconfont icon-Exceldaoru"></i>
           </div>
-          <span>Excel导入</span>
+          <span>{{ $t('editor.excelImport') }}</span>
         </div>
       </div>
     </el-dialog>
     <div class="fiexed-text-import-wrapper" v-if="showTextImport">
       <div class="text-import-header">
-        <div class="return no-logo-return icon-fanhui" @click="showTextImport = false">返回</div>
-        <div class="title">文本导入</div>
+        <div class="return no-logo-return icon-fanhui" @click="showTextImport = false">{{ $t('common.back') }}</div>
+        <div class="title">{{ $t('editor.textImport') }}</div>
         <el-button type="primary" class="publish-btn" @click="onShowCreateForm">
-          创建
+          {{ $t('common.create') }}
         </el-button>
       </div>
       <TextImport @change="onTextImportChange"></TextImport>
@@ -91,15 +91,16 @@
           <img src="/imgs/s-logo.webp" class="logo" />
           <el-button link @click="showAIGenerate = false">
             <i class="iconfont icon-fanhui"></i>
-            返回
+            {{ $t('common.back') }}
           </el-button>
         </div>
-        <h2 class="nav-title">AI智能生成问卷</h2>
-        <el-button type="primary" class="publish-btn" @click="onShowCreateForm">确定创建</el-button>
+        <h2 class="nav-title">{{ $t('editor.aiGenerateSurvey') }}</h2>
+        <el-button type="primary" class="publish-btn" @click="onShowCreateForm">{{ $t('common.confirmCreate')
+        }}</el-button>
       </div>
       <AIGenerate @change="onAIGenerteChange"></AIGenerate>
     </div>
-    <el-dialog v-model="showCreateForm" title="确定创建" width="500">
+    <el-dialog :title="$t('common.confirmCreate')" v-model="showCreateForm" width="500">
       <CreateForm @cancel="showCreateForm = false" @confirm="onConfirmCreate"></CreateForm>
     </el-dialog>
     <ExcelImport v-if="showExcelImport" :visible="showExcelImport" @on-close-excel-import="onCloseExcelImport"
@@ -111,6 +112,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import { ElMessage } from 'element-plus'
 import BaseList from './components/BaseList.vue'
 import RecycleBinList from './components/RecycleBinList.vue'
@@ -147,16 +149,17 @@ const {
   groupListTotal
 } = storeToRefs(workSpaceStore)
 const router = useRouter()
+const { t: $t } = useI18n()
 
 const tableTitle = computed(() => {
   if (menuType.value === MenuType.PersonalGroup && !groupId.value) {
-    return '我的空间'
+    return $t('surveyList.mySpace')
   } else if (menuType.value === MenuType.SpaceGroup && !workSpaceId.value) {
-    return '团队空间'
+    return $t('surveyList.teamSpace')
   } else if (menuType.value === MenuType.RecycleBin) {
     return ''
   } else {
-    return currentTeamSpace.value?.name || '问卷列表'
+    return currentTeamSpace.value?.name || $t('surveyList.surveyListTitle')
   }
 })
 
@@ -353,7 +356,7 @@ const onShowCreateForm = () => {
   if (questionList.value.length <= 0) {
     ElMessage({
       type: 'error',
-      message: '请导入题目'
+      message: $t('surveyList.pleaseImportQuestions')
     })
     return
   }
@@ -385,7 +388,7 @@ const onConfirmCreate = async (formValue: { title: string; remark?: string; surv
           })
           showCreateForm.value = false
         } else {
-          ElMessage.error(res?.errmsg || '创建失败')
+          ElMessage.error(res?.errmsg || $t('error.createFailed'))
           callback(false)
         }
         break;
@@ -411,7 +414,7 @@ const onConfirmCreate = async (formValue: { title: string; remark?: string; surv
           })
           showCreateForm.value = false
         } else {
-          ElMessage.error(res?.errmsg || '创建失败')
+          ElMessage.error(res?.errmsg || $t('error.createFailed'))
           callback(false)
         }
         break;
@@ -421,8 +424,8 @@ const onConfirmCreate = async (formValue: { title: string; remark?: string; surv
         break;
     }
   } catch (error) {
-    console.error('创建问卷失败:', error)
-    ElMessage.error('创建失败，请稍后重试')
+    console.error($t('error.createSurveyFailed'), error)
+    ElMessage.error($t('error.createFailedRetry'))
     callback(false)
   }
 }

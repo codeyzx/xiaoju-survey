@@ -1,34 +1,34 @@
 export const type = {
-  normal: '基础调查',
-  vote: '投票评选',
-  nps: 'NPS评分',
-  register: '在线报名'
+  normal: 'surveyList.surveyTypes.normal',
+  vote: 'surveyList.surveyTypes.vote',
+  nps: 'surveyList.surveyTypes.nps',
+  register: 'surveyList.surveyTypes.register'
 }
 
 export const spaceListConfig = {
   name: {
-    title: '空间名称',
+    title: 'surveyList.spaceName',
     key: 'name',
     width: 200
   },
   surveyTotal: {
-    title: '问卷数',
+    title: 'surveyList.surveyCount',
     key: 'surveyTotal',
     width: 150,
     tip: true
   },
   memberTotal: {
-    title: '成员数',
+    title: 'surveyList.memberCount',
     key: 'memberTotal',
     width: 150
   },
   owner: {
-    title: '所有者',
+    title: 'surveyList.owner',
     key: 'owner',
     width: 150
   },
   createdAt: {
-    title: '创建时间',
+    title: 'surveyList.createdAt',
     key: 'createdAt',
     minWidth: 200
   }
@@ -36,18 +36,18 @@ export const spaceListConfig = {
 
 export const groupListConfig = {
   name: {
-    title: '分组名称',
+    title: 'surveyList.groupName',
     key: 'name',
     width: 200
   },
   surveyTotal: {
-    title: '问卷数',
+    title: 'surveyList.surveyCount',
     key: 'surveyTotal',
     width: 150,
     tip: true
   },
   createdAt: {
-    title: '创建时间',
+    title: 'surveyList.createdAt',
     key: 'createdAt',
     minWidth: 200
   }
@@ -55,41 +55,41 @@ export const groupListConfig = {
 
 export const fieldConfig = {
   type: {
-    title: '类型',
+    title: 'surveyList.surveyType',
     key: 'type',
     width: 150,
     comp: 'TagModule'
   },
   title: {
-    title: '标题',
+    title: 'surveyList.surveyTitle',
     key: 'title',
     width: 240,
     tip: true
   },
   remark: {
-    title: '备注',
+    title: 'surveyList.remark',
     key: 'remark',
     width: 200,
     tip: true
   },
   state: {
-    title: '状态',
+    title: 'surveyList.state',
     key: 'state',
     width: 140,
     comp: 'StateModule'
   },
   owner: {
-    title: '所有者',
+    title: 'surveyList.owner',
     key: 'owner',
     width: 140
   },
   updatedAt: {
-    title: '更新时间',
+    title: 'surveyList.updatedAt',
     key: 'updatedAt',
     minWidth: 200
   },
   createdAt: {
-    title: '创建时间',
+    title: 'surveyList.createdAt',
     key: 'createdAt',
     minWidth: 200
   }
@@ -97,76 +97,76 @@ export const fieldConfig = {
 
 export const recycleBinFieldConfig = {
   title: {
-    title: '标题',
+    title: 'surveyList.surveyTitle',
     key: 'title',
     width: 240,
     tip: true
   },
   createdAt: {
-    title: '创建时间',
+    title: 'surveyList.createdAt',
     key: 'createdAt',
     minWidth: 200
   },
   deletedAt: {
-    title: '删除时间',
+    title: 'surveyList.deletedAt',
     key: 'deletedAt',
     minWidth: 200
   },
   owner: {
-    title: '所有者',
+    title: 'surveyList.owner',
     key: 'owner',
     width: 140
   }
 }
 
 export const noListDataConfig = {
-  title: '您还没有创建问卷',
-  desc: '赶快点击右上角立即创建问卷吧！',
+  title: 'surveyList.emptyStates.noSurveys',
+  desc: 'surveyList.emptyStates.noSurveysDesc',
   img: '/imgs/icons/list-empty.webp'
 }
 
 export const noSpaceDataConfig = {
-  title: '您还没有创建团队空间',
-  desc: '赶快点击右上角立即创建团队空间吧！',
+  title: 'surveyList.emptyStates.noSpaces',
+  desc: 'surveyList.emptyStates.noSpacesDesc',
   img: '/imgs/icons/list-empty.webp'
 }
 export const noSpaceSearchDataConfig = {
-  title: '没有满足该查询条件的团队空间',
-  desc: '可以更换条件查询试试',
+  title: 'surveyList.emptyStates.noSpacesSearch',
+  desc: 'surveyList.emptyStates.noSpacesSearchDesc',
   img: '/imgs/icons/list-empty.webp'
 }
 export const noGroupDataConfig = {
-  title: '您还没有创建问卷分组',
-  desc: '赶快点击右上角立即创建问卷分组吧！',
+  title: 'surveyList.emptyStates.noGroups',
+  desc: 'surveyList.emptyStates.noGroupsDesc',
   img: '/imgs/icons/list-empty.webp'
 }
 export const noGroupSearchDataConfig = {
-  title: '没有满足该查询条件的问卷分组哦',
-  desc: '可以更换条件查询试试',
+  title: 'surveyList.emptyStates.noGroupsSearch',
+  desc: 'surveyList.emptyStates.noGroupsSearchDesc',
   img: '/imgs/icons/list-empty.webp'
 }
 export const noSearchDataConfig = {
-  title: '没有满足该查询条件的问卷',
-  desc: '可以更换条件查询试试',
+  title: 'surveyList.emptyStates.noSurveysSearch',
+  desc: 'surveyList.emptyStates.noSurveysSearchDesc',
   img: '/imgs/icons/list-empty.webp'
 }
 export const noDownloadTaskConfig = {
-  title: '没有下载任务',
-  desc: '可以在数据分析进行下载',
+  title: 'surveyList.emptyStates.noDownloadTasks',
+  desc: 'surveyList.emptyStates.noDownloadTasksDesc',
   img: '/imgs/icons/list-empty.webp'
 }
 
 export const curStatus = {
   new: {
     value: 'new',
-    label: '未发布'
+    label: 'surveyList.surveyStatuses.new'
   },
   published: {
     value: 'published',
-    label: '已发布'
+    label: 'surveyList.surveyStatuses.published'
   },
   editing: {
-    label: '修改中',
+    label: 'surveyList.surveyStatuses.editing',
     value: 'editing'
   }
 }
@@ -174,7 +174,7 @@ export const curStatus = {
 // 子状态
 export const subStatus = {
   pausing: {
-    label: '暂停中',
+    label: 'surveyList.surveyStatuses.pausing',
     value: 'pausing'
   }
 }
@@ -189,15 +189,15 @@ export const subStatusKey = 'subStatus.status'
 
 // 问卷类型
 export const surveyTypeSelect = {
-  label: '问卷类型',
+  label: 'surveyList.filters.surveyType',
   value: [
     {
       value: '',
-      label: '全部类型'
+      label: 'surveyList.filters.allTypes'
     },
     {
       value: 'normal',
-      label: '基础调查'
+      label: 'surveyList.surveyTypes.normal'
     },
     // {
     //   value: 'exam',
@@ -209,11 +209,11 @@ export const surveyTypeSelect = {
     // },
     {
       value: 'vote',
-      label: '投票评选'
+      label: 'surveyList.surveyTypes.vote'
     },
     {
       value: 'register',
-      label: '在线报名'
+      label: 'surveyList.surveyTypes.register'
     }
   ],
   default: ''
@@ -221,11 +221,11 @@ export const surveyTypeSelect = {
 
 // 问卷状态
 export const curStatusSelect = {
-  label: '问卷状态',
+  label: 'surveyList.filters.status',
   value: [
     {
       value: '',
-      label: '全部状态'
+      label: 'surveyList.filters.allStatuses'
     },
     curStatus.new,
     curStatus.published,
@@ -242,7 +242,7 @@ export const selectOptionsDict = Object.freeze({
 
 export const buttonOptionsDict = Object.freeze({
   updatedAt: {
-    label: '更新时间',
+    label: 'surveyList.sortOptions.updatedAt',
     icons: [
       {
         name: 'el-icon-sort',
@@ -263,7 +263,7 @@ export const buttonOptionsDict = Object.freeze({
     ]
   },
   createdAt: {
-    label: '创建时间',
+    label: 'surveyList.sortOptions.createdAt',
     icons: [
       {
         name: 'el-icon-sort',

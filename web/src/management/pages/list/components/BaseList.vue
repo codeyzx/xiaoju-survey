@@ -2,113 +2,61 @@
   <div class="tableview-root">
     <div class="filter-wrap">
       <div class="select">
-        <TextSelect
-          v-for="item in Object.keys(selectOptionsDict)"
-          :key="item"
-          :options="selectOptionsDict[item]"
-          :value="selectValueMap[item]"
-          @change="(value) => onSelectChange(item, value)"
-        />
+        <TextSelect v-for="item in Object.keys(selectOptionsDict)" :key="item" :options="selectOptionsDict[item]"
+          :value="selectValueMap[item]" @change="(value) => onSelectChange(item, value)" />
       </div>
       <div class="search">
-        <TextButton
-          v-for="item in Object.keys(buttonOptionsDict)"
-          :key="item"
-          @change="(value) => onButtonChange(item, value)"
-          :option="buttonOptionsDict[item]"
-          :icon="
-            buttonOptionsDict[item].icons.find(
-              (iconItem) => iconItem.effectValue === buttonValueMap[item]
-            ).icon
-          "
-          link
-        />
+        <TextButton v-for="item in Object.keys(buttonOptionsDict)" :key="item"
+          @change="(value) => onButtonChange(item, value)" :option="buttonOptionsDict[item]" :icon="buttonOptionsDict[item].icons.find(
+            (iconItem) => iconItem.effectValue === buttonValueMap[item]
+          ).icon
+            " link />
         <TextSearch placeholder="请输入问卷标题" :value="searchVal" @search="onSearchText" />
       </div>
     </div>
     <div class="list-wrapper" v-if="total">
-      <el-table
-        v-if="total"
-        ref="multipleListTable"
-        class="list-table"
-        :data="dataList"
-        empty-text="暂无数据"
-        row-key="_id"
-        header-row-class-name="tableview-header"
-        row-class-name="tableview-row"
-        cell-class-name="tableview-cell"
-        style="width: 100%"
-        v-loading="loading"
-        @row-click="onRowClick"
-      >
+      <el-table v-if="total" ref="multipleListTable" class="list-table" :data="dataList"
+        :empty-text="$t('common.noData')" row-key="_id" header-row-class-name="tableview-header"
+        row-class-name="tableview-row" cell-class-name="tableview-cell" style="width: 100%" v-loading="loading"
+        @row-click="onRowClick">
         <el-table-column column-key="space" width="20" />
 
-        <el-table-column
-          v-for="field in fieldList"
-          :key="field.key"
-          :label="field.title"
-          :column-key="field.key"
-          :width="field.width"
-          :min-width="field.width || field.minWidth"
-          class-name="link"
-        >
+        <el-table-column v-for="field in fieldList" :key="field.key" :label="field.title" :column-key="field.key"
+          :width="field.width" :min-width="field.width || field.minWidth" class-name="link">
           <template #default="scope">
             <template v-if="field.comp">
-              <component
-                :is="currentComponent(field.comp)"
-                type="table"
-                :value="unref(scope.row)"
-              />
+              <component :is="currentComponent(field.comp)" type="table" :value="unref(scope.row)" />
             </template>
             <template v-else>
               <div class="title-wrapper">
                 <span class="cell-span">{{ scope.row[field.key] }}</span>
-                <span 
-                  v-if="field.key === 'title' && scope.row.createMethod === 'AIGenerate'"
-                  class="ai-tag"
-                >AI生成</span>
+                <span v-if="field.key === 'title' && scope.row.createMethod === 'AIGenerate'" class="ai-tag">AI生成</span>
               </div>
             </template>
           </template>
         </el-table-column>
 
-        <el-table-column label="操作" :width="230" class-name="table-options" fixed="right">
+        <el-table-column :label="$t('surveyList.actions')" :width="230" class-name="table-options" fixed="right">
           <template #default="scope">
-            <ToolBar
-              :data="scope.row"
-              type="list"
-              :tools="getToolConfig(scope.row)"
-              :tool-width="50"
-              @click="handleClick"
-            />
+            <ToolBar :data="scope.row" type="list" :tools="getToolConfig(scope.row)" :tool-width="50"
+              @click="handleClick" />
           </template>
         </el-table-column>
       </el-table>
     </div>
 
     <div class="list-pagination" v-if="total">
-      <el-pagination
-        background
-        layout="prev, pager, next"
-        :total="total"
-        v-model:current-page="currentPage"
-        @current-change="handleCurrentChange"
-      >
+      <el-pagination background layout="prev, pager, next" :total="total" v-model:current-page="currentPage"
+        @current-change="handleCurrentChange">
       </el-pagination>
     </div>
 
     <div v-else>
-      <EmptyIndex :data="!searchVal ? noListDataConfig : noSearchDataConfig" />
+      <EmptyIndex :data="emptyData" />
     </div>
 
-    <ModifyDialog
-      :type="modifyType"
-      :visible="showModify"
-      :question-info="questionInfo"
-      :group-all-list="groupAllList"
-      :menu-type="menuType"
-      @on-close-codify="onCloseModify"
-    />
+    <ModifyDialog :type="modifyType" :visible="showModify" :question-info="questionInfo" :group-all-list="groupAllList"
+      :menu-type="menuType" @on-close-codify="onCloseModify" />
     <CooperModify :modifyId="cooperId" :visible="cooperModify" @on-close-codify="onCooperClose" />
   </div>
 </template>
@@ -118,6 +66,7 @@ import { ref, computed, unref } from 'vue'
 import { useRouter } from 'vue-router'
 import { get, map } from 'lodash-es'
 import { storeToRefs } from 'pinia'
+import { useI18n } from 'vue-i18n'
 
 import { ElMessage, ElMessageBox } from 'element-plus'
 import 'element-plus/theme-chalk/src/message.scss'
@@ -153,6 +102,7 @@ const surveyListStore = useSurveyListStore()
 const workSpaceStore = useWorkSpaceStore()
 const { workSpaceId, groupAllList, menuType } = storeToRefs(workSpaceStore)
 const router = useRouter()
+const { t } = useI18n()
 const props = defineProps({
   loading: {
     type: Boolean,
@@ -190,8 +140,24 @@ const currentComponent = computed(() => {
 
 const fieldList = computed(() => {
   return map(fields, (f) => {
-    return get(fieldConfig, f, null)
+    const config = get(fieldConfig, f, null)
+    if (config) {
+      return {
+        ...config,
+        title: t(config.title)
+      }
+    }
+    return null
   })
+})
+
+const emptyData = computed(() => {
+  const config = searchVal.value ? noSearchDataConfig : noListDataConfig
+  return {
+    ...config,
+    title: t(config.title),
+    desc: t(config.desc)
+  }
 })
 const data = computed(() => {
   return props.data
@@ -236,33 +202,33 @@ const getToolConfig = (row) => {
   const permissionsBtn = [
     {
       key: QOP_MAP.EDIT,
-      label: '修改'
+      label: t('surveyList.edit')
     },
     {
       key: 'delete',
-      label: '删除',
+      label: t('surveyList.delete'),
       icon: 'icon-shanchu'
     },
     {
       key: QOP_MAP.COPY,
-      label: '复制',
+      label: t('surveyList.copy'),
       icon: 'icon-shanchu'
     },
     {
       key: 'analysis',
-      label: '数据'
+      label: t('surveyList.data')
     },
     {
       key: 'release',
-      label: '投放'
+      label: t('surveyList.publish')
     },
     {
       key: subStatus.pausing.value,
-      label: '暂停'
+      label: t('surveyList.pause')
     },
     {
       key: 'cooper',
-      label: '协作'
+      label: t('surveyList.collaborate')
     }
   ]
   if (!workSpaceId.value) {
@@ -274,7 +240,7 @@ const getToolConfig = (row) => {
         // 协作人判断权限显示数据分析按钮
         funcList.push({
           key: 'analysis',
-          label: '数据'
+          label: t('surveyList.data')
         })
       }
       if (row.currentPermissions.includes(SurveyPermissions.SurveyManage)) {
@@ -282,25 +248,25 @@ const getToolConfig = (row) => {
         funcList.push(
           {
             key: subStatus.pausing.value,
-            label: '暂停'
+            label: t('surveyList.pause')
           },
           {
             key: QOP_MAP.EDIT,
-            label: '修改'
+            label: t('surveyList.edit')
           },
           {
             key: 'delete',
-            label: '删除',
+            label: t('surveyList.delete'),
             icon: 'icon-shanchu'
           },
           {
             key: QOP_MAP.COPY,
-            label: '复制',
+            label: t('surveyList.copy'),
             icon: 'icon-shanchu'
           },
           {
             key: 'release',
-            label: '投放'
+            label: t('surveyList.publish')
           }
         )
       }
@@ -308,7 +274,7 @@ const getToolConfig = (row) => {
         // 协作人判断权限显示协作按钮
         funcList.push({
           key: 'cooper',
-          label: '协作'
+          label: t('surveyList.collaborate')
         })
       }
     }
@@ -369,9 +335,9 @@ const handleClick = (key, data) => {
 }
 const onDelete = async (row) => {
   try {
-    await ElMessageBox.confirm('是否确认删除？', '提示', {
-      confirmButtonText: '确定',
-      cancelButtonText: '取消',
+    await ElMessageBox.confirm(t('surveyList.confirmDelete'), t('common.warning'), {
+      confirmButtonText: t('common.confirm'),
+      cancelButtonText: t('common.cancel'),
       type: 'warning'
     })
   } catch (error) {
@@ -380,20 +346,20 @@ const onDelete = async (row) => {
 
   const res = await deleteSurvey(row._id)
   if (res.code === CODE_MAP.SUCCESS) {
-    ElMessage.success('删除成功')
+    ElMessage.success(t('surveyList.deleteSuccess'))
     onRefresh()
     workSpaceStore.getGroupList()
     workSpaceStore.getSpaceList()
     workSpaceStore.getRecycleBinCount()
   } else {
-    ElMessage.error(res.errmsg || '删除失败')
+    ElMessage.error(res.errmsg || t('surveyList.deleteFailed'))
   }
 }
 
 const onPausing = async (row) => {
   try {
-    await ElMessageBox.confirm('“暂停回收”后问卷将不能填写，是否继续？', '提示', {
-      confirmButtonText: '确定',
+    await ElMessageBox.confirm(t('surveyList.confirmPause'), t('common.warning'), {
+      confirmButtonText: t('common.confirm'),
       cancelButtonText: '取消',
       type: 'warning'
     })
@@ -403,10 +369,10 @@ const onPausing = async (row) => {
   }
   const res = await pausingSurvey(row._id)
   if (res.code === CODE_MAP.SUCCESS) {
-    ElMessage.success('暂停成功')
+    ElMessage.success(t('surveyList.pauseSuccess'))
     onRefresh()
   } else {
-    ElMessage.error(res.errmsg || '暂停失败')
+    ElMessage.error(res.errmsg || t('surveyList.pauseFailed'))
   }
 }
 const handleCurrentChange = (current) => {
@@ -543,6 +509,7 @@ defineExpose({
   align-items: center;
   gap: 6px;
   max-width: 100%; // 新增限制最大宽度
+
   .cell-span {
     font-size: 14px;
     display: -webkit-box;
@@ -555,6 +522,7 @@ defineExpose({
     flex: 1; // 新增
     min-width: 0; // 新增 (解决flex布局下的截断问题)
   }
+
   .ai-tag {
     padding: 0 4px;
     border-radius: 2px;
@@ -566,8 +534,4 @@ defineExpose({
     color: #FAA600;
   }
 }
-
-
-
-
 </style>

@@ -1,35 +1,14 @@
 <template>
   <div v-loading="loading" class="list-wrapper">
-    <el-table
-      v-if="total"
-      ref="multipleListTable"
-      class="list-table"
-      :data="dataList"
-      empty-text="暂无数据"
-      row-key="_id"
-      header-row-class-name="tableview-header"
-      row-class-name="tableview-row"
-      cell-class-name="tableview-cell"
-      style="width: 100%"
-      v-loading="loading"
-    >
-      <el-table-column
-        v-for="field in fieldList"
-        :key="field.key"
-        :prop="field.key"
-        :label="field.title"
-        :width="field.width"
-        :class-name="field.key"
-        :formatter="field.formatter"
-      >
+    <el-table v-if="total" ref="multipleListTable" class="list-table" :data="dataList" empty-text="暂无数据" row-key="_id"
+      header-row-class-name="tableview-header" row-class-name="tableview-row" cell-class-name="tableview-cell"
+      style="width: 100%" v-loading="loading">
+      <el-table-column v-for="field in fieldList" :key="field.key" :prop="field.key" :label="field.title"
+        :width="field.width" :class-name="field.key" :formatter="field.formatter">
       </el-table-column>
       <el-table-column label="操作" width="200">
         <template v-slot="{ row }">
-          <span
-            v-if="row?.status === 'succeed'"
-            class="text-btn download-btn"
-            @click="handleDownload(row)"
-          >
+          <span v-if="row?.status === 'succeed'" class="text-btn download-btn" @click="handleDownload(row)">
             下载
           </span>
           <span class="text-btn delete-btn" @click="openDeleteDialog(row)"> 删除 </span>
@@ -37,17 +16,11 @@
       </el-table-column>
     </el-table>
     <div v-else>
-      <EmptyIndex :data="noDownloadTaskConfig" />
+      <EmptyIndex :data="emptyData" />
     </div>
     <div class="list-pagination" v-if="total">
-      <el-pagination
-        background
-        layout="prev, pager, next"
-        :total="total"
-        size="small"
-        :page-size="pageSize"
-        @current-change="handleCurrentChange"
-      >
+      <el-pagination background layout="prev, pager, next" :total="total" size="small" :page-size="pageSize"
+        @current-change="handleCurrentChange">
       </el-pagination>
     </div>
   </div>
@@ -56,6 +29,7 @@
 <script setup lang="ts">
 import { ref, reactive, computed, onMounted } from 'vue'
 import { get, map } from 'lodash-es'
+import { useI18n } from 'vue-i18n'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import EmptyIndex from '@/management/components/EmptyIndex.vue'
 import { noDownloadTaskConfig } from '@/management/config/listConfig'
@@ -63,10 +37,18 @@ import { noDownloadTaskConfig } from '@/management/config/listConfig'
 import { deleteDownloadTask, getDownloadTaskList } from '@/management/api/download'
 import { CODE_MAP } from '@/management/api/base'
 
+const { t } = useI18n()
+
 const loading = ref(false)
 const pageSize = ref(10)
 const total = ref(0)
 const dataList: Array<any> = reactive([])
+
+const emptyData = computed(() => ({
+  ...noDownloadTaskConfig,
+  title: t(noDownloadTaskConfig.title),
+  desc: t(noDownloadTaskConfig.desc)
+}))
 
 onMounted(() => {
   getList({ pageIndex: 1 })
@@ -190,26 +172,33 @@ const handleCurrentChange = (val: number) => {
       .cell {
         text-align: center;
       }
+
       .text-btn {
         font-size: 14px;
         cursor: pointer;
         margin-left: 20px;
+
         &:first-child {
           margin-left: 0;
         }
       }
+
       .download-btn {
         color: $primary-color;
       }
+
       .delete-btn {
         color: red;
       }
     }
+
     .small-text {
       color: red;
     }
+
     .list-pagination {
       margin-top: 20px;
+
       :deep(.el-pagination) {
         display: flex;
         justify-content: flex-end;

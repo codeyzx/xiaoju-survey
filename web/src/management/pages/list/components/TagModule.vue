@@ -1,7 +1,7 @@
 <template>
   <span :class="['list-tag-root', 'list-tag-' + type]">
     <div class="tag-bg"></div>
-    <span>{{ surveyType[value.surveyType] || surveyType[value.questionType] }}</span>
+    <span>{{ $t(surveyType[value.surveyType] || surveyType[value.questionType]) }}</span>
   </span>
 </template>
 
@@ -25,6 +25,7 @@ export default {
 .list-tag-root {
   display: inline-block;
   position: relative;
+
   span {
     padding: 0 16px;
     height: 40px;
@@ -38,6 +39,7 @@ export default {
     white-space: nowrap;
     display: inline-block;
   }
+
   &.list-tag-card {
     .tag-bg {
       width: 50%;

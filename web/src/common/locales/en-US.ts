@@ -8,6 +8,7 @@ export default {
     edit: 'Edit',
     add: 'Add',
     create: 'Create',
+    confirmCreate: 'Confirm Create',
     submit: 'Submit',
     reset: 'Reset',
     search: 'Search',
@@ -72,7 +73,10 @@ export default {
     analysis: 'Analysis',
     settings: 'Settings',
     workspace: 'Workspace',
-    profile: 'Profile'
+    profile: 'Profile',
+    editSurvey: 'Edit Survey',
+    publishSurvey: 'Publish Survey',
+    dataAnalysis: 'Data Analysis'
   },
 
   // Survey List
@@ -83,24 +87,148 @@ export default {
     createGroup: 'Create Group',
     spaceManagement: 'Team Management',
     mySpace: 'My Space',
+    teamSpace: 'Team Space',
+    surveyListTitle: 'Survey List',
     myGroup: 'My Group',
     allSurveys: 'All Surveys',
     publishedSurveys: 'Published',
     draftSurveys: 'Draft',
     completedSurveys: 'Completed',
-    searchPlaceholder: 'Search survey name',
+    searchPlaceholder: 'Please enter survey title',
+    spaceSearchPlaceholder: 'Please enter space name',
+    groupSearchPlaceholder: 'Please enter group name',
     noSurveys: 'No surveys found',
     surveyName: 'Survey Name',
     status: 'Status',
     createTime: 'Created',
     updateTime: 'Updated',
+    deleteTime: 'Deleted',
     responseCount: 'Responses',
     actions: 'Actions',
     draft: 'Draft',
     published: 'Published',
     completed: 'Completed',
     paused: 'Paused',
-    selectCreateMethod: 'Select Creation Method'
+    selectCreateMethod: 'Select Creation Method',
+    pleaseImportQuestions: 'Please import questions',
+    recycleBin: 'Recycle Bin',
+    surveyType: 'Type',
+    surveyTitle: 'Title',
+    remark: 'Remarks',
+    owner: 'Owner',
+    spaceName: 'Space Name',
+    surveyCount: 'Survey Count',
+    memberCount: 'Member Count',
+    groupName: 'Group Name',
+    name: 'Name',
+    surveyTotal: 'Survey Count',
+    enter: 'Enter',
+    manage: 'Manage',
+    view: 'View',
+    delete: 'Delete',
+    edit: 'Edit',
+    copy: 'Copy',
+    data: 'Data',
+    publish: 'Publish',
+    pause: 'Pause',
+    collaborate: 'Collaborate',
+    recover: 'Recover',
+    completeDelete: 'Complete Delete',
+    aiGenerated: 'AI Generated',
+    // Additional keys for table fields
+    state: 'Status',
+    createdAt: 'Created',
+    updatedAt: 'Updated',
+    // Navigation
+    back: 'Back',
+    confirmDelete: 'Are you sure you want to delete?',
+    confirmDeleteSpace:
+      'After deletion, surveys in the team will be deleted synchronously. Are you sure you want to delete?',
+    confirmDeleteGroup:
+      'After deleting the group, surveys belonging to this group will automatically be moved to "Ungrouped". Are you sure you want to delete?',
+    confirmPause: 'After "Pause Collection", the survey cannot be filled. Do you want to continue?',
+    confirmCompleteDelete:
+      'The survey will be permanently deleted from the recycle bin. Are you sure you want to delete?',
+    deleteSuccess: 'Deleted successfully',
+    deleteFailed: 'Delete failed',
+    recoverSuccess: 'Recovered successfully',
+    recoverFailed: 'Recover failed',
+    pauseSuccess: 'Paused successfully',
+    pauseFailed: 'Pause failed',
+    cancelPause: 'Cancel pause',
+    surveyDeleted: 'The survey has been deleted and cannot be accessed.',
+    backToList: 'Back to Survey List',
+    noData: 'No Data',
+    // Space and Group management
+    spaceDescriptionLabel: 'Team Space Description',
+    addMembers: 'Add Members',
+    createSpaceTitle: 'Create Team Space',
+    manageSpaceTitle: 'Manage Team Space',
+    createGroupTitle: 'Create Group',
+    manageGroupTitle: 'Manage Group',
+    enterSpaceName: 'Please enter team space name',
+    enterGroupName: 'Please enter group name',
+    setAdmin: 'Please set at least one space administrator',
+    // Text import
+    inputArea: 'Input Area',
+    inputExample: 'Input Example',
+    editExample: 'Edit Example',
+    example: 'Example',
+    copyText: 'Copy Text',
+    copySuccess: 'Copy successful!',
+    // List config
+    surveyTypes: {
+      normal: 'Basic Survey',
+      vote: 'Vote & Election',
+      nps: 'NPS Score',
+      register: 'Online Registration'
+    },
+    tableHeaders: {
+      spaceName: 'Space Name',
+      surveyCount: 'Survey Count',
+      memberCount: 'Member Count',
+      groupName: 'Group Name',
+      surveyType: 'Type',
+      surveyTitle: 'Title',
+      remark: 'Remarks',
+      status: 'Status',
+      owner: 'Owner',
+      updatedAt: 'Updated',
+      createdAt: 'Created',
+      deletedAt: 'Deleted'
+    },
+    emptyStates: {
+      noSurveys: "You haven't created any surveys yet",
+      noSurveysDesc: 'Click the top right corner to create a survey now!',
+      noSpaces: "You haven't created any team spaces yet",
+      noSpacesDesc: 'Click the top right corner to create a team space now!',
+      noSpacesSearch: 'No team spaces match the search criteria',
+      noSpacesSearchDesc: 'Try changing the search conditions',
+      noGroups: "You haven't created any survey groups yet",
+      noGroupsDesc: 'Click the top right corner to create a survey group now!',
+      noGroupsSearch: 'No survey groups match the search criteria',
+      noGroupsSearchDesc: 'Try changing the search conditions',
+      noSurveysSearch: 'No surveys match the search criteria',
+      noSurveysSearchDesc: 'Try changing the search conditions',
+      noDownloadTasks: 'No download tasks',
+      noDownloadTasksDesc: 'You can download from data analysis'
+    },
+    surveyStatuses: {
+      new: 'Unpublished',
+      published: 'Published',
+      editing: 'Editing',
+      pausing: 'Paused'
+    },
+    filters: {
+      surveyType: 'Survey Type',
+      status: 'Survey Status',
+      allTypes: 'All Types',
+      allStatuses: 'All Statuses'
+    },
+    sortOptions: {
+      updatedAt: 'Updated Time',
+      createdAt: 'Created Time'
+    }
   },
 
   // Survey Editor
@@ -139,9 +267,24 @@ export default {
     createBlank: 'Create Blank',
     textImport: 'Text Import',
     aiGenerate: 'AI Generate',
+    aiGenerateSurvey: 'AI Intelligent Survey Generation',
     excelImport: 'Excel Import',
     selectCreateMethod: 'Select Creation Method',
     collaborate: 'Collaborate'
+  },
+
+  // Create Survey Form
+  createForm: {
+    surveyTitleLabel: 'Survey Name',
+    surveyTitlePlaceholder: 'Please enter survey name',
+    surveyTitleTip:
+      'This title will be displayed at the top of the browser when opening the survey',
+    remarkLabel: 'Survey Remark',
+    remarkPlaceholder: 'Please enter remark',
+    remarkTip: 'Remark is only visible to yourself',
+    groupLabel: 'Group',
+    groupPlaceholder: 'Ungrouped',
+    createButton: 'Start Creating'
   },
 
   // Survey Settings
@@ -207,7 +350,10 @@ export default {
     saveFailed: 'Save failed',
     deleteFailed: 'Delete failed',
     sessionInvalid: 'Invalid session ID',
-    surveyIdNotFound: 'Survey ID not found'
+    surveyIdNotFound: 'Survey ID not found',
+    createFailed: 'Creation Failed',
+    createSurveyFailed: 'Create Survey Failed:',
+    createFailedRetry: 'Creation failed, please try again later'
   },
 
   // Success Messages

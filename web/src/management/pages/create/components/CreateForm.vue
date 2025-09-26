@@ -1,44 +1,26 @@
 <template>
   <div class="right-side">
     <p class="type-title">{{ title }}</p>
-    <el-form
-      class="new-form"
-      label-position="right"
-      ref="ruleForm"
-      :model="form"
-      label-width="100px"
-      :rules="rules"
-      @submit.prevent
-    >
-      <el-form-item prop="title" label="问卷名称">
-        <el-input
-          v-model="form.title"
-          :class="form.title ? 'nonempty' : 'empty'"
-          placeholder="请输入问卷名称"
-        />
-        <p class="form-item-tip">该标题可在打开问卷的浏览器顶部展示</p>
+    <el-form class="new-form" label-position="right" ref="ruleForm" :model="form" label-width="100px" :rules="rules"
+      @submit.prevent>
+      <el-form-item prop="title" :label="$t('createForm.surveyTitleLabel')">
+        <el-input v-model="form.title" :class="form.title ? 'nonempty' : 'empty'"
+          :placeholder="$t('createForm.surveyTitlePlaceholder')" />
+        <p class="form-item-tip">{{ $t('createForm.surveyTitleTip') }}</p>
       </el-form-item>
-      <el-form-item prop="remark" label="问卷备注">
-        <el-input
-          v-model="form.remark"
-          :class="form.remark ? 'nonempty' : 'empty'"
-          placeholder="请输入备注"
-        />
-        <p class="form-item-tip">备注仅自己可见</p>
+      <el-form-item prop="remark" :label="$t('createForm.remarkLabel')">
+        <el-input v-model="form.remark" :class="form.remark ? 'nonempty' : 'empty'"
+          :placeholder="$t('createForm.remarkPlaceholder')" />
+        <p class="form-item-tip">{{ $t('createForm.remarkTip') }}</p>
       </el-form-item>
-      <el-form-item prop="groupId" label="分组" v-if="menuType === MenuType.PersonalGroup">
-        <el-select v-model="form.groupId" placeholder="未分组" clearable>
-          <el-option
-            v-for="item in groupAllList"
-            :key="item?._id"
-            :label="item?.name"
-            :value="item?._id"
-          />
+      <el-form-item prop="groupId" :label="$t('createForm.groupLabel')" v-if="menuType === MenuType.PersonalGroup">
+        <el-select v-model="form.groupId" :placeholder="$t('createForm.groupPlaceholder')" clearable>
+          <el-option v-for="item in groupAllList" :key="item?._id" :label="item?.name" :value="item?._id" />
         </el-select>
       </el-form-item>
       <el-form-item>
         <el-button class="create-btn" type="primary" @click="submit" :loading="!canSubmit">
-          开始创建
+          {{ $t('createForm.createButton') }}
         </el-button>
       </el-form-item>
     </el-form>
@@ -49,6 +31,7 @@
 import { ref, reactive, computed, toRefs } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import { ElMessage } from 'element-plus'
 import 'element-plus/theme-chalk/src/message.scss'
 import { createSurvey } from '@/management/api/survey'
@@ -64,6 +47,8 @@ const props = withDefaults(defineProps<Props>(), {
   selectType: 'normal'
 })
 
+const { t } = useI18n()
+
 const workSpaceStore = useWorkSpaceStore()
 workSpaceStore.getGroupList()
 const { groupAllList, menuType, groupId, workSpaceId } = storeToRefs(workSpaceStore)
@@ -72,12 +57,12 @@ const ruleForm = ref<any>(null)
 
 const state = reactive({
   rules: {
-    title: [{ required: true, message: '请输入问卷标题', trigger: 'blur' }]
+    title: [{ required: true, message: t('createForm.surveyTitlePlaceholder'), trigger: 'blur' }]
   },
   canSubmit: true,
   form: {
-    title: '问卷调研',
-    remark: '问卷调研',
+    title: t('createForm.surveyTitlePlaceholder'),
+    remark: t('createForm.remarkPlaceholder'),
     groupId:
       groupId.value === GroupState.All || groupId.value === GroupState.Not ? '' : groupId.value
   }
@@ -126,7 +111,7 @@ const submit = () => {
         }
       })
     } else {
-      ElMessage.error(res?.errmsg || '创建失败')
+      ElMessage.error(res?.errmsg || t('error.createFailed'))
     }
     state.canSubmit = true
   })

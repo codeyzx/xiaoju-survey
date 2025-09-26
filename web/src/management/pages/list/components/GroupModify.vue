@@ -1,29 +1,16 @@
 <template>
-  <el-dialog
-    class="base-dialog-root"
-    :model-value="visible"
-    width="40%"
-    :title="formTitle"
-    @close="onClose"
-  >
-    <el-form
-      class="base-form-root"
-      ref="ruleForm"
-      :model="formModel"
-      :rules="rules"
-      label-position="top"
-      size="large"
-      @submit.prevent
-    >
-      <el-form-item label="分组名称" prop="name">
+  <el-dialog class="base-dialog-root" :model-value="visible" width="40%" :title="formTitle" @close="onClose">
+    <el-form class="base-form-root" ref="ruleForm" :model="formModel" :rules="rules" label-position="top" size="large"
+      @submit.prevent>
+      <el-form-item :label="$t('surveyList.groupName')" prop="name">
         <el-input v-model="formModel.name" />
       </el-form-item>
     </el-form>
 
     <template #footer>
       <div class="dialog-footer">
-        <el-button @click="onClose">取消</el-button>
-        <el-button type="primary" class="save-btn" @click="onConfirm"> 确定 </el-button>
+        <el-button @click="onClose">{{ $t('common.cancel') }}</el-button>
+        <el-button type="primary" class="save-btn" @click="onConfirm"> {{ $t('common.confirm') }} </el-button>
       </div>
     </template>
   </el-dialog>
@@ -34,6 +21,7 @@ import { computed, ref, shallowRef, onMounted } from 'vue'
 import { pick as _pick } from 'lodash-es'
 import { ElMessage } from 'element-plus'
 import 'element-plus/theme-chalk/src/message.scss'
+import { useI18n } from 'vue-i18n'
 
 import { QOP_MAP } from '@/management/utils/constant'
 import { type IGroup } from '@/management/utils/workSpace'
@@ -47,16 +35,17 @@ const props = defineProps({
   visible: Boolean
 })
 const ruleForm = shallowRef<any>(null)
+const { t: $t } = useI18n()
 
 const formTitle = computed(() => {
-  return props.type === QOP_MAP.ADD ? '创建分组' : '管理分组'
+  return props.type === QOP_MAP.ADD ? $t('surveyList.createGroupTitle') : $t('surveyList.manageGroupTitle')
 })
 const formModel = ref<Required<IGroup>>({
   _id: '',
   name: ''
 })
 const rules = {
-  name: [{ required: true, message: '请输入分组名称', trigger: 'blur' }]
+  name: [{ required: true, message: $t('surveyList.enterGroupName'), trigger: 'blur' }]
 }
 const groupDetail = computed(() => {
   return workSpaceStore.groupDetail

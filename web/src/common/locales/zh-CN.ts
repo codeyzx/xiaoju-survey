@@ -8,6 +8,7 @@ export default {
     edit: '编辑',
     add: '添加',
     create: '创建',
+    confirmCreate: '确定创建',
     submit: '提交',
     reset: '重置',
     search: '搜索',
@@ -72,7 +73,10 @@ export default {
     analysis: '分析',
     settings: '设置',
     workspace: '工作空间',
-    profile: '个人资料'
+    profile: '个人资料',
+    editSurvey: '编辑问卷',
+    publishSurvey: '投放问卷',
+    dataAnalysis: '数据统计'
   },
 
   // 问卷列表
@@ -83,24 +87,146 @@ export default {
     createGroup: '创建分组',
     spaceManagement: '团队管理',
     mySpace: '我的空间',
+    teamSpace: '团队空间',
+    surveyListTitle: '问卷列表',
     myGroup: '我的分组',
     allSurveys: '全部问卷',
     publishedSurveys: '已发布',
     draftSurveys: '草稿',
     completedSurveys: '已完成',
-    searchPlaceholder: '搜索问卷名称',
+    searchPlaceholder: '请输入问卷标题',
+    spaceSearchPlaceholder: '请输入空间名称',
+    groupSearchPlaceholder: '请输入分组名称',
     noSurveys: '暂无问卷',
     surveyName: '问卷名称',
     status: '状态',
     createTime: '创建时间',
     updateTime: '更新时间',
+    deleteTime: '删除时间',
     responseCount: '回收数量',
     actions: '操作',
     draft: '草稿',
     published: '已发布',
     completed: '已完成',
     paused: '已暂停',
-    selectCreateMethod: '请选择创建方式'
+    selectCreateMethod: '请选择创建方式',
+    pleaseImportQuestions: '请导入题目',
+    recycleBin: '回收站',
+    surveyType: '类型',
+    surveyTitle: '标题',
+    remark: '备注',
+    owner: '所有者',
+    spaceName: '空间名称',
+    surveyCount: '问卷数',
+    memberCount: '成员数',
+    groupName: '分组名称',
+    enter: '进入',
+    manage: '管理',
+    view: '查看',
+    delete: '删除',
+    edit: '修改',
+    copy: '复制',
+    data: '数据',
+    publish: '投放',
+    pause: '暂停',
+    collaborate: '协作',
+    recover: '恢复',
+    completeDelete: '彻底删除',
+    aiGenerated: 'AI生成',
+    // Additional keys for table fields
+    state: '状态',
+    createdAt: '创建时间',
+    updatedAt: '更新时间',
+    // Navigation
+    back: '返回',
+    confirmDelete: '是否确认删除？',
+    confirmDeleteSpace: '删除后团队内的问卷将同步被删除，是否确认本次删除？',
+    confirmDeleteGroup: '删除分组后，属于该分组的问卷将会自动更换到"未分组"下，是否确认本次删除？',
+    confirmPause: '"暂停回收"后问卷将不能填写，是否继续？',
+    confirmCompleteDelete: '将从回收站中永久删除该问卷，是否确认删除？',
+    deleteSuccess: '删除成功',
+    deleteFailed: '删除失败',
+    recoverSuccess: '恢复成功',
+    recoverFailed: '恢复失败',
+    pauseSuccess: '暂停成功',
+    pauseFailed: '暂停失败',
+    cancelPause: '取消暂停',
+    surveyDeleted: '该问卷已被删除，无法继续访问。',
+    backToList: '返回问卷列表',
+    noData: '暂无数据',
+    // Space and Group management
+    spaceDescriptionLabel: '团队空间描述',
+    addMembers: '添加成员',
+    createSpaceTitle: '创建团队空间',
+    manageSpaceTitle: '管理团队空间',
+    createGroupTitle: '创建分组',
+    manageGroupTitle: '管理分组',
+    enterSpaceName: '请输入团队空间名称',
+    enterGroupName: '请输入分组名称',
+    setAdmin: '请至少设置一名空间管理员',
+    // Text import
+    inputArea: '输入区',
+    inputExample: '输入示例',
+    editExample: '编辑示例',
+    example: '示例',
+    copyText: '复制文本',
+    copySuccess: '复制成功！',
+    // List config
+    surveyTypes: {
+      normal: '基础调查',
+      vote: '投票评选',
+      nps: 'NPS评分',
+      register: '在线报名'
+    },
+    tableHeaders: {
+      spaceName: '空间名称',
+      surveyCount: '问卷数',
+      memberCount: '成员数',
+      groupName: '分组名称',
+      surveyType: '类型',
+      surveyTitle: '标题',
+      remark: '备注',
+      status: '状态',
+      owner: '所有者',
+      updatedAt: '更新时间',
+      createdAt: '创建时间',
+      deletedAt: '删除时间'
+    },
+    emptyStates: {
+      noSurveys: '您还没有创建问卷',
+      noSurveysDesc: '赶快点击右上角立即创建问卷吧！',
+      noSpaces: '您还没有创建团队空间',
+      noSpacesDesc: '赶快点击右上角立即创建团队空间吧！',
+      noSpacesSearch: '没有满足该查询条件的团队空间',
+      noSpacesSearchDesc: '可以更换条件查询试试',
+      noGroups: '您还没有创建问卷分组',
+      noGroupsDesc: '赶快点击右上角立即创建问卷分组吧！',
+      noGroupsSearch: '没有满足该查询条件的问卷分组哦',
+      noGroupsSearchDesc: '可以更换条件查询试试',
+      noSurveysSearch: '没有满足该查询条件的问卷',
+      noSurveysSearchDesc: '可以更换条件查询试试',
+      noDownloadTasks: '没有下载任务',
+      noDownloadTasksDesc: '可以在数据分析进行下载'
+    },
+    surveyStatuses: {
+      new: '未发布',
+      published: '已发布',
+      editing: '修改中',
+      pausing: '暂停中'
+    },
+    filters: {
+      surveyType: '问卷类型',
+      status: '问卷状态',
+      allTypes: '全部类型',
+      allStatuses: '全部状态'
+    },
+    sortOptions: {
+      updatedAt: '更新时间',
+      createdAt: '创建时间'
+    },
+    // Additional keys
+    name: '名称',
+    surveyTotal: '问卷数量'
   },
 
   // 问卷编辑器
@@ -139,9 +265,23 @@ export default {
     createBlank: '空白创建',
     textImport: '文本导入',
     aiGenerate: 'AI生成',
+    aiGenerateSurvey: 'AI智能生成问卷',
     excelImport: 'Excel导入',
     selectCreateMethod: '请选择创建方式',
     collaborate: '协作'
+  },
+
+  // 创建问卷表单
+  createForm: {
+    surveyTitleLabel: '问卷名称',
+    surveyTitlePlaceholder: '请输入问卷名称',
+    surveyTitleTip: '该标题可在打开问卷的浏览器顶部展示',
+    remarkLabel: '问卷备注',
+    remarkPlaceholder: '请输入备注',
+    remarkTip: '备注仅自己可见',
+    groupLabel: '分组',
+    groupPlaceholder: '未分组',
+    createButton: '开始创建'
   },
 
   // 问卷设置
@@ -207,7 +347,10 @@ export default {
     saveFailed: '保存失败',
     deleteFailed: '删除失败',
     sessionInvalid: 'sessionId有误',
-    surveyIdNotFound: '未获取到问卷id'
+    surveyIdNotFound: '未获取到问卷id',
+    createFailed: '创建失败',
+    createSurveyFailed: '创建问卷失败:',
+    createFailedRetry: '创建失败，请稍后重试'
   },
 
   // 成功消息

@@ -1,7 +1,7 @@
 <template>
   <div :class="['list-state', 'list-state-' + status]">
     <span class="list-state-badge" />
-    <span>{{ statusMaps[status] }}</span>
+    <span>{{ $t(statusMaps[status]) }}</span>
   </div>
 </template>
 
@@ -24,30 +24,39 @@ const status = computed(() => {
 .list-state {
   display: flex;
   align-items: center;
+
   &-new {
     color: $normal-color;
+
     .list-state-badge {
       background: $normal-color;
     }
   }
+
   &-pausing {
     color: #eb505c;
+
     .list-state-badge {
       background: #eb505c;
     }
   }
+
   &-published {
     color: #0dbd93;
+
     .list-state-badge {
       background: #0dbd93;
     }
   }
+
   &-editing {
     color: $primary-color;
+
     .list-state-badge {
       background: $primary-color;
     }
   }
+
   &-badge {
     width: 6px;
     height: 6px;

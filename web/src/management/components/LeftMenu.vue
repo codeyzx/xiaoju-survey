@@ -3,21 +3,19 @@
     <LogoIcon />
     <template v-for="(tab, index) in tabs" :key="tab.text + index">
       <router-link :to="tab.to" v-slot="{ isActive }" :replace="true">
-        <div
-          :class="[
-            'tab-btn',
-            ([
-              'QuestionEditIndex',
-              'QuestionEditSetting',
-              'QuestionSkinSetting',
-              'QuestionEditResultConfig'
-            ].includes(route.name) &&
-              tab.to.name === 'QuestionEditIndex') ||
+        <div :class="[
+          'tab-btn',
+          ([
+            'QuestionEditIndex',
+            'QuestionEditSetting',
+            'QuestionSkinSetting',
+            'QuestionEditResultConfig'
+          ].includes(route.name) &&
+            tab.to.name === 'QuestionEditIndex') ||
             isActive
-              ? 'router-link-active'
-              : ''
-          ]"
-        >
+            ? 'router-link-active'
+            : ''
+        ]">
           <div class="icon">
             <i class="iconfont" :class="tab.icon"></i>
           </div>
@@ -30,30 +28,32 @@
 
 <script setup>
 import { ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useEditStore } from '@/management/stores/edit'
 import { useRoute } from 'vue-router'
 const route = useRoute()
 import LogoIcon from './LogoIcon.vue'
 import { SurveyPermissions } from '@/management/utils/workSpace'
 const editStore = useEditStore()
+const { t } = useI18n()
 
 const tabArr = [
   {
-    text: '编辑问卷',
+    text: t('nav.editSurvey'),
     icon: 'icon-bianji',
     to: {
       name: 'QuestionEditIndex'
     }
   },
   {
-    text: '投放问卷',
+    text: t('nav.publishSurvey'),
     icon: 'icon-toufang',
     to: {
       name: 'channel'
     }
   },
   {
-    text: '数据统计',
+    text: t('nav.dataAnalysis'),
     icon: 'icon-shujutongji',
     to: {
       name: 'analysisPage'

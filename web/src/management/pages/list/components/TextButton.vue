@@ -4,14 +4,18 @@
       <template #icon>
         <StaticIcon :icon="icon" />
       </template>
-      {{ option.label }}
+      {{ translatedLabel }}
     </el-button>
   </div>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import StaticIcon from './StaticIcon.vue'
+
+const { t } = useI18n()
+
 const props = defineProps({
   option: {
     type: Object,
@@ -22,6 +26,8 @@ const props = defineProps({
   }
 })
 const emit = defineEmits(['change'])
+
+const translatedLabel = computed(() => t(props.option.label))
 const toggleOptionIcons = computed(() => {
   return props.option.icons.slice(1)
 })
@@ -49,6 +55,7 @@ const onClick = () => {
   display: flex;
   align-items: center;
 }
+
 .el-button {
   margin-right: 20px;
   font-size: 14px;

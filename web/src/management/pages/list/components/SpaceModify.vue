@@ -1,41 +1,23 @@
 <template>
-  <el-dialog
-    class="base-dialog-root"
-    :model-value="visible"
-    width="40%"
-    :title="formTitle"
-    @close="onClose"
-  >
-    <el-form
-      class="base-form-root"
-      ref="ruleForm"
-      :model="formModel"
-      :rules="rules"
-      label-position="top"
-      size="large"
-      @submit.prevent
-      :disabled="formDisabled"
-    >
-      <el-form-item label="团队空间名称" prop="name">
+  <el-dialog class="base-dialog-root" :model-value="visible" width="40%" :title="formTitle" @close="onClose">
+    <el-form class="base-form-root" ref="ruleForm" :model="formModel" :rules="rules" label-position="top" size="large"
+      @submit.prevent :disabled="formDisabled">
+      <el-form-item :label="$t('surveyList.spaceName')" prop="name">
         <el-input v-model="formModel.name" />
       </el-form-item>
-      <el-form-item label="团队空间空间描述">
+      <el-form-item :label="$t('surveyList.spaceDescriptionLabel')">
         <el-input v-model="formModel.description" />
       </el-form-item>
-      <el-form-item label="添加成员" prop="members">
-        <MemberSelect
-          :members="formModel.members"
-          @select="handleMemberSelect"
-          @change="handleMembersChange"
-        />
+      <el-form-item :label="$t('surveyList.addMembers')" prop="members">
+        <MemberSelect :members="formModel.members" @select="handleMemberSelect" @change="handleMembersChange" />
       </el-form-item>
     </el-form>
 
     <template #footer>
       <div class="dialog-footer">
-        <el-button @click="onClose" v-if="!formDisabled">取消</el-button>
+        <el-button @click="onClose" v-if="!formDisabled">{{ $t('common.cancel') }}</el-button>
         <el-button type="primary" class="save-btn" @click="onConfirm" v-if="!formDisabled">
-          确定
+          {{ $t('common.confirm') }}
         </el-button>
       </div>
     </template>
@@ -47,6 +29,7 @@ import { computed, ref, shallowRef, onMounted } from 'vue'
 import { pick as _pick } from 'lodash-es'
 import { ElMessage } from 'element-plus'
 import 'element-plus/theme-chalk/src/message.scss'
+import { useI18n } from 'vue-i18n'
 
 import { QOP_MAP } from '@/management/utils/constant'
 import { type IMember, type IWorkspace, UserRole } from '@/management/utils/workSpace'
@@ -62,9 +45,10 @@ const props = defineProps({
   visible: Boolean
 })
 const ruleForm = shallowRef<any>(null)
+const { t: $t } = useI18n()
 
 const formTitle = computed(() => {
-  return props.type === QOP_MAP.ADD ? '创建团队空间' : '管理团队空间'
+  return props.type === QOP_MAP.ADD ? $t('surveyList.createSpaceTitle') : $t('surveyList.manageSpaceTitle')
 })
 const formModel = ref<Required<IWorkspace>>({
   _id: '',
@@ -73,14 +57,14 @@ const formModel = ref<Required<IWorkspace>>({
   members: [] as IMember[]
 })
 const rules = {
-  name: [{ required: true, message: '请输入团队空间名称', trigger: 'blur' }],
+  name: [{ required: true, message: $t('surveyList.enterSpaceName'), trigger: 'blur' }],
   members: [
     {
       trigger: 'change',
       validator: (rule: any, value: IMember[], callback: Function) => {
         if (props.type === QOP_MAP.EDIT) {
           if (value.filter((item: IMember) => item.role === UserRole.Admin).length === 0) {
-            callback('请至少设置一名空间管理员')
+            callback($t('surveyList.setAdmin'))
           }
         }
         callback()
@@ -94,7 +78,7 @@ const spaceDetail = computed(() => {
 const formDisabled = computed(() => {
   return spaceDetail.value?._id
     ? workSpaceStore.workSpaceList.find((item: any) => item._id === spaceDetail.value?._id)
-        ?.currentUserRole !== UserRole.Admin
+      ?.currentUserRole !== UserRole.Admin
     : false
 })
 

@@ -1,44 +1,23 @@
 <template>
   <div class="tableview-root">
     <div class="filter-wrap">
-      <h2>回收站</h2>
+      <h2>{{ $t('surveyList.recycleBin') }}</h2>
       <div class="search">
-        <TextSearch placeholder="请输入问卷标题" :value="searchVal" @search="onSearchText" />
+        <TextSearch :placeholder="$t('surveyList.enterSurveyTitle')" :value="searchVal" @search="onSearchText" />
       </div>
     </div>
     <div class="list-wrapper" v-if="total">
-      <el-table
-        v-if="total"
-        ref="multipleListTable"
-        class="list-table"
-        :data="dataList"
-        empty-text="暂无数据"
-        row-key="_id"
-        header-row-class-name="tableview-header"
-        row-class-name="tableview-row"
-        cell-class-name="tableview-cell"
-        style="width: 100%"
-        v-loading="loading"
-        @row-click="onRowClick"
-      >
+      <el-table v-if="total" ref="multipleListTable" class="list-table" :data="dataList"
+        :empty-text="$t('common.noData')" row-key="_id" header-row-class-name="tableview-header"
+        row-class-name="tableview-row" cell-class-name="tableview-cell" style="width: 100%" v-loading="loading"
+        @row-click="onRowClick">
         <el-table-column column-key="space" width="20" />
 
-        <el-table-column
-          v-for="field in fieldList"
-          :key="field.key"
-          :label="field.title"
-          :column-key="field.key"
-          :width="field.width"
-          :min-width="field.width || field.minWidth"
-          class-name="link"
-        >
+        <el-table-column v-for="field in fieldList" :key="field.key" :label="field.title" :column-key="field.key"
+          :width="field.width" :min-width="field.width || field.minWidth" class-name="link">
           <template #default="scope">
             <template v-if="field.comp">
-              <component
-                :is="currentComponent(field.comp)"
-                type="table"
-                :value="unref(scope.row)"
-              />
+              <component :is="currentComponent(field.comp)" type="table" :value="unref(scope.row)" />
             </template>
             <template v-else>
               <span class="cell-span">{{ formatField(field.key, scope.row[field.key]) }}</span>
@@ -46,43 +25,27 @@
           </template>
         </el-table-column>
 
-        <el-table-column label="操作" :width="230" class-name="table-options" fixed="right">
+        <el-table-column :label="$t('surveyList.actions')" :width="230" class-name="table-options" fixed="right">
           <template #default="scope">
-            <ToolBar
-              :data="scope.row"
-              type="list"
-              :tools="getToolConfig(scope.row)"
-              :tool-width="50"
-              @click="handleClick"
-            />
+            <ToolBar :data="scope.row" type="list" :tools="getToolConfig(scope.row)" :tool-width="50"
+              @click="handleClick" />
           </template>
         </el-table-column>
       </el-table>
     </div>
 
     <div class="list-pagination" v-if="total">
-      <el-pagination
-        background
-        layout="prev, pager, next"
-        :total="total"
-        v-model:current-page="currentPage"
-        @current-change="handleCurrentChange"
-      >
+      <el-pagination background layout="prev, pager, next" :total="total" v-model:current-page="currentPage"
+        @current-change="handleCurrentChange">
       </el-pagination>
     </div>
 
     <div v-else>
-      <EmptyIndex :data="!searchVal ? noListDataConfig : noSearchDataConfig" />
+      <EmptyIndex :data="emptyData" />
     </div>
 
-    <ModifyDialog
-      :type="modifyType"
-      :visible="showModify"
-      :question-info="questionInfo"
-      :group-all-list="groupAllList"
-      :menu-type="menuType"
-      @on-close-codify="onCloseModify"
-    />
+    <ModifyDialog :type="modifyType" :visible="showModify" :question-info="questionInfo" :group-all-list="groupAllList"
+      :menu-type="menuType" @on-close-codify="onCloseModify" />
     <CooperModify :modifyId="cooperId" :visible="cooperModify" @on-close-codify="onCooperClose" />
   </div>
 </template>
@@ -92,6 +55,7 @@ import { ref, computed, unref } from 'vue'
 import { useRouter } from 'vue-router'
 import { get, map } from 'lodash-es'
 import { storeToRefs } from 'pinia'
+import { useI18n } from 'vue-i18n'
 import moment from 'moment'
 
 import { ElMessage, ElMessageBox } from 'element-plus'
@@ -116,8 +80,6 @@ import { SurveyPermissions } from '@/management/utils/workSpace'
 
 import {
   fieldConfig,
-  noListDataConfig,
-  noSearchDataConfig,
   selectOptionsDict,
   buttonOptionsDict,
   curStatus,
@@ -130,6 +92,7 @@ const surveyListStore = useSurveyListStore()
 const workSpaceStore = useWorkSpaceStore()
 const { workSpaceId, groupAllList, menuType } = storeToRefs(workSpaceStore)
 const router = useRouter()
+const { t } = useI18n()
 const props = defineProps({
   loading: {
     type: Boolean,
@@ -167,8 +130,24 @@ const currentComponent = computed(() => {
 
 const fieldList = computed(() => {
   return map(fields, (f) => {
-    return get(recycleBinFieldConfig, f, null)
+    const config = get(recycleBinFieldConfig, f, null)
+    if (config) {
+      return {
+        ...config,
+        title: t(config.title)
+      }
+    }
+    return null
   }).filter(field => field !== null)
+})
+
+const emptyData = computed(() => {
+  const config = searchVal.value ? noSearchDataConfig : noListDataConfig
+  return {
+    ...config,
+    title: t(config.title),
+    desc: t(config.desc)
+  }
 })
 const data = computed(() => {
   return props.data
@@ -219,14 +198,14 @@ const getToolConfig = (row) => {
   let funcList = []
   funcList.push({
     key: 'recover',
-    label: '恢复'
+    label: t('surveyList.recover')
   },
-  {
-    key: 'complete_delete',
-    label: '彻底删除',
+    {
+      key: 'complete_delete',
+      label: t('surveyList.completeDelete'),
       width: 70,
       color: 'red'
-  })
+    })
   const order = ['recover', 'complete_delete']
   const result = funcList.sort((a, b) => order.indexOf(a.key) - order.indexOf(b.key))
 
@@ -300,21 +279,21 @@ const onDelete = async (row) => {
 const onRecover = async (row) => {
   const res = await recoverSurvey(row._id)
   if (res.code === CODE_MAP.SUCCESS) {
-    ElMessage.success('恢复成功')
+    ElMessage.success(t('surveyList.recoverSuccess'))
     onRefresh()
     workSpaceStore.getGroupList()
     workSpaceStore.getSpaceList()
     workSpaceStore.getRecycleBinCount()
   } else {
-    ElMessage.error(res.errmsg || '恢复失败')
+    ElMessage.error(res.errmsg || t('surveyList.recoverFailed'))
   }
 }
 
 const onCompleteDelete = async (row) => {
   try {
-    await ElMessageBox.confirm('将从回收站中永久删除该问卷，是否确认删除？', '提示', {
-      confirmButtonText: '确定',
-      cancelButtonText: '取消',
+    await ElMessageBox.confirm(t('surveyList.confirmCompleteDelete'), t('common.warning'), {
+      confirmButtonText: t('common.confirm'),
+      cancelButtonText: t('common.cancel'),
       type: 'warning'
     })
   } catch (error) {
@@ -323,33 +302,33 @@ const onCompleteDelete = async (row) => {
 
   const res = await completeDeleteSurvey(row._id)
   if (res.code === CODE_MAP.SUCCESS) {
-    ElMessage.success('删除成功')
+    ElMessage.success(t('surveyList.deleteSuccess'))
     onRefresh()
     workSpaceStore.getGroupList()
     workSpaceStore.getSpaceList()
     workSpaceStore.getRecycleBinCount()
   } else {
-    ElMessage.error(res.errmsg || '删除失败')
+    ElMessage.error(res.errmsg || t('surveyList.deleteFailed'))
   }
 }
 
 const onPausing = async (row) => {
   try {
-    await ElMessageBox.confirm('“暂停回收”后问卷将不能填写，是否继续？', '提示', {
-      confirmButtonText: '确定',
-      cancelButtonText: '取消',
+    await ElMessageBox.confirm(t('surveyList.confirmPause'), t('common.warning'), {
+      confirmButtonText: t('common.confirm'),
+      cancelButtonText: t('common.cancel'),
       type: 'warning'
     })
   } catch (error) {
-    console.log('取消暂停')
+    console.log(t('surveyList.cancelPause'))
     return
   }
   const res = await pausingSurvey(row._id)
   if (res.code === CODE_MAP.SUCCESS) {
-    ElMessage.success('暂停成功')
+    ElMessage.success(t('surveyList.pauseSuccess'))
     onRefresh()
   } else {
-    ElMessage.error(res.errmsg || '暂停失败')
+    ElMessage.error(res.errmsg || t('surveyList.pauseFailed'))
   }
 }
 const handleCurrentChange = (current) => {
@@ -373,8 +352,8 @@ const onCloseModify = (type) => {
 const onRowClick = async (row) => {
 
   try {
-    await ElMessageBox.alert('该问卷已被删除，无法继续访问。', '提示', {
-      confirmButtonText: '返回问卷列表',
+    await ElMessageBox.alert(t('surveyList.surveyDeleted'), '提示', {
+      confirmButtonText: t('surveyList.backToList'),
       type: 'warning'
     })
   } catch (error) {
