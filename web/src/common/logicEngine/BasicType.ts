@@ -1,8 +1,8 @@
 /**
- * in：包含, 选择了，任一
- * eq: 等于，选择了，全部
- * nin: 不包含，不选择，任一
- * neq：不等于，不选择，全部，可以实现“填写了”
+ * in: include, selected, any
+ * eq: equal, selected, all
+ * nin: not include, not selected, any
+ * neq: not equal, not selected, all, can implement "filled"
  */
 export enum Operator {
   Include = 'in',

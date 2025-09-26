@@ -108,7 +108,7 @@ export default {
   },
   team_list: {
     key: 'whitelist',
-    label: '团队空间成员选择',
+    label: 'surveyList.teamMemberSelection',
     type: 'TeamMemberList',
     custom: true, // 自定义导入高级组件
     relyFunc: (data) => {

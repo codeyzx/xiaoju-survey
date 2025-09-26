@@ -3,7 +3,7 @@
     <LeftMenu class="left" />
     <div class="right">
       <div class="topNav">
-        <Navbar title="投放管理" />  
+        <Navbar :title="t('nav.publishSurvey')" />
       </div>
       <div class="content">
         <template v-if="curStatus !== 'new'">
@@ -12,27 +12,23 @@
               <!-- <span class="launch-tip"
                 >说明：若您的问卷投放对象，涉及14周岁以下的用户，需征得其监护人的同意。</span
               > -->
-              <h2>问卷链接</h2>
+              <h2>{{ t('publish.surveyLink') }}</h2>
               <div class="main-channel-wrap">
-                <ChannelRow
-                  :disable-delete="true"
-                  :data="mainChannel"
-                  :style-wrap="{ marginBottom: '8px' }"
-                />
+                <ChannelRow :disable-delete="true" :data="mainChannel" :style-wrap="{ marginBottom: '8px' }" />
               </div>
             </div>
-            
-            <br/>
+
+            <br />
             <div class="box-channelList" v-if="channelTotal > 0">
-              <h2>投放列表</h2>
+              <h2>{{ t('publish.channelList') }}</h2>
               <div class="main-channel-wrap">
                 <ChannelList />
               </div>
             </div>
             <div class="box-channelList">
-              <h2>投放方式</h2>
+              <h2>{{ t('publish.channelMethods') }}</h2>
               <div class="main-channel-wrap">
-                <ChannelCards/>
+                <ChannelCards />
               </div>
             </div>
           </div>
@@ -48,9 +44,9 @@ import { storeToRefs } from 'pinia'
 import { useEditStore } from '@/management/stores/edit'
 import { useChannelStore } from '@/management/stores/channel'
 import { useRoute, useRouter } from 'vue-router'
-import { get as _get } from 'lodash-es'
-
 import { ElMessage } from 'element-plus'
+import { get as _get } from 'lodash-es'
+import { useI18n } from 'vue-i18n'
 import 'element-plus/theme-chalk/src/message.scss'
 
 import EmptyIndex from '@/management/components/EmptyIndex.vue'
@@ -60,11 +56,13 @@ import ChannelList from './components/ChannelList.vue'
 import ChannelCards from './components/ChannelCards.vue'
 import Navbar from './components/Navbar.vue'
 
-const defaultConfig = {
-  title: '问卷未发布',
-  desc: '点击发布后，问卷就可以对外投放了哦！',
+const { t } = useI18n()
+
+const defaultConfig = computed(() => ({
+  title: t('publish.unpublishedTitle'),
+  desc: t('publish.unpublishedDesc'),
   img: '/imgs/icons/unpublished.webp'
-}
+}))
 const channelStore = useChannelStore()
 const editStore = useEditStore()
 const { schema, init, setSurveyId } = editStore
@@ -119,16 +117,18 @@ onMounted(async () => {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    
+
 
     background: #f6f7f9;
     // padding: 30px 40px 50px 40px;
     padding-left: 80px;
-    .topNav{
+
+    .topNav {
       width: 100%;
       height: 55px;
       background: #fff;
     }
+
     .content {
       display: flex;
       height: calc(100% - 90px);
@@ -145,6 +145,7 @@ onMounted(async () => {
   padding: 30px 30px 80px;
   border-radius: 2px;
   min-width: 1060px;
+
   .launch-tip {
     font-size: 12px;
     color: #fa881a;
@@ -160,4 +161,3 @@ onMounted(async () => {
   }
 }
 </style>
-  

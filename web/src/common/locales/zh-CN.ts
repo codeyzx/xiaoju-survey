@@ -5,6 +5,7 @@ export default {
     cancel: '取消',
     save: '保存',
     delete: '删除',
+    deleteAll: '全部删除',
     edit: '编辑',
     add: '添加',
     create: '创建',
@@ -35,7 +36,50 @@ export default {
     help: '帮助',
     about: '关于',
     logout: '退出登录',
-    language: '语言'
+    language: '语言',
+    member: '成员',
+    admin: '管理员',
+    user: '成员',
+    selectPlaceholder: '请选择',
+    allPermissions: '全部权限',
+    basicInfo: '基础信息',
+    title: '标题',
+    remark: '备注',
+    group: '分组',
+    ungrouped: '未分组',
+    all: '全部',
+    fileName: '文件名称',
+    estimatedSize: '预估大小',
+    downloadTime: '下载时间',
+    status: '状态',
+    operation: '操作',
+    completed: '已完成',
+    waiting: '排队中',
+    computing: '计算中',
+    exportFailed: '导出失败',
+    fileNotExist: '文件不存在',
+    confirmDelete: '是否确认本次删除',
+    promptTitle: '提示',
+    confirmDeleteWithImpact: '本次操作会影响数据统计查看，是否确认删除？',
+    showLogicDependency: '该题目被显示逻辑关联，请先清除逻辑依赖',
+    jumpLogicDependency: '该题目被跳转逻辑关联，请先清除逻辑依赖',
+    satisfyAllConditions: '满足以上全部，则显示本题',
+    appEmbeddedSurvey: 'App嵌入问卷',
+    webEmbeddedSurvey: 'Web嵌入问卷',
+    miniProgramEmbeddedSurvey: '小程序嵌入问卷',
+    accessInstructions: '接入说明',
+    embedAppDesc: '将问卷通过SDK方式嵌入到IOS、Android等应用中。',
+    embedWebDesc: '将问卷通过SDK方式嵌入到网页中，适合弹窗、信息流等。',
+    embedMpDesc: '将问卷通过SDK嵌入到小程序中，在小程序中进行调查收集。',
+    sdkAccessMethod: 'SDK接入方式',
+    openInNewPage: '在新页面打开',
+    copyLink: '复制链接',
+    channelLinkCopied: '已复制渠道链接',
+    comingSoon: '方式即将上线，敬请期待',
+    distributionName: '投放名称：',
+    enterDistributionName: '请输入投放名称',
+    enterAccountSearch: '请输入账号名搜索',
+    confirmDeleteGroup: '删除分组后，属于该分组的问卷将会自动更换到"未分组"下，是否确认本次删除？'
   },
 
   // 登录页面
@@ -79,6 +123,13 @@ export default {
     dataAnalysis: '数据统计'
   },
 
+  // 工作空间
+  workspace: {
+    mySpace: '我的空间',
+    teamSpace: '团队空间',
+    recycleBin: '回收站'
+  },
+
   // 问卷列表
   surveyList: {
     title: '问卷列表',
@@ -95,6 +146,9 @@ export default {
     draftSurveys: '草稿',
     completedSurveys: '已完成',
     searchPlaceholder: '请输入问卷标题',
+    validationTitleRequired: '请输入问卷标题',
+    teamMemberSelection: '团队空间成员选择',
+    collaboratorManagement: '协作管理',
     spaceSearchPlaceholder: '请输入空间名称',
     groupSearchPlaceholder: '请输入分组名称',
     noSurveys: '暂无问卷',
@@ -144,6 +198,8 @@ export default {
     confirmDeleteGroup: '删除分组后，属于该分组的问卷将会自动更换到"未分组"下，是否确认本次删除？',
     confirmPause: '"暂停回收"后问卷将不能填写，是否继续？',
     confirmCompleteDelete: '将从回收站中永久删除该问卷，是否确认删除？',
+    deleteCollaboratorConfirm: '删除协作者后，用户不再有该问卷下的相关权限',
+    deleteTeamMemberConfirm: '删除团队成员后，该成员不再有团队空间的访问权限',
     deleteSuccess: '删除成功',
     deleteFailed: '删除失败',
     recoverSuccess: '恢复成功',
@@ -229,6 +285,35 @@ export default {
     surveyTotal: '问卷数量'
   },
 
+  // Excel导入
+  excelImport: {
+    title: 'Excel导入',
+    step1Title: '下载Excel模版，按照模版格式要求在Excel中编辑题目',
+    step2Title: '上传编辑好的Excel模版文件',
+    downloadTemplate: '下载Excel模版',
+    selectUploadFile: '选择上传文件',
+    uploadTip1: '格式支持xls、xlsx',
+    uploadTip2: '文件大小不超过2MB',
+    uploadTip3: '文件必须包含表头，数据勿放在合并的单元格中',
+    uploadTip4: '文件所含数据行数勿超过10000、列数勿超过3（超出可分多次上传）',
+    uploadSuccess: '上传成功',
+    confirm: '确定',
+    create: '创建',
+    cancel: '取消',
+    errorDialogTitle: '异常提示',
+    errorNote: '注：若未按照模版填写数据，请先下载模版',
+    downloadTemplateFull: '下载Excel模版',
+    reupload: '重新上传',
+    errors: {
+      excelFormatError: '不支持该文件格式，请重新上传！',
+      fileSizeOver2MBError: '文件大小超出限制，请重新上传！',
+      mergedCellsError: '文件格式不正确，请重新上传！',
+      rowColLimitError: '文件所含数据超出限制，请重新上传！',
+      headerIncorrectError:
+        '第一列标题必须为[题目标题]，第二列标题必须为[题型]，第三列标题必须为[选项内容]。'
+    }
+  },
+
   // 问卷编辑器
   editor: {
     title: '问卷编辑器',
@@ -305,7 +390,17 @@ export default {
     customTheme: '自定义主题',
     backgroundColor: '背景色',
     textColor: '文字颜色',
-    buttonColor: '按钮颜色'
+    buttonColor: '按钮颜色',
+    whitelist: '名单',
+    whitelistEntry: '名单录入',
+    addToWhitelist: '添加',
+    addWhitelist: '添加白名单',
+    typeSelection: '类型选择',
+    mobilePhone: '手机号',
+    email: '邮箱',
+    multipleSeparator: '多个用逗号(半角)","隔开',
+    maxWhitelistItems: '最多添加 {max} 个',
+    invalidFormat: '格式错误，请检查后重新输入~'
   },
 
   // 数据分析
@@ -315,6 +410,8 @@ export default {
     responses: '回收情况',
     statistics: '统计分析',
     export: '导出数据',
+    exportAllData: '导出全部数据',
+    showOriginalData: '是否展示原数据',
     totalResponses: '总回收数',
     validResponses: '有效回收数',
     invalidResponses: '无效回收数',
@@ -417,6 +514,13 @@ export default {
     verify: '验证'
   },
 
+  // Render
+  render: {
+    verifyWhiteDialog: {
+      passwordPlaceholder: '请输入6位字符串类型访问密码'
+    }
+  },
+
   // Form placeholders
   form: {
     enterPassword: '请输入访问密码',
@@ -426,5 +530,35 @@ export default {
     enterVerificationCode: '请输入6位字符串类型访问密码',
     continueFillContent: '是否继续上次填写的内容？',
     continueSubmitContent: '是否继续上次提交的内容？'
+  },
+
+  // Survey Creation Form
+  surveyForm: {
+    surveyName: '问卷名称',
+    enterSurveyTitle: '请输入问卷标题',
+    surveyRemark: '问卷备注',
+    enterRemark: '请输入备注',
+    surveyType: '问卷类型',
+    group: '分组',
+    ungrouped: '未分组',
+    titleTip: '此标题将在打开问卷时显示在浏览器的顶部',
+    remarkTip: '备注仅自己可见'
+  },
+
+  // Publish/Channel
+  publish: {
+    surveyLink: '问卷链接',
+    channelList: '投放列表',
+    channelMethods: '投放方式',
+    unpublishedTitle: '问卷未发布',
+    unpublishedDesc: '点击发布后，问卷就可以对外投放了哦！',
+    distributionEnabled: '投放已开启',
+    creationSuccessful: '创建成功',
+    method1: '方式一： API调用',
+    method2: '方式二： 组件调用',
+    copyCode: '复制代码',
+    copied: '已复制',
+    collecting: '回收中',
+    paused: '已暂停'
   }
 }

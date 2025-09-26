@@ -1,19 +1,9 @@
 <template>
   <div class="team-member-wrap">
     <div class="team-tree-wrap">
-      <el-tree
-        ref="treeRef"
-        :default-expanded-keys="defaultCheckedKeys"
-        :default-checked-keys="defaultCheckedKeys"
-        :data="treeData"
-        empty-text="暂无数据"
-        @check="handleChange"
-        style="height: 201px"
-        highlight-current
-        show-checkbox
-        node-key="id"
-        :props="defaultProps"
-      />
+      <el-tree ref="treeRef" :default-expanded-keys="defaultCheckedKeys" :default-checked-keys="defaultCheckedKeys"
+        :data="treeData" empty-text="暂无数据" @check="handleChange" style="height: 201px" highlight-current show-checkbox
+        node-key="id" :props="defaultProps" />
     </div>
     <div class="member-count">
       已选择 <span>{{ selectCount }}</span> 人
@@ -25,6 +15,9 @@ import { ref, computed, onMounted } from 'vue'
 import { FORM_CHANGE_EVENT_KEY } from '@/materials/setters/constant'
 import { getMemberList } from '@/management/api/space'
 import { ElMessage } from 'element-plus'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const props = defineProps({
   formConfig: Object
@@ -56,7 +49,7 @@ const selectCount = computed(() => {
 const getSpaceMenus = async () => {
   const res = await getMemberList()
   if (res.code != 200) {
-    ElMessage.error('获取空间成员列表失败')
+    ElMessage.error(t('surveyList.getMemberListFailed'))
   }
   const data = res.data
   data.map((v) => {

@@ -5,6 +5,7 @@ export default {
     cancel: 'Cancel',
     save: 'Save',
     delete: 'Delete',
+    deleteAll: 'Delete All',
     edit: 'Edit',
     add: 'Add',
     create: 'Create',
@@ -35,7 +36,59 @@ export default {
     help: 'Help',
     about: 'About',
     logout: 'Logout',
-    language: 'Language'
+    language: 'Language',
+    networkError:
+      'Network or server error during upload, please check network or contact administrator',
+    administrator: 'Administrator',
+    enterAccount: 'Please enter account',
+    member: 'Member',
+    admin: 'Administrator',
+    user: 'Member',
+    selectPlaceholder: 'Please select',
+    allPermissions: 'All permissions',
+    basicInfo: 'Basic Information',
+    title: 'Title',
+    remark: 'Remark',
+    group: 'Group',
+    ungrouped: 'Ungrouped',
+    all: 'All',
+    fileName: 'File Name',
+    estimatedSize: 'Estimated Size',
+    downloadTime: 'Download Time',
+    status: 'Status',
+    operation: 'Operation',
+    completed: 'Completed',
+    waiting: 'Waiting',
+    computing: 'Computing',
+    exportFailed: 'Export Failed',
+    fileNotExist: 'File does not exist',
+    confirmDelete: 'Are you sure to delete this time?',
+    promptTitle: 'Prompt',
+    confirmDeleteWithImpact:
+      'This operation will affect data statistics viewing, are you sure to delete?',
+    showLogicDependency:
+      'This question is associated with display logic, please clear the logic dependency first',
+    jumpLogicDependency:
+      'This question is associated with jump logic, please clear the logic dependency first',
+    satisfyAllConditions: 'Satisfy all of the above, then display this question',
+    appEmbeddedSurvey: 'App Embedded Survey',
+    webEmbeddedSurvey: 'Web Embedded Survey',
+    miniProgramEmbeddedSurvey: 'Mini Program Embedded Survey',
+    accessInstructions: 'Access Instructions',
+    embedAppDesc: 'Embed the survey into IOS, Android and other apps via SDK.',
+    embedWebDesc:
+      'Embed the survey into web pages via SDK, suitable for popups, information streams, etc.',
+    embedMpDesc: 'Embed the survey into mini programs via SDK, conduct surveys in mini programs.',
+    sdkAccessMethod: 'SDK Access Method',
+    openInNewPage: 'Open in new page',
+    copyLink: 'Copy link',
+    channelLinkCopied: 'Channel link copied',
+    comingSoon: 'method is coming soon, stay tuned',
+    distributionName: 'Distribution Name:',
+    enterDistributionName: 'Please enter distribution name',
+    enterAccountSearch: 'Please enter account name to search',
+    confirmDeleteGroup:
+      'After deleting the group, the surveys in this group will be automatically moved to "Ungrouped". Are you sure to delete this time?'
   },
 
   // Login Page
@@ -79,13 +132,20 @@ export default {
     dataAnalysis: 'Data Analysis'
   },
 
+  // Workspace
+  workspace: {
+    mySpace: 'My Space',
+    teamSpace: 'Team Space',
+    recycleBin: 'Recycle Bin'
+  },
+
   // Survey List
   surveyList: {
     title: 'Survey List',
     createSurvey: 'Create Survey',
-    createSpace: 'Create Team Space',
+    createSpace: 'Create Space',
     createGroup: 'Create Group',
-    spaceManagement: 'Team Management',
+    spaceManagement: 'Manage Team',
     mySpace: 'My Space',
     teamSpace: 'Team Space',
     surveyListTitle: 'Survey List',
@@ -95,6 +155,9 @@ export default {
     draftSurveys: 'Draft',
     completedSurveys: 'Completed',
     searchPlaceholder: 'Please enter survey title',
+    validationTitleRequired: 'Please enter survey title',
+    teamMemberSelection: 'Team Space Member Selection',
+    collaboratorManagement: 'Collaborator Management',
     spaceSearchPlaceholder: 'Please enter space name',
     groupSearchPlaceholder: 'Please enter group name',
     noSurveys: 'No surveys found',
@@ -149,11 +212,16 @@ export default {
     confirmPause: 'After "Pause Collection", the survey cannot be filled. Do you want to continue?',
     confirmCompleteDelete:
       'The survey will be permanently deleted from the recycle bin. Are you sure you want to delete?',
+    deleteCollaboratorConfirm:
+      'After deleting collaborator, user will no longer have relevant permissions for this survey',
+    deleteTeamMemberConfirm:
+      'After deleting team member, the member will no longer have access to the team space',
     deleteSuccess: 'Deleted successfully',
     deleteFailed: 'Delete failed',
     recoverSuccess: 'Recovered successfully',
     recoverFailed: 'Recover failed',
     pauseSuccess: 'Paused successfully',
+    getMemberListFailed: 'Failed to get space member list',
     pauseFailed: 'Pause failed',
     cancelPause: 'Cancel pause',
     surveyDeleted: 'The survey has been deleted and cannot be accessed.',
@@ -162,7 +230,7 @@ export default {
     // Space and Group management
     spaceDescriptionLabel: 'Team Space Description',
     addMembers: 'Add Members',
-    createSpaceTitle: 'Create Team Space',
+    createSpaceTitle: 'Create Space',
     manageSpaceTitle: 'Manage Team Space',
     createGroupTitle: 'Create Group',
     manageGroupTitle: 'Manage Group',
@@ -228,6 +296,38 @@ export default {
     sortOptions: {
       updatedAt: 'Updated Time',
       createdAt: 'Created Time'
+    }
+  },
+
+  // Excel Import
+  excelImport: {
+    title: 'Excel Import',
+    step1Title:
+      'Download Excel template, edit questions in Excel according to template format requirements',
+    step2Title: 'Upload the edited Excel template file',
+    downloadTemplate: 'Download Excel Template',
+    selectUploadFile: 'Select Upload File',
+    uploadTip1: 'Supports xls, xlsx formats',
+    uploadTip2: 'File size should not exceed 2MB',
+    uploadTip3: 'File must contain headers, data should not be in merged cells',
+    uploadTip4:
+      'File should not contain more than 10,000 rows and 3 columns (can upload multiple times if exceeded)',
+    uploadSuccess: 'Upload Successful',
+    confirm: 'Confirm',
+    create: 'Create',
+    cancel: 'Cancel',
+    errorDialogTitle: 'Exception Prompt',
+    errorNote:
+      'Note: If data is not filled according to the template, please download the template first',
+    downloadTemplateFull: 'Download Excel Template',
+    reupload: 'Re-upload',
+    errors: {
+      excelFormatError: 'Unsupported file format, please re-upload!',
+      fileSizeOver2MBError: 'File size exceeds limit, please re-upload!',
+      mergedCellsError: 'Incorrect file format, please re-upload!',
+      rowColLimitError: 'File data exceeds limit, please re-upload!',
+      headerIncorrectError:
+        'First column header must be [Question Title], second column must be [Question Type], third column must be [Option Content].'
     }
   },
 
@@ -308,7 +408,17 @@ export default {
     customTheme: 'Custom Theme',
     backgroundColor: 'Background Color',
     textColor: 'Text Color',
-    buttonColor: 'Button Color'
+    buttonColor: 'Button Color',
+    whitelist: 'Whitelist',
+    whitelistEntry: 'Whitelist Entry',
+    addToWhitelist: 'Add',
+    addWhitelist: 'Add Whitelist',
+    typeSelection: 'Type Selection',
+    mobilePhone: 'Mobile Phone',
+    email: 'Email',
+    multipleSeparator: 'Separate multiple with commas ","',
+    maxWhitelistItems: 'Maximum {max} items can be added',
+    invalidFormat: 'Invalid format, please check and re-enter~'
   },
 
   // Data Analysis
@@ -318,6 +428,8 @@ export default {
     responses: 'Responses',
     statistics: 'Statistics',
     export: 'Export Data',
+    exportAllData: 'Export All Data',
+    showOriginalData: 'Show Original Data?',
     totalResponses: 'Total Responses',
     validResponses: 'Valid Responses',
     invalidResponses: 'Invalid Responses',
@@ -420,6 +532,13 @@ export default {
     verify: 'Verify'
   },
 
+  // Render
+  render: {
+    verifyWhiteDialog: {
+      passwordPlaceholder: 'Please enter 6-character string access password'
+    }
+  },
+
   // Form placeholders
   form: {
     enterPassword: 'Please enter access password',
@@ -429,5 +548,51 @@ export default {
     enterVerificationCode: 'Please enter 6-character access password',
     continueFillContent: 'Continue with previous content?',
     continueSubmitContent: 'Continue with previous submission?'
+  },
+
+  // Survey Creation Form
+  surveyForm: {
+    surveyName: 'Survey Name',
+    enterSurveyTitle: 'Please enter survey title',
+    surveyRemark: 'Survey Remark',
+    enterRemark: 'Please enter remark',
+    surveyType: 'Survey Type',
+    group: 'Group',
+    ungrouped: 'Ungrouped',
+    titleTip: 'This title will be displayed at the top of the browser when opening the survey',
+    remarkTip: 'Remarks are only visible to yourself'
+  },
+
+  // Publish/Channel
+  publish: {
+    surveyLink: 'Survey Link',
+    channelList: 'Distribution List',
+    channelMethods: 'Distribution Methods',
+    unpublishedTitle: 'Survey Not Published',
+    unpublishedDesc: 'Click publish to make the survey available for distribution!',
+    channelId: 'Channel ID',
+    channelName: 'Distribution Name',
+    status: 'Status',
+    collectionCount: 'Collection Count',
+    createdDate: 'Created Date',
+    creator: 'Creator',
+    updatedDate: 'Updated Date',
+    actions: 'Actions',
+    rename: 'Rename',
+    close: 'Close',
+    enable: 'Enable',
+    delete: 'Delete',
+    confirmDeleteChannel: 'Are you sure you want to delete this distribution?',
+    confirmCloseChannel: 'Closing the distribution will stop survey collection, continue?',
+    confirmCloseTitle: 'Confirm to close distribution?',
+    tip: 'Tip',
+    distributionEnabled: 'Distribution enabled',
+    creationSuccessful: 'Creation successful',
+    method1: 'Method 1: API Call',
+    method2: 'Method 2: Component Call',
+    copyCode: 'Copy Code',
+    copied: 'Copied',
+    collecting: 'Collecting',
+    paused: 'Paused'
   }
 }

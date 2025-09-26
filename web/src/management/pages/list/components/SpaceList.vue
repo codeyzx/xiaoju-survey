@@ -132,9 +132,9 @@ const onSearchText = async (value: string) => {
 
 const getTools = (data: any) => {
   const flag = isAdmin(data._id)
-  const tools = [{ key: 'modify', label: flag ? '管理' : '查看' }]
+  const tools = [{ key: 'modify', label: flag ? t('surveyList.manage') : t('common.view') }]
   if (flag) {
-    tools.push({ key: 'delete', label: '删除' })
+    tools.push({ key: 'delete', label: t('common.delete') })
   }
   return tools
 }
@@ -145,7 +145,7 @@ const handleModify = async (id: string) => {
   showSpaceModify.value = true
 }
 const handleDelete = (id: string) => {
-  ElMessageBox.confirm('删除后团队内的问卷将同步被删除，是否确认本次删除？', '提示', {
+  ElMessageBox.confirm(t('surveyList.confirmDeleteSpace'), t('common.warning'), {
     confirmButtonText: '确定',
     cancelButtonText: '取消',
     type: 'warning'

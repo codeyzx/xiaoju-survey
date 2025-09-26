@@ -84,8 +84,8 @@ export enum GroupState {
 
 // 定义角色标签映射对象
 export const roleLabels: Record<UserRole, string> = {
-  [UserRole.Admin]: '管理员',
-  [UserRole.Member]: '成员'
+  [UserRole.Admin]: 'common.admin',
+  [UserRole.Member]: 'common.user'
 }
 
 export enum SurveyPermissions {

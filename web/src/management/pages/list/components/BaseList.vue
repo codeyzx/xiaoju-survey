@@ -11,7 +11,7 @@
             (iconItem) => iconItem.effectValue === buttonValueMap[item]
           ).icon
             " link />
-        <TextSearch placeholder="请输入问卷标题" :value="searchVal" @search="onSearchText" />
+        <TextSearch :placeholder="t('surveyList.searchPlaceholder')" :value="searchVal" @search="onSearchText" />
       </div>
     </div>
     <div class="list-wrapper" v-if="total">

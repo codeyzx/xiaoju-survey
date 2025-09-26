@@ -1,26 +1,17 @@
 <template>
-  <el-menu
-    :default-active="activeValue"
-    class="el-menu-vertical"
-    ref="menuRef"
-    @select="handleMenu"
-    :default-openeds="[MenuType.PersonalGroup, MenuType.SpaceGroup]"
-  >
+  <el-menu :default-active="activeValue" class="el-menu-vertical" ref="menuRef" @select="handleMenu"
+    :default-openeds="[MenuType.PersonalGroup, MenuType.SpaceGroup]">
     <template v-for="(menu, index) in props.menus" :key="menu.id">
-      <el-menu-item
-        :class="[
-          'recycle-bin-item',
-          menu.id === MenuType.RecycleBin ? 'bottom-element' : '',
-          activeValue == menu.id ? 'check-item' : ''
-        ]"
-        :index="menu.id.toString()"
-        v-if="menu.id === MenuType.RecycleBin"
-      >
+      <el-menu-item :class="[
+        'recycle-bin-item',
+        menu.id === MenuType.RecycleBin ? 'bottom-element' : '',
+        activeValue == menu.id ? 'check-item' : ''
+      ]" :index="menu.id.toString()" v-if="menu.id === MenuType.RecycleBin">
         <template #title>
           <div class="title-box">
             <div class="title-content">
               <i :class="['iconfont', menu.icon]"></i>
-              <span>{{ menu.name }}</span>
+              <span>{{ $t(menu.name) }}</span>
             </div>
             <p class="title-total" v-if="menu.id === MenuType.RecycleBin">{{ menu.count }}</p>
           </div>
@@ -28,43 +19,31 @@
       </el-menu-item>
 
 
-      <el-menu-item
-        :class="[
-          index === 0 ? 'bottom' : '',
-          index > 2 ? 'sub-item' : 'main-item',
-          menu.id === MenuType.RecycleBin ? 'bottom-element' : '',
-          activeValue == menu.id ? 'check-item' : ''
-        ]"
-        :index="menu.id.toString()"
-        v-else-if="!menu.children?.length"
-      >
+      <el-menu-item :class="[
+        index === 0 ? 'bottom' : '',
+        index > 2 ? 'sub-item' : 'main-item',
+        menu.id === MenuType.RecycleBin ? 'bottom-element' : '',
+        activeValue == menu.id ? 'check-item' : ''
+      ]" :index="menu.id.toString()" v-else-if="!menu.children?.length">
         <template #title>
           <div class="title-content">
             <i :class="['iconfont', menu.icon]"></i>
-            <span>{{ menu.name }}</span>
+            <span>{{ $t(menu.name) }}</span>
           </div>
         </template>
       </el-menu-item>
-      <el-sub-menu
-        v-else
-        :index="menu.id.toString()"
-        :class="[activeValue == menu.id ? 'check-item' : '']"
-        default-opened
-      >
+      <el-sub-menu v-else :index="menu.id.toString()" :class="[activeValue == menu.id ? 'check-item' : '']"
+        default-opened>
         <template #title>
           <div class="title-content sub-title main-item" @click.stop="handleMenu(menu.id)">
             <i :class="['iconfont', menu.icon]"></i>
-            <span>{{ menu.name }}</span>
+            <span>{{ $t(menu.name) }}</span>
           </div>
         </template>
-        <el-menu-item
-          v-for="item in menu.children"
-          :key="item.id"
-          :index="item.id.toString()"
-          :class="[activeValue == item.id ? 'check-item' : '']"
-        >
+        <el-menu-item v-for="item in menu.children" :key="item.id" :index="item.id.toString()"
+          :class="[activeValue == item.id ? 'check-item' : '']">
           <div class="title-box">
-            <p class="title-text">{{ item.name }}</p>
+            <p class="title-text">{{ $t(item.name) }}</p>
             <p class="title-total">{{ item.total }}</p>
           </div>
         </el-menu-item>
@@ -107,6 +86,7 @@ const handleMenu = (id: string) => {
     }
   }
 }
+
 .el-menu-vertical {
   border: none;
   width: 200px;
@@ -119,10 +99,12 @@ const handleMenu = (id: string) => {
   overflow-x: hidden;
   overflow-y: auto;
   box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.04);
+
   :deep(.el-menu-item) {
     width: 200px;
     height: 36px;
-    > p {
+
+    >p {
       overflow: hidden;
       /*文本不会换行*/
       white-space: nowrap !important;
@@ -133,11 +115,13 @@ const handleMenu = (id: string) => {
     &.bottom {
       border-bottom: 1px solid #f6f5f2;
     }
+
     &.bottom-element {
       position: absolute;
       bottom: 0;
       border-top: 1px solid #f6f5f2;
     }
+
     &.main-item {
       // margin: 10px 0;
       font-size: 16px;
@@ -145,12 +129,15 @@ const handleMenu = (id: string) => {
       color: #292a36;
       height: 48px;
     }
+
     &.sub-item {
       margin: 0;
     }
+
     &:hover {
       background-color: #f2f4f7;
     }
+
     .title-content {
       display: flex;
       align-items: center;
@@ -177,31 +164,37 @@ const handleMenu = (id: string) => {
       font-weight: 400;
     }
   }
+
   :deep(.el-menu-item-group) {
-    > ul {
-      > li {
+    >ul {
+      >li {
         padding-left: 45px !important;
       }
     }
   }
+
   :deep(.el-menu-item-group__title) {
     cursor: pointer;
     padding: 0 !important;
   }
+
   .sub-title {
     width: 100%;
     width: 100%;
   }
 }
+
 .iconfont {
   font-size: 16px;
   margin-right: 10px;
   color: #faa600 !important;
 }
+
 .check-item {
   background: #fef6e6 100% !important;
 }
+
 .recycle-bin-item {
-  height: 56px!important;
+  height: 56px !important;
 }
 </style>

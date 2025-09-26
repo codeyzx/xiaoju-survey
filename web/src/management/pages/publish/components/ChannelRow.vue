@@ -9,16 +9,13 @@
         </div>
       </div>
       <div class="operate-btn-group">
-        <el-tooltip class="item" effect="dark" content="在新页面打开" placement="top">
+        <el-tooltip class="item" effect="dark" :content="t('common.openInNewPage')" placement="top">
           <a class="cru-suffix j-open" @click="handleOpenPage(normalizationURL(data))">
             <i class="font23 iconfont icon-jinru"></i>
           </a>
         </el-tooltip>
-        <el-tooltip class="item" effect="dark" content="复制链接" placement="top">
-          <a
-            class="cru-suffix j-copy"
-            @click="handleCopy"
-          >
+        <el-tooltip class="item" effect="dark" :content="t('common.copyLink')" placement="top">
+          <a class="cru-suffix j-copy" @click="handleCopy">
             <i class="font23 iconfont icon-fuzhi"></i>
           </a>
         </el-tooltip>
@@ -30,11 +27,14 @@
 
 <script setup lang="ts">
 import copy from 'copy-to-clipboard'
+import { useI18n } from 'vue-i18n'
 import { ElMessage } from 'element-plus'
 import 'element-plus/theme-chalk/src/message.scss'
 
 import QRCode from './QRCode.vue'
 import { computed } from 'vue'
+
+const { t } = useI18n()
 
 interface Props {
   data: any
@@ -48,7 +48,7 @@ const handleCopy = () => {
   if (data) {
     ElMessage({
       type: 'success',
-      message: `已复制渠道链接：${url.value}`
+      message: `${t('common.channelLinkCopied')}：${url.value}`
     })
   }
 }

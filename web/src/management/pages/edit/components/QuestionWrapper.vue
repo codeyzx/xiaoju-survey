@@ -1,19 +1,13 @@
 <template>
-  <div
-    :class="[itemClass, { 'is-move': isSelected || isMove }]"
-    @mouseenter="onMouseenter"
-    @mouseleave="onMouseleave"
-    @click="clickFormItem"
-  >
-    <div><slot v-if="moduleConfig.type !== 'section'"></slot></div>
+  <div :class="[itemClass, { 'is-move': isSelected || isMove }]" @mouseenter="onMouseenter" @mouseleave="onMouseleave"
+    @click="clickFormItem">
+    <div>
+      <slot v-if="moduleConfig.type !== 'section'"></slot>
+    </div>
 
     <div :class="[showHover ? 'visibility' : 'hidden', 'hoverItem']">
-      <div
-        class="item el-icon-rank"
-        @click.stop.prevent
-        @mouseenter="setMoveState(true)"
-        @mouseleave="setMoveState(false)"
-      >
+      <div class="item el-icon-rank" @click.stop.prevent @mouseenter="setMoveState(true)"
+        @mouseleave="setMoveState(false)">
         <i-ep-rank />
       </div>
       <div v-if="showUp" class="item" @click.stop.prevent="onMoveUp">
@@ -35,10 +29,13 @@
 </template>
 <script setup lang="ts">
 import { ref, computed, unref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessageBox } from 'element-plus'
 import 'element-plus/theme-chalk/src/message-box.scss'
 import { useShowLogicInfo } from '@/management/hooks/useShowLogicInfo'
 import { useJumpLogicInfo } from '@/management/hooks/useJumpLogicInfo'
+
+const { t } = useI18n()
 
 const props = defineProps({
   qIndex: {
@@ -142,23 +139,23 @@ const onMoveDown = () => {
 }
 const onDelete = async () => {
   if (unref(hasShowLogic) || getShowLogicText.value) {
-    ElMessageBox.alert('该题目被显示逻辑关联，请先清除逻辑依赖', '提示', {
-      confirmButtonText: '确定',
+    ElMessageBox.alert(t('common.showLogicDependency'), t('common.promptTitle'), {
+      confirmButtonText: t('common.confirm'),
       type: 'warning'
     })
     return
   }
   if (unref(hasJumpLogic)) {
-    ElMessageBox.alert('该题目被跳转逻辑关联，请先清除逻辑依赖', '提示', {
-      confirmButtonText: '确定',
+    ElMessageBox.alert(t('common.jumpLogicDependency'), t('common.promptTitle'), {
+      confirmButtonText: t('common.confirm'),
       type: 'warning'
     })
     return
   }
   try {
-    await ElMessageBox.confirm('本次操作会影响数据统计查看，是否确认删除？', '提示', {
-      confirmButtonText: '确定',
-      cancelButtonText: '取消',
+    await ElMessageBox.confirm(t('common.confirmDeleteWithImpact'), t('common.promptTitle'), {
+      confirmButtonText: t('common.confirm'),
+      cancelButtonText: t('common.cancel'),
       type: 'warning'
     })
 
@@ -184,6 +181,7 @@ const setMoveState = (state: boolean) => {
   position: relative;
   padding: 0.36rem 0 0.36rem;
   border: 1px solid transparent;
+
   &.spliter {
     border-bottom: 0.1rem solid $spliter-color;
   }
@@ -191,6 +189,7 @@ const setMoveState = (state: boolean) => {
   &.mouse-hover {
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.09);
   }
+
   &.isSelected {
     background-color: #f2f4f7;
     box-shadow: 0 0 5px #e3e4e8;
@@ -204,9 +203,11 @@ const setMoveState = (state: boolean) => {
     z-index: 2;
     display: flex;
     flex-direction: column;
+
     &.hidden {
       display: none;
     }
+
     .item {
       display: flex;
       align-items: center;
@@ -222,12 +223,14 @@ const setMoveState = (state: boolean) => {
       font-size: 12px;
       text-align: center;
       line-height: 28px;
+
       &:hover {
         background-color: $primary-color;
         color: #fff;
       }
     }
   }
+
   .logic-text {
     font-size: 12px;
     color: #c8c9cd;

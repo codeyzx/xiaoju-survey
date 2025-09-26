@@ -16,7 +16,8 @@
             <component :is="(field as any).comp" type="table" :value="scope.row" />
           </template>
           <template v-else>
-            <span class="cell-span">{{ scope.row[(field as any).key] }}</span>
+            <span class="cell-span">{{ (field as any).key === 'name' ? getDisplayName(scope.row[(field as any).key]) :
+              scope.row[(field as any).key] }}</span>
           </template>
         </template>
       </el-table-column>
@@ -102,18 +103,18 @@ const emptyData = computed(() => {
     desc: t(config.desc)
   }
 })
-const tools = ref([
+const tools = computed(() => [
   {
     key: 'open',
-    label: '进入'
+    label: t('surveyList.enter')
   },
   {
     key: 'modify',
-    label: '管理'
+    label: t('surveyList.manage')
   },
   {
     key: 'delete',
-    label: '删除'
+    label: t('common.delete')
   }
 ])
 
@@ -137,17 +138,24 @@ const onSearchText = async (value: string) => {
   emitRefresh(1, value)
 }
 
+const getDisplayName = (name: string) => {
+  if (name.startsWith('common.')) {
+    return t(name)
+  }
+  return name
+}
+
 const handleModify = (id: string) => {
   workSpaceStore.getGroupDetail(id)
   showGroupModify.value = true
 }
 const handleDelete = (id: string) => {
   ElMessageBox.confirm(
-    '删除分组后，属于该分组的问卷将会自动更换到“未分组”下，是否确认本次删除？',
-    '提示',
+    t('common.confirmDeleteGroup'),
+    t('common.warning'),
     {
-      confirmButtonText: '确定',
-      cancelButtonText: '取消',
+      confirmButtonText: t('common.confirm'),
+      cancelButtonText: t('common.cancel'),
       type: 'warning'
     }
   )

@@ -34,19 +34,19 @@ export const useWorkSpaceStore = defineStore('workSpace', () => {
   const spaceMenus = ref([
     {
       icon: 'icon-wodekongjian',
-      name: '我的空间',
+      name: 'workspace.mySpace',
       id: MenuType.PersonalGroup,
       children: []
     },
     {
       icon: 'icon-tuanduikongjian',
-      name: '团队空间',
+      name: 'workspace.teamSpace',
       id: MenuType.SpaceGroup,
       children: []
     },
     {
       icon: 'icon-huishouzhan',
-      name: '回收站',
+      name: 'workspace.recycleBin',
       id: MenuType.RecycleBin,
       count: 0,
       children: []
@@ -197,12 +197,12 @@ export const useWorkSpaceStore = defineStore('workSpace', () => {
         group.unshift(
           {
             id: GroupState.All,
-            name: '全部',
+            name: 'common.all',
             total: allSurveyTotal
           },
           {
             id: GroupState.Not,
-            name: '未分组',
+            name: 'common.ungrouped',
             total: unclassifiedSurveyTotal
           }
         )
@@ -249,9 +249,8 @@ export const useWorkSpaceStore = defineStore('workSpace', () => {
     }
   }
 
-
-  async function getRecycleBinCount(params?:  any) {
-    const recycleBinMenu = spaceMenus.value.find(menu => menu.id === MenuType.RecycleBin);
+  async function getRecycleBinCount(params?: any) {
+    const recycleBinMenu = spaceMenus.value.find((menu) => menu.id === MenuType.RecycleBin)
 
     try {
       const res: any = await getRecycleBinCountReq(params)

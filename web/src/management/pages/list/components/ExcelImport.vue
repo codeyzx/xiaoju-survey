@@ -1,64 +1,49 @@
 <template>
-  <el-dialog
-    class="base-dialog-root"
-    :model-value="visible"
-    width="40%"
-    title="Excel导入"
-    @close="handleClose"
-    :close-on-click-modal="false"
-  >    
+  <el-dialog class="base-dialog-root" :model-value="visible" width="40%" :title="$t('excelImport.title')"
+    @close="handleClose" :close-on-click-modal="false">
     <div class="excel-import-content">
       <!-- 第一步：下载Excel模版 -->
       <div class="step-container">
-        <div class="step-header">   
+        <div class="step-header">
           <div class="step-number-icon-container">
-              <i class="iconfont icon-xuhao1 step-number-icon"></i>
+            <i class="iconfont icon-xuhao1 step-number-icon"></i>
           </div>
-          <span class="step-title">下载Excel模版，按照模版格式要求在Excel中编辑题目</span>
+          <span class="step-title">{{ $t('excelImport.step1Title') }}</span>
         </div>
         <div class="step-body1">
           <a href="/public/excel_survey_template.xlsx" download="Excel导入模板.xlsx" class="download-link">
             <el-button type="primary" class="download-button">
               <i class="iconfont icon-xiazai button-icon"></i>
-              <span class="download-button-text">下载Excel模版</span>
+              <span class="download-button-text">{{ $t('excelImport.downloadTemplate') }}</span>
             </el-button>
           </a>
         </div>
       </div>
-    
+
       <!-- 第二步：上传Excel文件 -->
       <div class="step-container">
         <div class="step-header">
           <div class="step-number-icon-container">
-              <i class="iconfont icon-xuhao2 step-number-icon"></i>
+            <i class="iconfont icon-xuhao2 step-number-icon"></i>
           </div>
-          <span class="step-title">上传编辑好的Excel模版文件</span>
+          <span class="step-title">{{ $t('excelImport.step2Title') }}</span>
         </div>
         <div class="step-body2">
           <template v-if="!uploadSuccess">
-            <el-upload
-              ref="uploadRef"
-              class="excel-uploader"
-              drag
-              action=""
-              multiple
+            <el-upload ref="uploadRef" class="excel-uploader" drag action="" multiple
               accept=".xls,.xlsx,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-              :auto-upload="false"
-              :file-list="fileList"
-              :on-change="handleChange"
-              :on-remove="handleRemove"
-            >
+              :auto-upload="false" :file-list="fileList" :on-change="handleChange" :on-remove="handleRemove">
               <div class="custom-upload-area">
                 <div class="upload-main">
                   <i class="iconfont icon-shangchuan1 upload-icon"></i>
-                  <span class="upload-text-main">选择上传文件</span>
+                  <span class="upload-text-main">{{ $t('excelImport.selectUploadFile') }}</span>
                 </div>
                 <div class="upload-text-secondary">点击按钮选择本地Excel文件或将其拖至此区域内</div>
                 <div class="el-upload__tip">
-                  <p>1、格式支持xls、xlsx</p>
-                  <p>2、文件大小不超过2MB</p>
-                  <p>3、文件必须包含表头，数据勿放在合并的单元格中</p>
-                  <p>4、文件所含数据行数勿超过10000、列数勿超过3（超出可分多次上传）</p>
+                  <p>{{ $t('excelImport.uploadTip1') }}</p>
+                  <p>{{ $t('excelImport.uploadTip2') }}</p>
+                  <p>{{ $t('excelImport.uploadTip3') }}</p>
+                  <p>{{ $t('excelImport.uploadTip4') }}</p>
                 </div>
               </div>
             </el-upload>
@@ -68,7 +53,7 @@
               <div class="success-icon-container">
                 <i class="iconfont icon-shangchuanchenggong success-icon"></i>
               </div>
-              <p class="success-message">上传成功</p>
+              <p class="success-message">{{ $t('excelImport.uploadSuccess') }}</p>
             </div>
           </template>
         </div>
@@ -80,45 +65,42 @@
     <template #footer>
       <div class="dialog-footer">
         <template v-if="!uploadSuccess">
-          <el-button @click="handleClose">取消</el-button>
-          <el-button type="primary" class="upload-btn" @click="submitUpload">确定</el-button>
+          <el-button @click="handleClose">{{ $t('excelImport.cancel') }}</el-button>
+          <el-button type="primary" class="upload-btn" @click="submitUpload">{{ $t('excelImport.confirm') }}</el-button>
         </template>
         <template v-else>
-          <el-button type="primary" class="publish-btn" @click="handleshowCreateFormExcelImport">创建</el-button>
+          <el-button type="primary" class="publish-btn" @click="handleshowCreateFormExcelImport">{{
+            $t('excelImport.create') }}</el-button>
         </template>
       </div>
     </template>
   </el-dialog>
 
-   <!-- 异常提示弹窗 -->
-  <el-dialog
-    v-model="errorDialogVisible"
-    width="528px"
-    :show-close="true"
-    :close-on-click-modal="false"
-    class="excel-import-error-dialog"
-    @close="handleCloseErrorDialog"
-    :top="'275px'"
-  >
+  <!-- 异常提示弹窗 -->
+  <el-dialog v-model="errorDialogVisible" width="528px" :show-close="true" :close-on-click-modal="false"
+    class="excel-import-error-dialog" @close="handleCloseErrorDialog" :top="'275px'">
     <template #header>
       <div class="error-dialog-header">
-        <el-icon class = "warning-icon"><WarningFilled /></el-icon>
-        <span class="error-dialog-header-text">异常提示</span>
+        <el-icon class="warning-icon">
+          <WarningFilled />
+        </el-icon>
+        <span class="error-dialog-header-text">{{ $t('excelImport.errorDialogTitle') }}</span>
       </div>
     </template>
     <div class="error-dialog-content">
       <p class="main-error-message">{{ errorDialogMessage }}</p>
-      <p class="error-note">注：若未按照模版填写数据，请先下载模版</p>
+      <p class="error-note">{{ $t('excelImport.errorNote') }}</p>
     </div>
     <template #footer>
       <div class="dialog-footer error-dialog-footer">
         <a href="/public/excel_survey_template.xlsx" download="问卷题目Excel导入模板.xlsx" class="download-link">
           <el-button type="default" plain class="download-button">
             <i class="iconfont icon-xiazai button-icon"></i>
-            <span class="download-button-text">下载Excel模版</span>
+            <span class="download-button-text">{{ $t('excelImport.downloadTemplateFull') }}</span>
           </el-button>
         </a>
-        <el-button type="primary" @click="handleCloseErrorDialog" class ="chongxinshangchuan-btn">重新上传</el-button>
+        <el-button type="primary" @click="handleCloseErrorDialog" class="chongxinshangchuan-btn">{{
+          $t('excelImport.reupload') }}</el-button>
       </div>
     </template>
   </el-dialog>
@@ -126,7 +108,8 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { ElMessage, ElDialog, ElButton, ElIcon} from 'element-plus'
+import { useI18n } from 'vue-i18n'
+import { ElMessage, ElDialog, ElButton, ElIcon } from 'element-plus'
 import { WarningFilled } from '@element-plus/icons-vue'
 import axios from 'axios'
 import type { UploadFile, UploadUserFile, UploadInstance } from 'element-plus'
@@ -135,24 +118,26 @@ import { getQuestionByType } from "@/management/utils";
 import { typeTagLabels, QUESTION_TYPE } from "@/common/typeEnum";
 
 
-const emit = defineEmits(['on-close-excel-import','on-excel-upload-success','on-show-create-form-excel-import']);
+const emit = defineEmits(['on-close-excel-import', 'on-excel-upload-success', 'on-show-create-form-excel-import']);
 const props = defineProps({
   visible: Boolean
 })
 
+const { t } = useI18n()
+
 const uploadRef = ref<UploadInstance>();
 const fileList = ref<UploadUserFile[]>([]);
-const uploadSuccess = ref(false); 
+const uploadSuccess = ref(false);
 const errorDialogVisible = ref(false);
 const errorDialogMessage = ref('');
 
 // 预定义错误信息
 const ERROR_MESSAGES = {
-  EXCEL_FORMAT_ERROR: "不支持该文件格式，请重新上传！", 
-  FILE_SIZE_OVER_2MB_ERROR: "文件大小超出限制，请重新上传！", 
-  MERGED_CELLS_ERROR: "文件格式不正确，请重新上传！",
-  ROW_COL_LIMIT_ERROR: "文件所含数据超出限制，请重新上传！", 
-  HEADER_INCORRECT_ERROR:"第一列标题必须为[题目标题]，第二列标题必须为[题型]，第三列标题必须为[选项内容]。"
+  EXCEL_FORMAT_ERROR: t('excelImport.errors.excelFormatError'),
+  FILE_SIZE_OVER_2MB_ERROR: t('excelImport.errors.fileSizeOver2MBError'),
+  MERGED_CELLS_ERROR: t('excelImport.errors.mergedCellsError'),
+  ROW_COL_LIMIT_ERROR: t('excelImport.errors.rowColLimitError'),
+  HEADER_INCORRECT_ERROR: t('excelImport.errors.headerIncorrectError')
 };
 
 const showErrorDialog = (message: string) => {
@@ -194,7 +179,7 @@ const textTypeMap = (Object.keys(typeTagLabels) as Array<QUESTION_TYPE>).reduce(
 }, {} as Record<string, string>)
 
 // 将后端返回的Excel解析数据转换为问卷格式的题目列表
-const excelToSchema = (excelQuestions: Array<{title: string, type: string, options: string}>) => {
+const excelToSchema = (excelQuestions: Array<{ title: string, type: string, options: string }>) => {
   const questions = []
 
   for (const excelQuestion of excelQuestions) {
@@ -225,7 +210,7 @@ const excelToSchema = (excelQuestions: Array<{title: string, type: string, optio
         if (options && options.trim()) {
           const questionOptions = getMultiOptionByText(options.trim())
           question.options = questionOptions;
-        }else {
+        } else {
           question.options = [];
         }
         questions.push(question);
@@ -262,11 +247,11 @@ const submitUpload = async () => {
     for (const item of fileList.value) {
       const file = item.raw;
       if (!file) continue;
-      
+
       const fileExtension = file.name.split('.').pop()?.toLowerCase();
       const isExcel = file.type === 'application/vnd.ms-excel' ||
-                      file.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'||
-                      (fileExtension && ['xls', 'xlsx'].includes(fileExtension));
+        file.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' ||
+        (fileExtension && ['xls', 'xlsx'].includes(fileExtension));
       const isLt2M = file.size / 1024 / 1024 < 2;
 
       if (!isExcel) {
@@ -324,7 +309,7 @@ const submitUpload = async () => {
     }
   } catch (err) {
     console.error('上传Excel发生错误：', err);
-    ElMessage.error('上传过程中发生网络或服务器错误，请检查网络或联系管理员');
+    ElMessage.error(t('common.networkError'));
     resetUpload();
   }
 };
@@ -336,7 +321,7 @@ const handleshowCreateFormExcelImport = () => {
 
 <style scoped>
 .excel-import-content {
-  padding: 0 20px 20px 20px; 
+  padding: 0 20px 20px 20px;
 }
 
 .step-container {
@@ -353,7 +338,7 @@ const handleshowCreateFormExcelImport = () => {
   margin-bottom: 15px;
 }
 
-.step-number-icon-container {  
+.step-number-icon-container {
   width: 16px;
   height: 16px;
   border-radius: 50%;
@@ -397,10 +382,10 @@ const handleshowCreateFormExcelImport = () => {
   background: #FFFFFF;
   border: 1px solid var(--primary-color);
   border-radius: 2px;
-  color:var(--primary-color)
+  color: var(--primary-color)
 }
 
-.download-button:hover{
+.download-button:hover {
   border-color: #E25822;
 }
 
@@ -434,7 +419,8 @@ const handleshowCreateFormExcelImport = () => {
   justify-content: center;
   border: 1px dashed #dcdfe6;
   border-radius: 2px;
-  background-color:#F6F7F9;;
+  background-color: #F6F7F9;
+  ;
   min-height: 180px;
 }
 
@@ -460,7 +446,7 @@ const handleshowCreateFormExcelImport = () => {
 }
 
 .upload-icon {
-  font-size: 16px; 
+  font-size: 16px;
   color: var(--primary-color);
   margin-right: 8px;
 }
@@ -547,18 +533,18 @@ const handleshowCreateFormExcelImport = () => {
   font-weight: 500;
 }
 
-.error-dialog-header{
-  display: flex; 
+.error-dialog-header {
+  display: flex;
   align-items: center;
 }
 
-.warning-icon{
+.warning-icon {
   color: var(--primary-color);
   font-size: 32px;
   margin-right: 10px;
 }
 
-.error-dialog-header-text{
+.error-dialog-header-text {
   font-family: PingFangSC-Medium;
   font-size: 24px;
   color: #292A36;

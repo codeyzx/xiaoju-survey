@@ -1,43 +1,27 @@
 <template>
-   <el-dialog
-    :modelValue="visible"
-    title="APP嵌入式问卷"
-    width="500"
-    :before-close="handleClose"
-  >
-    <el-form
-      ref="formRef"
-      style="max-width: 600px"
-      :model="channelForm"
-      label-width="auto"
-      class="demo-ruleForm"
-    >
-      <el-form-item
-        label="投放名称："
-        prop="name"
-        :rules="[
-          { required: true, message: '请输入投放名称', trigger: 'blur' },
-        ]"
-      >
-        <el-input
-          v-model.number="channelForm.name"
-          type="text"
-          autocomplete="off"
-        />
+  <el-dialog :modelValue="visible" :title="t('common.appEmbeddedSurvey')" width="500" :before-close="handleClose">
+    <el-form ref="formRef" style="max-width: 600px" :model="channelForm" label-width="auto" class="demo-ruleForm">
+      <el-form-item :label="t('common.distributionName')" prop="name" :rules="[
+        { required: true, message: t('common.enterDistributionName'), trigger: 'blur' },
+      ]">
+        <el-input v-model.number="channelForm.name" type="text" autocomplete="off" />
       </el-form-item>
     </el-form>
     <template #footer>
       <div class="dialog-footer">
-        <el-button @click="handleClose">取消</el-button>
+        <el-button @click="handleClose">{{ t('common.cancel') }}</el-button>
         <el-button type="primary" @click="handleConfirm">
-          确认
+          {{ t('common.confirm') }}
         </el-button>
       </div>
     </template>
   </el-dialog>
-</template>  
+</template>
 <script lang="ts" setup>
 import { shallowRef, reactive, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 const props = defineProps({
   visible: {
     type: Boolean,

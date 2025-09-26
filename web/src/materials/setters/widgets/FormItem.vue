@@ -2,14 +2,10 @@
   <el-form-item>
     <template #label v-if="formConfig.label">
       <div v-if="formConfig.label" class="item-label" :style="formConfig.labelStyle">
-        <span class="label" v-plain-text="formConfig.label"><i-ep-questionFilled /></span>
+        <span class="label" v-plain-text="$t(formConfig.label)"><i-ep-questionFilled /></span>
 
-        <el-tooltip
-          v-if="formConfig.tip"
-          class="tooltip"
-          :content="formConfig.tip"
-          :placement="formConfig.placement || 'right'"
-        >
+        <el-tooltip v-if="formConfig.tip" class="tooltip" :content="formConfig.tip"
+          :placement="formConfig.placement || 'right'">
           <i-ep-questionFilled class="icon-tip" />
         </el-tooltip>
       </div>

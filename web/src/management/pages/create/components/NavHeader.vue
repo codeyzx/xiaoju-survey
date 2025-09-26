@@ -4,13 +4,14 @@
       <div class="logo">
         <img class="logoImg" :src="img" @click="toHomePage" />
       </div>
-      <div class="return no-logo-return icon-fanhui" @click="onBack">返回</div>
+      <div class="return no-logo-return icon-fanhui" @click="onBack">{{ t('common.back') }}</div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 
 interface Props {
   boxShadow?: boolean
@@ -21,8 +22,8 @@ withDefaults(defineProps<Props>(), {
 })
 
 const img = '/imgs/s-logo.webp'
-
 const router = useRouter()
+const { t } = useI18n()
 
 const onBack = () => {
   router.go(-1)
@@ -44,9 +45,11 @@ const toHomePage = () => {
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   .left {
     display: flex;
     align-items: center;
+
     .logo {
       width: 66px;
       height: 35px;
@@ -54,10 +57,12 @@ const toHomePage = () => {
       cursor: pointer;
       display: flex;
       justify-content: center;
+
       .logoImg {
         width: 32px;
       }
     }
+
     .return {
       margin-left: 20px;
       line-height: 56px;
@@ -65,6 +70,7 @@ const toHomePage = () => {
       color: #6e707c;
       position: relative;
       cursor: pointer;
+
       &::before {
         position: absolute;
         left: -20px;
@@ -73,11 +79,13 @@ const toHomePage = () => {
         content: '<';
       }
     }
+
     .no-logo-return {
       left: 20px;
     }
   }
 }
+
 .box-shadow {
   box-shadow: 0 4px 8px 0 rgba(74, 76, 91, 0.08);
 }

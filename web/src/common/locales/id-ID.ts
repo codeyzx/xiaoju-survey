@@ -5,6 +5,7 @@ export default {
     cancel: 'Batal',
     save: 'Simpan',
     delete: 'Hapus',
+    deleteAll: 'Hapus Semua',
     // Additional keys for table fields
     state: 'Status',
     createdAt: 'Dibuat',
@@ -42,7 +43,60 @@ export default {
     help: 'Bantuan',
     about: 'Tentang',
     logout: 'Keluar',
-    language: 'Bahasa'
+    language: 'Bahasa',
+    networkError:
+      'Kesalahan jaringan atau server selama unggah, periksa jaringan atau hubungi administrator',
+    administrator: 'Administrator',
+    enterAccount: 'Masukkan akun',
+    member: 'Anggota',
+    admin: 'Administrator',
+    user: 'Anggota',
+    selectPlaceholder: 'Pilih',
+    allPermissions: 'Semua izin',
+    basicInfo: 'Informasi Dasar',
+    title: 'Judul',
+    remark: 'Catatan',
+    group: 'Grup',
+    ungrouped: 'Tidak Dikelompokkan',
+    all: 'Semua',
+    fileName: 'Nama File',
+    estimatedSize: 'Ukuran Perkiraan',
+    downloadTime: 'Waktu Unduh',
+    status: 'Status',
+    operation: 'Operasi',
+    completed: 'Selesai',
+    waiting: 'Dalam Antrian',
+    computing: 'Sedang Menghitung',
+    exportFailed: 'Ekspor Gagal',
+    fileNotExist: 'File tidak ada',
+    confirmDelete: 'Apakah Anda yakin untuk menghapus kali ini?',
+    promptTitle: 'Prompt',
+    confirmDeleteWithImpact:
+      'Operasi ini akan mempengaruhi tampilan statistik data, apakah Anda yakin untuk menghapus?',
+    showLogicDependency:
+      'Pertanyaan ini terkait dengan logika tampilan, harap bersihkan dependensi logika terlebih dahulu',
+    jumpLogicDependency:
+      'Pertanyaan ini terkait dengan logika lompat, harap bersihkan dependensi logika terlebih dahulu',
+    satisfyAllConditions: 'Penuhi semua di atas, maka tampilkan pertanyaan ini',
+    appEmbeddedSurvey: 'Survei Tertanam Aplikasi',
+    webEmbeddedSurvey: 'Survei Tertanam Web',
+    miniProgramEmbeddedSurvey: 'Survei Tertanam Mini Program',
+    accessInstructions: 'Instruksi Akses',
+    embedAppDesc: 'Tanamkan survei ke dalam aplikasi IOS, Android dan lainnya melalui SDK.',
+    embedWebDesc:
+      'Tanamkan survei ke dalam halaman web melalui SDK, cocok untuk popup, aliran informasi, dll.',
+    embedMpDesc:
+      'Tanamkan survei ke dalam mini program melalui SDK, lakukan survei di mini program.',
+    sdkAccessMethod: 'Metode Akses SDK',
+    openInNewPage: 'Buka di halaman baru',
+    copyLink: 'Salin tautan',
+    channelLinkCopied: 'Tautan saluran disalin',
+    comingSoon: 'metode akan segera hadir, nantikan',
+    distributionName: 'Nama Distribusi:',
+    enterDistributionName: 'Masukkan nama distribusi',
+    enterAccountSearch: 'Masukkan nama akun untuk mencari',
+    confirmDeleteGroup:
+      'Setelah menghapus grup, survei dalam grup ini akan secara otomatis dipindahkan ke "Tidak Dikelompokkan". Apakah Anda yakin untuk menghapus kali ini?'
   },
 
   // Halaman Login
@@ -86,6 +140,13 @@ export default {
     dataAnalysis: 'Analisis Data'
   },
 
+  // Ruang Kerja
+  workspace: {
+    mySpace: 'Ruang Saya',
+    teamSpace: 'Ruang Tim',
+    recycleBin: 'Sampah'
+  },
+
   // Daftar Survei
   surveyList: {
     title: 'Daftar Survei',
@@ -98,55 +159,82 @@ export default {
     surveyListTitle: 'Daftar Survei',
     myGroup: 'Grup Saya',
     allSurveys: 'Semua Survei',
-    publishedSurveys: 'Terbit',
-    draftSurveys: 'Draft',
+    publishedSurveys: 'Dipublikasikan',
+    draftSurveys: 'Draf',
     completedSurveys: 'Selesai',
-    searchPlaceholder: 'Cari nama survei',
+    searchPlaceholder: 'Masukkan judul survei',
+    validationTitleRequired: 'Judul survei harus diisi',
+    teamMemberSelection: 'Pilih Anggota Ruang Tim',
+    collaboratorManagement: 'Manajemen Kolaborator',
+    spaceSearchPlaceholder: 'Masukkan nama ruang',
+    groupSearchPlaceholder: 'Masukkan nama grup',
     noSurveys: 'Tidak ada survei ditemukan',
     surveyName: 'Nama Survei',
     status: 'Status',
     createTime: 'Dibuat',
     updateTime: 'Diperbarui',
-    responseCount: 'Jumlah Respons',
+    deleteTime: 'Dihapus',
+    responseCount: 'Jumlah Respon',
     actions: 'Aksi',
-    draft: 'Draft',
-    published: 'Terbit',
+    draft: 'Draf',
+    published: 'Dipublikasikan',
     completed: 'Selesai',
     paused: 'Dijeda',
     selectCreateMethod: 'Pilih Metode Pembuatan',
     pleaseImportQuestions: 'Silakan impor pertanyaan',
-    // Table headers
-    type: 'Tipe',
-    surveyTitle: 'Judul',
-    remark: 'Catatan',
-    owner: 'Pemilik',
-    // Actions
-    edit: 'Edit',
-    delete: 'Hapus',
-    copy: 'Salin',
-    move: 'Pindah',
-    publish: 'Terbitkan',
-    pause: 'Jeda',
-    complete: 'Selesai',
-    restore: 'Pulihkan',
-    // Placeholders
-    enterSurveyTitle: 'Masukkan judul survei',
-    enterRemark: 'Masukkan catatan',
-    // Recycle bin
     recycleBin: 'Tempat Sampah',
-    // Workspace and Group
-    workspace: 'Ruang Kerja',
-    group: 'Grup',
-    // Status filters
-    all: 'Semua',
-    draftStatus: 'Draft',
-    publishedStatus: 'Diterbitkan',
-    completedStatus: 'Selesai',
-    pausedStatus: 'Dijeda',
+    surveyType: 'Tipe',
+    surveyTitle: 'Judul',
+    remark: 'Keterangan',
+    owner: 'Pemilik',
+    spaceName: 'Nama Ruang',
+    surveyCount: 'Jumlah Survei',
+    memberCount: 'Jumlah Anggota',
+    groupName: 'Nama Grup',
+    name: 'Nama',
+    surveyTotal: 'Jumlah Survei',
+    enter: 'Masuk',
+    manage: 'Kelola',
+    view: 'Lihat',
+    delete: 'Hapus',
+    edit: 'Edit',
+    copy: 'Salin',
+    data: 'Data',
+    publish: 'Publish',
+    pause: 'Jeda',
+    collaborate: 'Kolaborasi',
+    recover: 'Pulihkan',
+    completeDelete: 'Hapus Permanen',
+    aiGenerated: 'Dibuat AI',
     // Additional keys for table fields
     state: 'Status',
     createdAt: 'Dibuat',
     updatedAt: 'Diperbarui',
+    // Navigation
+    back: 'Kembali',
+    confirmDelete: 'Apakah Anda yakin ingin menghapus?',
+    confirmDeleteSpace:
+      'Setelah dihapus, survei dalam tim akan terhapus juga. Apakah Anda yakin ingin menghapus?',
+    confirmDeleteGroup:
+      'Setelah grup dihapus, survei dalam grup ini akan otomatis dipindahkan ke "Tanpa Grup". Apakah Anda yakin ingin menghapus?',
+    confirmPause: 'Setelah "Pengumpulan Dijeda", survei tidak bisa diisi. Lanjutkan?',
+    confirmCompleteDelete:
+      'Survei akan dihapus permanen dari tempat sampah. Apakah Anda yakin ingin menghapus?',
+    deleteCollaboratorConfirm:
+      'Setelah kolaborator dihapus, pengguna tidak akan memiliki izin untuk survei ini',
+    deleteTeamMemberConfirm:
+      'Setelah anggota tim dihapus, anggota tersebut tidak bisa lagi mengakses ruang tim',
+    deleteSuccess: 'Berhasil dihapus',
+    deleteFailed: 'Gagal menghapus',
+    recoverSuccess: 'Berhasil dipulihkan',
+    recoverFailed: 'Gagal memulihkan',
+    pauseSuccess: 'Berhasil dijeda',
+    getMemberListFailed: 'Gagal mendapatkan daftar anggota ruang',
+    pauseFailed: 'Gagal menjeda',
+    cancelPause: 'Batalkan jeda',
+    surveyDeleted: 'Survei ini telah dihapus dan tidak bisa diakses.',
+    backToList: 'Kembali ke Daftar Survei',
+    noData: 'Tidak Ada Data',
     // Space and Group management
     spaceDescriptionLabel: 'Deskripsi Ruang Tim',
     addMembers: 'Tambah Anggota',
@@ -154,26 +242,9 @@ export default {
     manageSpaceTitle: 'Kelola Ruang Tim',
     createGroupTitle: 'Buat Grup',
     manageGroupTitle: 'Kelola Grup',
-    enterSpaceName: 'Silakan masukkan nama ruang tim',
-    enterGroupName: 'Silakan masukkan nama grup',
-    setAdmin: 'Silakan tetapkan setidaknya satu administrator ruang',
-    // Confirm messages
-    confirmDelete: 'Apakah Anda yakin ingin menghapus?',
-    confirmDeleteSpace:
-      'Menghapus akan secara sinkron menghapus survei di dalam tim, apakah Anda yakin ingin menghapus ini?',
-    confirmDeleteGroup:
-      'Menghapus grup akan secara otomatis memindahkan survei yang termasuk dalam grup ini ke "Tidak Dikelompokkan". Apakah Anda yakin ingin menghapus?',
-    confirmPause:
-      'Setelah "menjeda pengumpulan", survei tidak dapat diisi. Apakah Anda ingin melanjutkan?',
-    confirmCompleteDelete:
-      'Survei akan dihapus secara permanen dari tempat sampah. Apakah Anda yakin ingin menghapus?',
-    deleteSuccess: 'Berhasil dihapus',
-    deleteFailed: 'Gagal menghapus',
-    recoverSuccess: 'Berhasil dipulihkan',
-    recoverFailed: 'Gagal memulihkan',
-    pauseSuccess: 'Berhasil dijeda',
-    pauseFailed: 'Gagal menjeda',
-    cancelPause: 'Batal jeda',
+    enterSpaceName: 'Masukkan nama ruang tim',
+    enterGroupName: 'Masukkan nama grup',
+    setAdmin: 'Harap atur minimal satu admin ruang',
     // Text import
     inputArea: 'Area Input',
     inputExample: 'Contoh Input',
@@ -184,7 +255,7 @@ export default {
     // List config
     surveyTypes: {
       normal: 'Survei Dasar',
-      vote: 'Pemilihan & Voting',
+      vote: 'Voting & Pemilihan',
       nps: 'Skor NPS',
       register: 'Pendaftaran Online'
     },
@@ -195,7 +266,7 @@ export default {
       groupName: 'Nama Grup',
       surveyType: 'Tipe',
       surveyTitle: 'Judul',
-      remark: 'Catatan',
+      remark: 'Keterangan',
       status: 'Status',
       owner: 'Pemilik',
       updatedAt: 'Diperbarui',
@@ -203,24 +274,24 @@ export default {
       deletedAt: 'Dihapus'
     },
     emptyStates: {
-      noSurveys: 'Anda belum membuat survei apa pun',
-      noSurveysDesc: 'Klik kanan atas untuk membuat survei sekarang!',
-      noSpaces: 'Anda belum membuat ruang tim apa pun',
-      noSpacesDesc: 'Klik kanan atas untuk membuat ruang tim sekarang!',
-      noSpacesSearch: 'Tidak ada ruang tim yang cocok dengan kriteria pencarian',
+      noSurveys: 'Anda belum membuat survei',
+      noSurveysDesc: 'Klik pojok kanan atas untuk membuat survei sekarang!',
+      noSpaces: 'Anda belum membuat ruang tim',
+      noSpacesDesc: 'Klik pojok kanan atas untuk membuat ruang tim sekarang!',
+      noSpacesSearch: 'Tidak ada ruang tim yang sesuai dengan pencarian',
       noSpacesSearchDesc: 'Coba ubah kondisi pencarian',
-      noGroups: 'Anda belum membuat grup survei apa pun',
-      noGroupsDesc: 'Klik kanan atas untuk membuat grup survei sekarang!',
-      noGroupsSearch: 'Tidak ada grup survei yang cocok dengan kriteria pencarian',
+      noGroups: 'Anda belum membuat grup survei',
+      noGroupsDesc: 'Klik pojok kanan atas untuk membuat grup survei sekarang!',
+      noGroupsSearch: 'Tidak ada grup survei yang sesuai dengan pencarian',
       noGroupsSearchDesc: 'Coba ubah kondisi pencarian',
-      noSurveysSearch: 'Tidak ada survei yang cocok dengan kriteria pencarian',
+      noSurveysSearch: 'Tidak ada survei yang sesuai dengan pencarian',
       noSurveysSearchDesc: 'Coba ubah kondisi pencarian',
-      noDownloadTasks: 'Tidak ada tugas unduh',
-      noDownloadTasksDesc: 'Anda dapat mengunduh dari analisis data'
+      noDownloadTasks: 'Tidak ada tugas unduhan',
+      noDownloadTasksDesc: 'Anda bisa mengunduh dari analisis data'
     },
     surveyStatuses: {
-      new: 'Belum Diterbitkan',
-      published: 'Diterbitkan',
+      new: 'Belum Dipublikasikan',
+      published: 'Dipublikasikan',
       editing: 'Sedang Diedit',
       pausing: 'Dijeda'
     },
@@ -233,10 +304,38 @@ export default {
     sortOptions: {
       updatedAt: 'Waktu Diperbarui',
       createdAt: 'Waktu Dibuat'
-    },
-    // Additional keys
-    name: 'Nama',
-    surveyTotal: 'Jumlah Survei'
+    }
+  },
+
+  // Impor Excel
+  excelImport: {
+    title: 'Impor Excel',
+    step1Title: 'Unduh template Excel, edit pertanyaan di Excel sesuai persyaratan format template',
+    step2Title: 'Unggah file template Excel yang telah diedit',
+    downloadTemplate: 'Unduh Template Excel',
+    selectUploadFile: 'Pilih File Unggah',
+    uploadTip1: 'Mendukung format xls, xlsx',
+    uploadTip2: 'Ukuran file tidak boleh melebihi 2MB',
+    uploadTip3: 'File harus berisi header, data tidak boleh di sel gabungan',
+    uploadTip4:
+      'File tidak boleh berisi lebih dari 10.000 baris dan 3 kolom (dapat unggah beberapa kali jika melebihi)',
+    uploadSuccess: 'Unggah Berhasil',
+    confirm: 'Konfirmasi',
+    create: 'Buat',
+    cancel: 'Batal',
+    errorDialogTitle: 'Pemberitahuan Pengecualian',
+    errorNote:
+      'Catatan: Jika data tidak diisi sesuai template, silakan unduh template terlebih dahulu',
+    downloadTemplateFull: 'Unduh Template Excel',
+    reupload: 'Unggah Ulang',
+    errors: {
+      excelFormatError: 'Format file tidak didukung, silakan unggah ulang!',
+      fileSizeOver2MBError: 'Ukuran file melebihi batas, silakan unggah ulang!',
+      mergedCellsError: 'Format file salah, silakan unggah ulang!',
+      rowColLimitError: 'Data file melebihi batas, silakan unggah ulang!',
+      headerIncorrectError:
+        'Header kolom pertama harus [Judul Pertanyaan], kolom kedua harus [Tipe Pertanyaan], kolom ketiga harus [Konten Opsi].'
+    }
   },
 
   // Editor Survei
@@ -315,7 +414,15 @@ export default {
     customTheme: 'Tema Kustom',
     backgroundColor: 'Warna Latar',
     textColor: 'Warna Teks',
-    buttonColor: 'Warna Tombol'
+    buttonColor: 'Warna Tombol',
+    whitelist: 'Daftar Putih',
+    whitelistEntry: 'Entri Daftar Putih',
+    addToWhitelist: 'Tambah',
+    addWhitelist: 'Tambah Daftar Putih',
+    typeSelection: 'Pilihan Tipe',
+    mobilePhone: 'Nomor Telepon',
+    email: 'Email',
+    multipleSeparator: 'Pisahkan beberapa dengan koma ","'
   },
 
   // Analisis Data
@@ -325,6 +432,8 @@ export default {
     responses: 'Respons',
     statistics: 'Statistik',
     export: 'Ekspor Data',
+    exportAllData: 'Ekspor Semua Data',
+    showOriginalData: 'Tampilkan Data Asli?',
     totalResponses: 'Total Respons',
     validResponses: 'Respons Valid',
     invalidResponses: 'Respons Tidak Valid',
@@ -427,6 +536,13 @@ export default {
     verify: 'Verifikasi'
   },
 
+  // Render
+  render: {
+    verifyWhiteDialog: {
+      passwordPlaceholder: 'Masukkan kata sandi akses 6 karakter string'
+    }
+  },
+
   // Form placeholders
   form: {
     enterPassword: 'Masukkan kata sandi akses',
@@ -436,5 +552,51 @@ export default {
     enterVerificationCode: 'Masukkan kata sandi akses 6 karakter',
     continueFillContent: 'Lanjutkan dengan konten sebelumnya?',
     continueSubmitContent: 'Lanjutkan dengan pengiriman sebelumnya?'
+  },
+
+  // Formulir Pembuatan Survei
+  surveyForm: {
+  surveyName: 'Nama Survei',
+  enterSurveyTitle: 'Masukkan judul survei',
+    surveyRemark: 'Catatan Survei',
+    enterRemark: 'Masukkan catatan',
+    surveyType: 'Tipe Survei',
+    group: 'Grup',
+    ungrouped: 'Tidak Dikelompokkan',
+    titleTip: 'Judul ini akan ditampilkan di bagian atas browser saat membuka survei',
+    remarkTip: 'Catatan hanya terlihat oleh diri sendiri'
+  },
+
+  // Publish/Channel
+  publish: {
+    surveyLink: 'Tautan Survei',
+    channelList: 'Daftar Distribusi',
+    channelMethods: 'Metode Distribusi',
+    unpublishedTitle: 'Survei Belum Dipublikasikan',
+    unpublishedDesc: 'Klik publikasikan agar survei dapat didistribusikan!',
+    channelId: 'ID Kanal',
+    channelName: 'Nama Distribusi',
+    status: 'Status',
+    collectionCount: 'Jumlah Koleksi',
+    createdDate: 'Tanggal Dibuat',
+    creator: 'Pembuat',
+    updatedDate: 'Tanggal Diperbarui',
+    actions: 'Aksi',
+    rename: 'Ganti Nama',
+    close: 'Tutup',
+    enable: 'Aktifkan',
+    delete: 'Hapus',
+    confirmDeleteChannel: 'Apakah Anda yakin ingin menghapus distribusi ini?',
+    confirmCloseChannel: 'Menutup distribusi akan menghentikan pengumpulan survei, lanjutkan?',
+    confirmCloseTitle: 'Konfirmasi untuk menutup distribusi?',
+    tip: 'Tip',
+    distributionEnabled: 'Distribusi diaktifkan',
+    creationSuccessful: 'Pembuatan berhasil',
+    method1: 'Metode 1: Panggilan API',
+    method2: 'Metode 2: Panggilan Komponen',
+    copyCode: 'Salin Kode',
+    copied: 'Disalin',
+    collecting: 'Mengumpulkan',
+    paused: 'Dijeda'
   }
 }

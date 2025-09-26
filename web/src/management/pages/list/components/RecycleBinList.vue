@@ -3,7 +3,7 @@
     <div class="filter-wrap">
       <h2>{{ $t('surveyList.recycleBin') }}</h2>
       <div class="search">
-        <TextSearch :placeholder="$t('surveyList.enterSurveyTitle')" :value="searchVal" @search="onSearchText" />
+        <TextSearch :placeholder="$t('surveyForm.enterSurveyTitle')" :value="searchVal" @search="onSearchText" />
       </div>
     </div>
     <div class="list-wrapper" v-if="total">
@@ -27,8 +27,7 @@
 
         <el-table-column :label="$t('surveyList.actions')" :width="230" class-name="table-options" fixed="right">
           <template #default="scope">
-            <ToolBar :data="scope.row" type="list" :tools="getToolConfig(scope.row)" :tool-width="50"
-              @click="handleClick" />
+            <ToolBar :data="scope.row" type="list" :tools="getToolConfig" :tool-width="50" @click="handleClick" />
           </template>
         </el-table-column>
       </el-table>
@@ -74,25 +73,18 @@ import TagModule from './TagModule.vue'
 import StateModule from './StateModule.vue'
 import ToolBar from './ToolBar.vue'
 import TextSearch from './TextSearch.vue'
-import TextSelect from './TextSelect.vue'
-import TextButton from './TextButton.vue'
-import { SurveyPermissions } from '@/management/utils/workSpace'
 
 import {
-  fieldConfig,
-  selectOptionsDict,
-  buttonOptionsDict,
-  curStatus,
-  subStatus,
-  recycleBinFieldConfig
+  recycleBinFieldConfig,
+  noListDataConfig,
+  noSearchDataConfig
 } from '@/management/config/listConfig'
-import { color } from 'echarts'
 
 const surveyListStore = useSurveyListStore()
 const workSpaceStore = useWorkSpaceStore()
 const { workSpaceId, groupAllList, menuType } = storeToRefs(workSpaceStore)
 const router = useRouter()
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const props = defineProps({
   loading: {
     type: Boolean,
@@ -113,7 +105,7 @@ const showModify = ref(false)
 const modifyType = ref('')
 const questionInfo = ref({})
 const currentPage = ref(1)
-const { searchVal, selectValueMap, buttonValueMap } = storeToRefs(surveyListStore)
+const { searchVal, buttonValueMap } = storeToRefs(surveyListStore)
 
 const currentComponent = computed(() => {
   return (componentName) => {
@@ -129,6 +121,8 @@ const currentComponent = computed(() => {
 })
 
 const fieldList = computed(() => {
+  // Access locale to ensure reactivity on language change
+  locale.value // This ensures the computed reacts to locale changes
   return map(fields, (f) => {
     const config = get(recycleBinFieldConfig, f, null)
     if (config) {
@@ -142,6 +136,8 @@ const fieldList = computed(() => {
 })
 
 const emptyData = computed(() => {
+  // Access locale to ensure reactivity on language change
+  locale.value // This ensures the computed reacts to locale changes
   const config = searchVal.value ? noSearchDataConfig : noListDataConfig
   return {
     ...config,
@@ -194,7 +190,9 @@ const onRefresh = async () => {
   emit('refresh', params)
 }
 
-const getToolConfig = (row) => {
+const getToolConfig = computed(() => {
+  // Access locale to ensure reactivity on language change
+  locale.value // This ensures the computed reacts to locale changes
   let funcList = []
   funcList.push({
     key: 'recover',
@@ -210,7 +208,7 @@ const getToolConfig = (row) => {
   const result = funcList.sort((a, b) => order.indexOf(a.key) - order.indexOf(b.key))
 
   return result
-}
+})
 const handleClick = (key, data) => {
   switch (key) {
     case 'recover':
@@ -256,9 +254,9 @@ const handleClick = (key, data) => {
 }
 const onDelete = async (row) => {
   try {
-    await ElMessageBox.confirm('是否确认删除？', '提示', {
-      confirmButtonText: '确定',
-      cancelButtonText: '取消',
+    await ElMessageBox.confirm(t('common.confirmDelete'), t('common.promptTitle'), {
+      confirmButtonText: t('common.confirm'),
+      cancelButtonText: t('common.cancel'),
       type: 'warning'
     })
   } catch (error) {
@@ -267,12 +265,12 @@ const onDelete = async (row) => {
 
   const res = await deleteSurvey(row._id)
   if (res.code === CODE_MAP.SUCCESS) {
-    ElMessage.success('删除成功')
+    ElMessage.success(t('surveyList.deleteSuccess'))
     onRefresh()
     workSpaceStore.getGroupList()
     workSpaceStore.getSpaceList()
   } else {
-    ElMessage.error(res.errmsg || '删除失败')
+    ElMessage.error(res.errmsg || t('surveyList.deleteFailed'))
   }
 }
 
@@ -349,10 +347,10 @@ const onCloseModify = (type) => {
     workSpaceStore.getSpaceList()
   }
 }
-const onRowClick = async (row) => {
+const onRowClick = async () => {
 
   try {
-    await ElMessageBox.alert(t('surveyList.surveyDeleted'), '提示', {
+    await ElMessageBox.alert(t('surveyList.surveyDeleted'), t('common.info'), {
       confirmButtonText: t('surveyList.backToList'),
       type: 'warning'
     })
@@ -363,16 +361,6 @@ const onRowClick = async (row) => {
 const onSearchText = (e) => {
   searchVal.value = e
   currentPage.value = 1
-  onRefresh()
-}
-const onSelectChange = (selectKey, selectValue) => {
-  surveyListStore.changeSelectValueMap(selectKey, selectValue)
-  currentPage.value = 1
-  onRefresh()
-}
-const onButtonChange = (effectKey, effectValue) => {
-  surveyListStore.resetButtonValueMap()
-  surveyListStore.changeButtonValueMap(effectKey, effectValue)
   onRefresh()
 }
 

@@ -1,38 +1,18 @@
 <template>
-  <el-dialog
-    class="base-dialog-root"
-    :model-value="visible"
-    width="40%"
-    title="基础信息"
-    @close="onClose"
-  >
-    <el-form
-      class="base-form-root"
-      ref="ruleForm"
-      :model="current"
-      :rules="rules"
-      label-position="top"
-      size="large"
-      @submit.prevent
-    >
-      <el-form-item label="标题" prop="title">
+  <el-dialog class="base-dialog-root" :model-value="visible" width="40%" :title="$t('common.basicInfo')"
+    @close="onClose">
+    <el-form class="base-form-root" ref="ruleForm" :model="current" :rules="rules" label-position="top" size="large"
+      @submit.prevent>
+      <el-form-item :label="$t('common.title')" prop="title">
         <el-input v-model="current.title" />
       </el-form-item>
-      <el-form-item label="备注">
+      <el-form-item :label="$t('common.remark')">
         <el-input v-model="current.remark" />
       </el-form-item>
-      <el-form-item
-        prop="groupId"
-        label="分组"
-        v-if="menuType === MenuType.PersonalGroup && !current.isCollaborated"
-      >
-        <el-select v-model="current.groupId" placeholder="未分组" clearable>
-          <el-option
-            v-for="item in groupAllList"
-            :key="item._id"
-            :label="item.name"
-            :value="item._id"
-          />
+      <el-form-item prop="groupId" :label="$t('common.group')"
+        v-if="menuType === MenuType.PersonalGroup && !current.isCollaborated">
+        <el-select v-model="current.groupId" :placeholder="$t('common.ungrouped')" clearable>
+          <el-option v-for="item in groupAllList" :key="item._id" :label="item.name" :value="item._id" />
         </el-select>
       </el-form-item>
     </el-form>
@@ -40,7 +20,7 @@
     <template #footer>
       <div class="dialog-footer">
         <el-button type="primary" class="save-btn" @click="onSave">{{
-          type === QOP_MAP.EDIT ? '保存' : '确定'
+          type === QOP_MAP.EDIT ? $t('common.save') : $t('common.confirm')
         }}</el-button>
       </div>
     </template>
@@ -73,7 +53,7 @@ export default {
       MenuType,
       loadingInstance: null,
       rules: {
-        title: [{ required: true, message: '请输入问卷标题', trigger: 'blur' }]
+        title: [{ required: true, message: this.$t('surveyList.validationTitleRequired'), trigger: 'blur' }]
       },
       current: this.getCurrent(this.questionInfo)
     }

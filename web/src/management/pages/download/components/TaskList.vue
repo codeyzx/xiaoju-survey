@@ -6,12 +6,12 @@
       <el-table-column v-for="field in fieldList" :key="field.key" :prop="field.key" :label="field.title"
         :width="field.width" :class-name="field.key" :formatter="field.formatter">
       </el-table-column>
-      <el-table-column label="操作" width="200">
+      <el-table-column :label="t('common.operation')" width="200">
         <template v-slot="{ row }">
           <span v-if="row?.status === 'succeed'" class="text-btn download-btn" @click="handleDownload(row)">
-            下载
+            {{ t('common.download') }}
           </span>
-          <span class="text-btn delete-btn" @click="openDeleteDialog(row)"> 删除 </span>
+          <span class="text-btn delete-btn" @click="openDeleteDialog(row)"> {{ t('common.delete') }} </span>
         </template>
       </el-table-column>
     </el-table>
@@ -72,10 +72,10 @@ const getList = async ({ pageIndex }: { pageIndex: number }) => {
 }
 
 const statusTextMap: Record<string, string> = {
-  waiting: '排队中',
-  computing: '计算中',
-  succeed: '已完成',
-  failed: '导出失败'
+  waiting: t('common.waiting'),
+  computing: t('common.computing'),
+  succeed: t('common.completed'),
+  failed: t('common.exportFailed')
 }
 
 let currentDelRow: Record<string, any> = {}
@@ -84,15 +84,15 @@ const handleDownload = async (row: any) => {
   if (row.url) {
     window.open(row.url)
   } else {
-    ElMessageBox.alert('文件不存在')
+    ElMessageBox.alert(t('common.fileNotExist'))
   }
 }
 // 删除文件
 const openDeleteDialog = async (row: any) => {
   try {
-    await ElMessageBox.confirm('是否确认删除？', '提示', {
-      confirmButtonText: '确定',
-      cancelButtonText: '取消',
+    await ElMessageBox.confirm(t('common.confirmDelete'), t('common.promptTitle'), {
+      confirmButtonText: t('common.confirm'),
+      cancelButtonText: t('common.cancel'),
       type: 'warning'
     })
     currentDelRow = row
@@ -127,23 +127,23 @@ const fieldList = computed(() => {
 
 const downloadListConfig = {
   filename: {
-    title: '文件名称',
+    title: t('common.fileName'),
     key: 'filename',
     width: 340,
     tip: true
   },
   fileSize: {
-    title: '预估大小',
+    title: t('common.estimatedSize'),
     key: 'fileSize',
     width: 140
   },
   createdAt: {
-    title: '下载时间',
+    title: t('common.downloadTime'),
     key: 'createdAt',
     width: 240
   },
   status: {
-    title: '状态',
+    title: t('common.status'),
     key: 'status',
     formatter(row: Record<string, any>, column: Record<string, any>) {
       return statusTextMap[get(row, column.rawColumnKey)]

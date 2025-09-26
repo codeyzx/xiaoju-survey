@@ -4,10 +4,12 @@ import { flatten } from 'lodash-es'
 import { cleanRichText } from '@/common/xss'
 import { useEditStore } from '../stores/edit'
 import { storeToRefs } from 'pinia'
+import { useI18n } from 'vue-i18n'
 
 // 目标题的显示逻辑提示文案
 export const useShowLogicInfo = (field) => {
   const editStore = useEditStore()
+  const { t } = useI18n()
   const { showLogicEngine } = storeToRefs(editStore)
 
   const hasShowLogic = computed(() => {
@@ -28,7 +30,7 @@ export const useShowLogicInfo = (field) => {
       return `<span>【 ${cleanRichText(getQuestionTitle.value())}】 选择了 【${getOptionTitle.value(unref(item.value)).join('、')}】</span> <br/>`
     })
     return conditions.length
-      ? conditions.join('') + '<span> &nbsp;满足以上全部，则显示本题</span>'
+      ? conditions.join('') + `<span> &nbsp;${t('common.satisfyAllConditions')}</span>`
       : ''
   })
   return { hasShowLogic, getShowLogicText }

@@ -1,29 +1,10 @@
 <template>
-  <el-dialog
-    class="base-dialog-root"
-    :model-value="visible"
-    width="40%"
-    :title="formTitle"
-    @close="onClose"
-  >
-    <el-form
-      class="base-form-root"
-      ref="ruleForm"
-      :model="formModel"
-      :rules="rules"
-      label-position="top"
-      size="large"
-      @submit.prevent
-      :disabled="formDisabled"
-    >
+  <el-dialog class="base-dialog-root" :model-value="visible" width="40%" :title="formTitle" @close="onClose">
+    <el-form class="base-form-root" ref="ruleForm" :model="formModel" :rules="rules" label-position="top" size="large"
+      @submit.prevent :disabled="formDisabled">
       <el-form-item label="添加协作者" prop="members">
-        <MemberSelect
-          :multiple="true"
-          :members="formModel.members"
-          :options="cooperOptions"
-          @select="handleMemberSelect"
-          @change="handleMembersChange"
-        >
+        <MemberSelect :multiple="true" :members="formModel.members" :options="cooperOptions"
+          @select="handleMemberSelect" @change="handleMembersChange">
         </MemberSelect>
       </el-form-item>
     </el-form>
@@ -41,6 +22,7 @@
 
 <script lang="ts" setup>
 import { computed, ref, shallowRef, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage } from 'element-plus'
 import 'element-plus/theme-chalk/src/message.scss'
 
@@ -49,6 +31,8 @@ import { type IMember, SurveyPermissions } from '@/management/utils/workSpace'
 import { CODE_MAP } from '@/management/api/base'
 
 import MemberSelect from './MemberSelect.vue'
+
+const { t } = useI18n()
 
 const emit = defineEmits(['on-close-codify', 'onFocus', 'change', 'blur'])
 const props = withDefaults(
@@ -63,7 +47,7 @@ const props = withDefaults(
 )
 const ruleForm = shallowRef<any>(null)
 
-const formTitle = ref('协作管理')
+const formTitle = computed(() => t('surveyList.collaboratorManagement'))
 
 const cooperOptions = ref([])
 
@@ -150,7 +134,7 @@ const onConfirm = async () => {
             permissions: i.role
           }
           if (i._id) {
-            ;(collaborator as any)._id = i._id
+            ; (collaborator as any)._id = i._id
           }
           return collaborator
         })

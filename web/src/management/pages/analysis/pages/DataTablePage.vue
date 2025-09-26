@@ -2,28 +2,18 @@
   <div class="data-table-page">
     <template v-if="tableData.total">
       <div class="menus">
-        <el-button type="primary" :loading="isDownloading" @click="onDownload"
-          >导出全部数据</el-button
-        >
-        <el-switch
-          class="desensitize-switch"
-          :model-value="isShowOriginData"
-          active-text="是否展示原数据"
-          @input="onIsShowOriginChange"
-        >
+        <el-button type="primary" :loading="isDownloading" @click="onDownload">{{ t('analysis.exportAllData')
+        }}</el-button>
+        <el-switch class="desensitize-switch" :model-value="isShowOriginData"
+          :active-text="t('analysis.showOriginalData')" @input="onIsShowOriginChange">
         </el-switch>
       </div>
     </template>
 
     <template v-if="tableData.total">
       <DataTable :main-table-loading :table-data />
-      <el-pagination
-        background
-        layout="prev, pager, next"
-        popper-class="analysis-pagination"
-        :total="tableData.total"
-        @current-change="handleCurrentChange"
-      >
+      <el-pagination background layout="prev, pager, next" popper-class="analysis-pagination" :total="tableData.total"
+        @current-change="handleCurrentChange">
       </el-pagination>
     </template>
     <div v-else>
@@ -66,6 +56,9 @@ import { getRecycleList } from '@/management/api/analysis'
 import { noDataConfig } from '@/management/config/analysisConfig'
 import DataTable from '../components/DataTable.vue'
 import { createDownloadTask, getDownloadTask } from '@/management/api/download'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const dataTableState = reactive({
   mainTableLoading: false,

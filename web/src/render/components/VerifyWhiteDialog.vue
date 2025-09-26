@@ -1,14 +1,6 @@
 <template>
-  <el-dialog
-    v-model="whiteVisible"
-    title="验证"
-    :show-close="false"
-    class="verify-white-wrap"
-    width="315"
-    :close-on-press-escape="false"
-    :close-on-click-modal="false"
-    align-center
-  >
+  <el-dialog v-model="whiteVisible" title="验证" :show-close="false" class="verify-white-wrap" width="315"
+    :close-on-press-escape="false" :close-on-click-modal="false" align-center>
     <template #header>
       <div class="verify-white-head">
         <div class="verify-white-title">验证</div>
@@ -16,18 +8,9 @@
       </div>
     </template>
     <div class="verify-white-body">
-      <el-input
-        v-if="isPwd"
-        v-model="state.password"
-        class="wd255 mb16"
-        placeholder="请输入6位字符串类型访问密码"
-      />
-      <el-input
-        v-if="isValue"
-        v-model="state.value"
-        class="wd255 mb16"
-        :placeholder="placeholder"
-      />
+      <el-input v-if="isPwd" v-model="state.password" class="wd255 mb16"
+        :placeholder="$t('render.verifyWhiteDialog.passwordPlaceholder')" />
+      <el-input v-if="isValue" v-model="state.value" class="wd255 mb16" :placeholder="placeholder" />
       <div class="submit-btn" @click="handleSubmit">验证并开始答题</div>
     </div>
   </el-dialog>
@@ -109,20 +92,24 @@ watch(
   .verify-white-body {
     padding: 0 14px;
   }
+
   .verify-white-head {
     padding: 0 14px;
     margin-bottom: 8px;
     margin-top: 2px;
   }
+
   .mb16 {
     margin-bottom: 16px;
   }
+
   .verify-white-tips {
     text-align: center;
     margin-top: 8px;
     font-size: 14px;
     color: #92949d;
   }
+
   .verify-white-title {
     font-size: 16px;
     color: #292a36;
@@ -131,6 +118,7 @@ watch(
     align-items: center;
     justify-content: center;
   }
+
   .submit-btn {
     background: #faa600;
     border-radius: 2px;
