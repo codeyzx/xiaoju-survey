@@ -13,7 +13,6 @@
     </div>
     <div class="login-info">
       <LanguageSelector class="language-selector" />
-      {{ $t('login.title').replace('请登录', '') }}{{ userInfo?.username }}
       <img class="login-info-img" src="/imgs/avatar.webp" />
       <span class="logout" @click="handleLogout">{{ $t('common.logout') }}</span>
     </div>

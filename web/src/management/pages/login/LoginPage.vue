@@ -7,7 +7,6 @@
       <img src="/imgs/Logo.webp" alt="logo" />
       <div class="login-top-right">
         <LanguageSelector />
-        <span>{{ $t('login.title') }}</span>
       </div>
     </div>
     <div class="login-box">
