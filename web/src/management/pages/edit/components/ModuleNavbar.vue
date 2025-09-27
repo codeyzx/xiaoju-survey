@@ -8,6 +8,7 @@
       <NavPanel></NavPanel>
     </div>
     <div class="right-group">
+      <LanguageSelector class="language-selector" />
       <CooperationPanel>
         <template #content="{ onCooper }">
           <div class="btn" @click="onCooper">
@@ -38,6 +39,7 @@ import PreviewPanel from '../modules/contentModule/PreviewPanel.vue'
 import SavePanel from '../modules/contentModule/SavePanel.vue'
 import PublishPanel from '../modules/contentModule/PublishPanel.vue'
 import CooperationPanel from '../modules/contentModule/CooperationPanel.vue'
+import LanguageSelector from '@/common/components/LanguageSelector.vue'
 import { seizeSession } from '@/management/api/survey'
 import { useRoute } from 'vue-router'
 
@@ -163,6 +165,7 @@ const seize = async (sessionId: string) => {
     height: 100%;
     flex: 1;
     justify-content: center;
+    padding-right: 200px; /* Add padding to prevent overlap with right group */
   }
 
   .left-group,
@@ -179,5 +182,10 @@ const seize = async (sessionId: string) => {
 
 .right-group {
   right: 18px;
+}
+
+.language-selector {
+  margin-right: 20px;
+  z-index: 1000; /* Ensure dropdown appears above other elements */
 }
 </style>
