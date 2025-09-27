@@ -130,7 +130,10 @@ export default {
     profile: 'Profile',
     editSurvey: 'Edit Survey',
     publishSurvey: 'Publish Survey',
-    dataAnalysis: 'Data Analysis'
+    dataAnalysis: 'Data Analysis',
+    surveyEdit: 'Survey Edit',
+    surveySettings: 'Survey Settings',
+    skinSettings: 'Theme Settings'
   },
 
   // Workspace
@@ -371,7 +374,10 @@ export default {
     aiGenerateSurvey: 'AI Intelligent Survey Generation',
     excelImport: 'Excel Import',
     selectCreateMethod: 'Select Creation Method',
-    collaborate: 'Collaborate'
+    collaborate: 'Collaborate',
+    history: 'History',
+    modificationHistory: 'Modification History',
+    publishHistory: 'Publish History'
   },
 
   // Create Survey Form
@@ -385,7 +391,8 @@ export default {
     remarkTip: 'Remark is only visible to yourself',
     groupLabel: 'Group',
     groupPlaceholder: 'Ungrouped',
-    createButton: 'Start Creating'
+    createButton: 'Start Creating',
+    defaultTitle: 'Survey Research'
   },
 
   // Survey Settings
@@ -518,7 +525,13 @@ export default {
     positive: 'Please enter a positive number',
     min: 'Value cannot be less than {min}',
     max: 'Value cannot be greater than {max}',
-    between: 'Value must be between {min} and {max}'
+    between: 'Value must be between {min} and {max}',
+    showLogicExistsError: 'Display logic exists, please delete it before setting jump logic',
+    jumpLogicExistsError: 'Jump logic exists, please delete it before setting display logic',
+    logicConfigEmpty: 'Logic configuration cannot be empty',
+    passwordRequired: 'Access password cannot be empty',
+    whitelistRequired: 'Whitelist cannot be empty',
+    permissionDenied: 'Failed to get permission, please try again'
   },
 
   // Survey submission

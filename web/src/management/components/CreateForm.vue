@@ -62,8 +62,8 @@ const state = reactive({
     title: [{ required: true, message: t('surveyList.validationTitleRequired'), trigger: 'blur' }]
   },
   form: {
-    title: '问卷调研',
-    remark: '问卷调研',
+    title: t('createForm.defaultTitle'),
+    remark: t('createForm.defaultTitle'),
     surveyType: 'normal',
     groupId: props.groupId === GroupState.All || props.groupId === GroupState.Not ? '' : props.groupId
   }

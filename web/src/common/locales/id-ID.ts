@@ -138,7 +138,10 @@ export default {
     profile: 'Profil',
     editSurvey: 'Edit Survei',
     publishSurvey: 'Terbitkan Survei',
-    dataAnalysis: 'Analisis Data'
+    dataAnalysis: 'Analisis Data',
+    surveyEdit: 'Edit Survei',
+    surveySettings: 'Pengaturan Survei',
+    skinSettings: 'Pengaturan Tema'
   },
 
   // Ruang Kerja
@@ -378,7 +381,10 @@ export default {
     aiGenerateSurvey: 'Generasi Survei AI Cerdas',
     excelImport: 'Impor Excel',
     selectCreateMethod: 'Pilih Metode Pembuatan',
-    collaborate: 'Kolaborasi'
+    collaborate: 'Kolaborasi',
+    history: 'Riwayat',
+    modificationHistory: 'Riwayat Modifikasi',
+    publishHistory: 'Riwayat Publikasi'
   },
 
   // Formulir Buat Survei
@@ -391,7 +397,8 @@ export default {
     remarkTip: 'Catatan hanya terlihat oleh diri sendiri',
     groupLabel: 'Grup',
     groupPlaceholder: 'Tidak Dikelompokkan',
-    createButton: 'Mulai Membuat'
+    createButton: 'Mulai Membuat',
+    defaultTitle: 'Riset Survei'
   },
 
   // Pengaturan Survei
@@ -522,7 +529,13 @@ export default {
     positive: 'Silakan masukkan angka positif',
     min: 'Nilai tidak boleh kurang dari {min}',
     max: 'Nilai tidak boleh lebih dari {max}',
-    between: 'Nilai harus antara {min} dan {max}'
+    between: 'Nilai harus antara {min} dan {max}',
+    showLogicExistsError: 'Logika tampilan sudah ada, hapus terlebih dahulu sebelum mengatur logika lompatan',
+    jumpLogicExistsError: 'Logika lompatan sudah ada, hapus terlebih dahulu sebelum mengatur logika tampilan',
+    logicConfigEmpty: 'Konfigurasi logika tidak boleh kosong',
+    passwordRequired: 'Kata sandi akses tidak boleh kosong',
+    whitelistRequired: 'Daftar putih tidak boleh kosong',
+    permissionDenied: 'Gagal mendapatkan izin, silakan coba lagi'
   },
 
   // Survey submission

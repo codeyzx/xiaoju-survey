@@ -17,7 +17,7 @@
         >
           <a :href="href" @click="navigate">
             <i class="iconfont" :class="[route.icon]"></i>
-            <span>{{ route.text }}</span></a
+            <span>{{ $t(route.text) }}</span></a
           >
         </div>
       </router-link>
@@ -25,24 +25,28 @@
   </div>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
+
 const routes = [
   {
     icon: 'icon-wenjuanbianji',
-    text: '问卷编辑',
+    text: 'nav.surveyEdit',
     router: 'QuestionEditIndex',
     key: 'edit',
     next: true
   },
   {
     icon: 'icon-wenjuanshezhi',
-    text: '问卷设置',
+    text: 'nav.surveySettings',
     router: 'QuestionEditSetting',
     key: 'settings',
     next: true
   },
   {
     icon: 'icon-yangshishezhi',
-    text: '皮肤设置',
+    text: 'nav.skinSettings',
     router: 'QuestionSkinSetting',
     key: 'skinsettings',
     next: true

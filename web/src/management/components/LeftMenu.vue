@@ -27,7 +27,7 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
+import { ref, watch, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useEditStore } from '@/management/stores/edit'
 import { useRoute } from 'vue-router'
@@ -37,7 +37,8 @@ import { SurveyPermissions } from '@/management/utils/workSpace'
 const editStore = useEditStore()
 const { t } = useI18n()
 
-const tabArr = [
+// Make tabArr reactive to language changes
+const tabArr = computed(() => [
   {
     text: t('nav.editSurvey'),
     icon: 'icon-bianji',
@@ -59,7 +60,8 @@ const tabArr = [
       name: 'analysisPage'
     }
   }
-]
+])
+
 const tabs = ref([])
 watch(
   () => editStore.cooperPermissions,
@@ -67,15 +69,33 @@ watch(
     tabs.value = []
     // 如果有问卷管理权限，则加入问卷编辑和投放菜单
     if (newVal.includes(SurveyPermissions.SurveyManage)) {
-      tabs.value.push(tabArr[0])
-      tabs.value.push(tabArr[1])
+      tabs.value.push(tabArr.value[0])
+      tabs.value.push(tabArr.value[1])
     }
     // 如果有数据分析权限，则加入数据分析菜单
     if (newVal.includes(SurveyPermissions.DataManage)) {
-      tabs.value.push(tabArr[2])
+      tabs.value.push(tabArr.value[2])
     }
   },
   { immediate: true }
+)
+
+// Watch for language changes and update tabs
+watch(
+  () => tabArr.value,
+  () => {
+    // Re-trigger the permissions watch to update tabs with new translations
+    const currentPermissions = editStore.cooperPermissions
+    tabs.value = []
+    if (currentPermissions.includes(SurveyPermissions.SurveyManage)) {
+      tabs.value.push(tabArr.value[0])
+      tabs.value.push(tabArr.value[1])
+    }
+    if (currentPermissions.includes(SurveyPermissions.DataManage)) {
+      tabs.value.push(tabArr.value[2])
+    }
+  },
+  { deep: true }
 )
 </script>
 <style lang="scss" scoped>
@@ -121,6 +141,12 @@ watch(
 
   p {
     font-size: 12px;
+    text-align: center;
+    line-height: 14px;
+    margin: 0;
+    padding: 0 4px;
+    word-break: break-word;
+    hyphens: auto;
   }
 
   &.router-link-active {

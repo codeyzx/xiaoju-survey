@@ -29,6 +29,7 @@ import { computed } from 'vue'
 import { useEditStore } from '@/management/stores/edit'
 import { storeToRefs } from 'pinia'
 import { ElMessage } from 'element-plus'
+import { useI18n } from 'vue-i18n'
 import 'element-plus/theme-chalk/src/message.scss'
 
 import BackPanel from '../modules/generalModule/BackPanel.vue'
@@ -47,6 +48,7 @@ const route = useRoute()
 const editStore = useEditStore()
 const { schema, changeSchema } = editStore
 const title = computed(() => (editStore.schema?.metaData as any)?.title || '')
+const { t } = useI18n()
 
 const { showLogicEngine, jumpLogicEngine } = storeToRefs(editStore)
 // 校验 - 逻辑
@@ -66,8 +68,8 @@ const updateLogicConf = () => {
       validated: false,
       message:
         active === 'jumpLogic'
-          ? '存在显示逻辑配置，删除后才能设置跳转逻辑'
-          : '存在跳转逻辑配置，删除后才能设置显示逻辑'
+          ? t('validation.showLogicExistsError')
+          : t('validation.jumpLogicExistsError')
     }
   }
 
@@ -81,7 +83,7 @@ const updateLogicConf = () => {
     } catch (error) {
       res = {
         validated: false,
-        message: '逻辑配置不能为空'
+        message: t('validation.logicConfigEmpty')
       }
 
       return res
@@ -113,14 +115,14 @@ const updateWhiteConf = () => {
   if (baseConf.passwordSwitch && !baseConf.password) {
     res = {
       validated: false,
-      message: '访问密码不能为空'
+      message: t('validation.passwordRequired')
     }
     return res
   }
   if (baseConf.whitelistType != 'ALL' && !baseConf.whitelist?.length) {
     res = {
       validated: false,
-      message: '白名单不能为空'
+      message: t('validation.whitelistRequired')
     }
     return res
   }
@@ -133,7 +135,7 @@ const seize = async (sessionId: string) => {
   if (seizeRes.code === 200) {
     location.reload()
   } else {
-    ElMessage.error('获取权限失败，请重试')
+    ElMessage.error(t('validation.permissionDenied'))
   }
 }
 </script>
@@ -165,7 +167,7 @@ const seize = async (sessionId: string) => {
     height: 100%;
     flex: 1;
     justify-content: center;
-    padding-right: 200px; /* Add padding to prevent overlap with right group */
+    padding-right: 350px; /* Increased padding to prevent overlap with Indonesian language */
   }
 
   .left-group,
@@ -187,5 +189,24 @@ const seize = async (sessionId: string) => {
 .language-selector {
   margin-right: 20px;
   z-index: 1000; /* Ensure dropdown appears above other elements */
+}
+
+.right-group {
+  gap: 8px; /* Add gap between buttons to prevent overlap */
+  
+  .btn {
+    min-width: 45px; /* Allow buttons to be flexible but have minimum width */
+    width: auto; /* Allow width to adjust to content */
+    max-width: 60px; /* Prevent buttons from getting too wide */
+    
+    .btn-txt {
+      font-size: 11px; /* Slightly smaller font for longer text */
+      text-align: center;
+      line-height: 12px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
 }
 </style>

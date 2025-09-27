@@ -121,7 +121,10 @@ export default {
     profile: '个人资料',
     editSurvey: '编辑问卷',
     publishSurvey: '投放问卷',
-    dataAnalysis: '数据统计'
+    dataAnalysis: '数据统计',
+    surveyEdit: '问卷编辑',
+    surveySettings: '问卷设置',
+    skinSettings: '皮肤设置'
   },
 
   // 工作空间
@@ -354,7 +357,10 @@ export default {
     aiGenerateSurvey: 'AI智能生成问卷',
     excelImport: 'Excel导入',
     selectCreateMethod: '请选择创建方式',
-    collaborate: '协作'
+    collaborate: '协作',
+    history: '历史',
+    modificationHistory: '修改历史',
+    publishHistory: '发布历史'
   },
 
   // 创建问卷表单
@@ -367,7 +373,8 @@ export default {
     remarkTip: '备注仅自己可见',
     groupLabel: '分组',
     groupPlaceholder: '未分组',
-    createButton: '开始创建'
+    createButton: '开始创建',
+    defaultTitle: '问卷调研'
   },
 
   // 问卷设置
@@ -500,7 +507,13 @@ export default {
     positive: '请输入正数',
     min: '数值不能小于 {min}',
     max: '数值不能大于 {max}',
-    between: '数值必须在 {min} 到 {max} 之间'
+    between: '数值必须在 {min} 到 {max} 之间',
+    showLogicExistsError: '存在显示逻辑配置，删除后才能设置跳转逻辑',
+    jumpLogicExistsError: '存在跳转逻辑配置，删除后才能设置显示逻辑',
+    logicConfigEmpty: '逻辑配置不能为空',
+    passwordRequired: '访问密码不能为空',
+    whitelistRequired: '白名单不能为空',
+    permissionDenied: '获取权限失败，请重试'
   },
 
   // Survey submission

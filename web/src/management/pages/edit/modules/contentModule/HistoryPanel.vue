@@ -1,14 +1,14 @@
 <template>
   <el-popover placement="top" trigger="click" @show="handlePopoverShow" :width="320">
     <el-tabs v-model="currentTab" class="custom-tab" v-if="visible" v-loading="loading">
-      <el-tab-pane label="修改历史" name="daily" class="custom-tab-pane">
+      <el-tab-pane :label="$t('editor.modificationHistory')" name="daily" class="custom-tab-pane">
         <div class="line" v-for="(his, index) in dailyList" :key="index">
           <span class="operator">{{ his.operator }}</span>
           <span class="seperator">|</span>
           <span>{{ his.time }}</span>
         </div>
       </el-tab-pane>
-      <el-tab-pane label="发布历史" name="publish" class="custom-tab-pane">
+      <el-tab-pane :label="$t('editor.publishHistory')" name="publish" class="custom-tab-pane">
         <div class="line" v-for="(his, index) in publishList" :key="index">
           <span class="operator">{{ his.operator }}</span>
           <span class="seperator">|</span>
@@ -19,7 +19,7 @@
     <template #reference>
       <div class="btn">
         <i class="iconfont icon-lishi"></i>
-        <span class="btn-txt">历史</span>
+        <span class="btn-txt">{{ $t('editor.history') }}</span>
       </div>
     </template>
   </el-popover>
