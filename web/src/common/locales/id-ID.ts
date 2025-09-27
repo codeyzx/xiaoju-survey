@@ -96,7 +96,8 @@ export default {
     enterDistributionName: 'Masukkan nama distribusi',
     enterAccountSearch: 'Masukkan nama akun untuk mencari',
     confirmDeleteGroup:
-      'Setelah menghapus grup, survei dalam grup ini akan secara otomatis dipindahkan ke "Tidak Dikelompokkan". Apakah Anda yakin untuk menghapus kali ini?'
+      'Setelah menghapus grup, survei dalam grup ini akan secara otomatis dipindahkan ke "Tidak Dikelompokkan". Apakah Anda yakin untuk menghapus kali ini?',
+    deleteFailedRetry: 'Gagal menghapus, silakan coba lagi'
   },
 
   // Halaman Login

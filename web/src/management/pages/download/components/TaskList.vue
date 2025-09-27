@@ -1,6 +1,6 @@
 <template>
   <div v-loading="loading" class="list-wrapper">
-    <el-table v-if="total" ref="multipleListTable" class="list-table" :data="dataList" empty-text="暂无数据" row-key="_id"
+    <el-table v-if="total" ref="multipleListTable" class="list-table" :data="dataList" :empty-text="t('common.noData')" row-key="_id"
       header-row-class-name="tableview-header" row-class-name="tableview-row" cell-class-name="tableview-cell"
       style="width: 100%" v-loading="loading">
       <el-table-column v-for="field in fieldList" :key="field.key" :prop="field.key" :label="field.title"
@@ -71,12 +71,12 @@ const getList = async ({ pageIndex }: { pageIndex: number }) => {
   loading.value = false
 }
 
-const statusTextMap: Record<string, string> = {
+const statusTextMap = computed(() => ({
   waiting: t('common.waiting'),
   computing: t('common.computing'),
   succeed: t('common.completed'),
   failed: t('common.exportFailed')
-}
+}))
 
 let currentDelRow: Record<string, any> = {}
 // 下载文件
@@ -109,23 +109,17 @@ const confirmDelete = async () => {
     if (res.code !== CODE_MAP.SUCCESS) {
       ElMessage.error(res.errmsg)
     } else {
-      ElMessage.success('删除成功')
+      ElMessage.success(t('common.deleteSuccess'))
       await getList({ pageIndex: 1 })
     }
   } catch (error) {
-    ElMessage.error('删除失败，请刷新重试')
+    ElMessage.error(t('common.deleteFailedRetry'))
   }
 }
 
 const fields = ['filename', 'fileSize', 'createdAt', 'status']
 
-const fieldList = computed(() => {
-  return map(fields, (f) => {
-    return get(downloadListConfig, f)
-  })
-})
-
-const downloadListConfig = {
+const downloadListConfig = computed(() => ({
   filename: {
     title: t('common.fileName'),
     key: 'filename',
@@ -146,10 +140,16 @@ const downloadListConfig = {
     title: t('common.status'),
     key: 'status',
     formatter(row: Record<string, any>, column: Record<string, any>) {
-      return statusTextMap[get(row, column.rawColumnKey)]
+      return statusTextMap.value[get(row, column.rawColumnKey)]
     }
   }
-}
+}))
+
+const fieldList = computed(() => {
+  return map(fields, (f) => {
+    return get(downloadListConfig.value, f)
+  })
+})
 
 const handleCurrentChange = (val: number) => {
   getList({ pageIndex: val })

@@ -88,7 +88,8 @@ export default {
     enterDistributionName: 'Please enter distribution name',
     enterAccountSearch: 'Please enter account name to search',
     confirmDeleteGroup:
-      'After deleting the group, the surveys in this group will be automatically moved to "Ungrouped". Are you sure to delete this time?'
+      'After deleting the group, the surveys in this group will be automatically moved to "Ungrouped". Are you sure to delete this time?',
+    deleteFailedRetry: 'Delete failed, please try again'
   },
 
   // Login Page
