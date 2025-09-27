@@ -384,7 +384,13 @@ export default {
     remarkTip: 'Remark is only visible to yourself',
     groupLabel: 'Group',
     groupPlaceholder: 'Ungrouped',
-    createButton: 'Start Creating'
+    createButton: 'Start Creating',
+    selectSurveyTypeTitle: 'Please select the type of survey to create',
+    surveyTypeDescriptions: {
+      normal: 'Market research / User analysis / Product evaluation / Requirements research',
+      vote: 'Talent competition / Outstanding employee / Most popular / Voting election',
+      register: 'Event registration / Meeting registration'
+    }
   },
 
   // Survey Settings
@@ -445,7 +451,45 @@ export default {
     lastWeek: 'Last Week',
     thisMonth: 'This Month',
     lastMonth: 'Last Month',
-    custom: 'Custom'
+    custom: 'Custom',
+    dataList: 'Data List',
+    separateStatistics: 'Separate Statistics',
+    option: 'Option',
+    count: 'Count',
+    percentage: 'Percentage',
+    noDataTitle: 'No Data',
+    noDataDesc: 'Your survey currently has no data, go collect responses!',
+    exportConfirmTitle: 'Export Confirmation',
+    exportContent: 'Export Content',
+    desensitizedData: 'Desensitized Data',
+    originalData: 'Original Response Data',
+    exportNote: 'Note:',
+    exportTip1: 'It is recommended to download desensitized data first, such as phone number: 1***3.',
+    exportTip2: 'Original response data may contain sensitive information, please download with caution.',
+    submissionCount: 'Submission Count',
+    option1: 'Option 1',
+    option2: 'Option 2',
+    option3: 'Option 3',
+    option4: 'Option 4',
+    option5: 'Option 5'
+  },
+
+  // Question Types
+  questionTypes: {
+    singleChoice: 'Single Choice',
+    multipleChoice: 'Multiple Choice',
+    text: 'Text Question',
+    textarea: 'Multi-line Text Question',
+    textInput: 'Text Input',
+    textareaInput: 'Multi-line Input',
+    imageSingleChoice: 'Image Single Choice',
+    imageMultipleChoice: 'Image Multiple Choice',
+    dropdown: 'Dropdown',
+    cascader: 'Cascader',
+    binaryChoice: 'Yes/No Question',
+    npsScore: 'NPS Score',
+    rating: 'Rating',
+    vote: 'Vote'
   },
 
   // Error Messages

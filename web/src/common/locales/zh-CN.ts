@@ -366,7 +366,13 @@ export default {
     remarkTip: '备注仅自己可见',
     groupLabel: '分组',
     groupPlaceholder: '未分组',
-    createButton: '开始创建'
+    createButton: '开始创建',
+    selectSurveyTypeTitle: '请选择创建的问卷类型',
+    surveyTypeDescriptions: {
+      normal: '市场调研 / 用户分析 / 产品测评 / 需求调研',
+      vote: '才艺比赛 / 优秀员工 / 最佳人气 / 投票选举',
+      register: '活动报名 / 会议报名'
+    }
   },
 
   // 问卷设置
@@ -427,7 +433,45 @@ export default {
     lastWeek: '上周',
     thisMonth: '本月',
     lastMonth: '上月',
-    custom: '自定义'
+    custom: '自定义',
+    dataList: '数据列表',
+    separateStatistics: '分题统计',
+    option: '选项',
+    count: '数量',
+    percentage: '占比',
+    noDataTitle: '暂无数据',
+    noDataDesc: '您的问卷当前还没有数据，快去回收问卷吧！',
+    exportConfirmTitle: '导出确认',
+    exportContent: '导出内容',
+    desensitizedData: '脱敏数据',
+    originalData: '原回收数据',
+    exportNote: '注：',
+    exportTip1: '推荐优先下载脱敏数据，如手机号：1***3。',
+    exportTip2: '原回收数据可能存在敏感信息，请谨慎下载。',
+    submissionCount: '提交人数',
+    option1: '选项1',
+    option2: '选项2',
+    option3: '选项3',
+    option4: '选项4',
+    option5: '选项5'
+  },
+
+  // 问题类型
+  questionTypes: {
+    singleChoice: '单项选择',
+    multipleChoice: '多项选择',
+    text: '文本题',
+    textarea: '多行文本题',
+    textInput: '单行输入框',
+    textareaInput: '多行输入框',
+    imageSingleChoice: '图片单选',
+    imageMultipleChoice: '图片多选',
+    dropdown: '下拉选择',
+    cascader: '级联选择',
+    binaryChoice: '是否题',
+    npsScore: 'NPS评分',
+    rating: '评分题',
+    vote: '投票题'
   },
 
   // 错误消息

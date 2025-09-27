@@ -2,7 +2,7 @@
  * @Description: 柱状图配置
  * @CreateDate: 2024-04-30
  */
-export default (data) => {
+export default (data, submissionCountText = '提交人数') => {
   const xAxisData = data.map((item) => item.name)
   return {
     color: ['#55A8FD'],
@@ -47,7 +47,7 @@ export default (data) => {
     series: [
       {
         showAllSymbol: true,
-        name: '提交人数',
+        name: submissionCountText,
         type: 'bar',
         barMaxWidth: 50,
         data

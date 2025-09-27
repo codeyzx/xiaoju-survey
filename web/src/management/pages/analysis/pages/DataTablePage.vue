@@ -20,19 +20,19 @@
       <EmptyIndex :data="noDataConfig" />
     </div>
 
-    <el-dialog v-model="downloadDialogVisible" title="导出确认" width="500" style="padding: 40px">
+    <el-dialog v-model="downloadDialogVisible" :title="t('analysis.exportConfirmTitle')" width="500" style="padding: 40px">
       <el-form :model="downloadForm" label-width="100px" label-position="left">
-        <el-form-item label="导出内容">
+        <el-form-item :label="t('analysis.exportContent')">
           <el-radio-group v-model="downloadForm.isMasked">
-            <el-radio :value="true">脱敏数据</el-radio>
-            <el-radio :value="false">原回收数据</el-radio>
+            <el-radio :value="true">{{ t('analysis.desensitizedData') }}</el-radio>
+            <el-radio :value="false">{{ t('analysis.originalData') }}</el-radio>
           </el-radio-group>
         </el-form-item>
         <div class="download-tips">
-          <div>注：</div>
+          <div>{{ t('analysis.exportNote') }}</div>
           <div>
-            <p>推荐优先下载脱敏数据，如手机号：1***3。</p>
-            <p>原回收数据可能存在敏感信息，请谨慎下载。</p>
+            <p>{{ t('analysis.exportTip1') }}</p>
+            <p>{{ t('analysis.exportTip2') }}</p>
           </div>
         </div>
       </el-form>
@@ -47,18 +47,23 @@
 </template>
 
 <script setup>
-import { reactive, toRefs, onMounted } from 'vue'
+import { reactive, toRefs, onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import 'element-plus/theme-chalk/src/message.scss'
 import EmptyIndex from '@/management/components/EmptyIndex.vue'
 import { getRecycleList } from '@/management/api/analysis'
-import { noDataConfig } from '@/management/config/analysisConfig'
 import DataTable from '../components/DataTable.vue'
 import { createDownloadTask, getDownloadTask } from '@/management/api/download'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
+
+const noDataConfig = computed(() => ({
+  title: t('analysis.noDataTitle'),
+  desc: t('analysis.noDataDesc'),
+  img: '/imgs/icons/analysis-empty.webp'
+}))
 
 const dataTableState = reactive({
   mainTableLoading: false,

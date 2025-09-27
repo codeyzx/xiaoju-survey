@@ -3,7 +3,7 @@ import { cleanRichText } from '@/common/xss'
 import { questionChartsConfig } from '../config/analysisConfig'
 
 // 饼图数据处理
-const pie = (data) => {
+const pie = (data, translateOptionText) => {
   const aggregation = data?.aggregation
   return (
     aggregation?.map?.((item) => {
@@ -11,13 +11,13 @@ const pie = (data) => {
       return {
         id,
         value: count,
-        name: cleanRichText(text)
+        name: translateOptionText ? translateOptionText(text) : cleanRichText(text)
       }
     }) || []
   )
 }
 // 柱状图数据处理
-const bar = (data) => {
+const bar = (data, translateOptionText) => {
   const aggregation = data?.aggregation
   return (
     aggregation?.map?.((item) => {
@@ -25,7 +25,7 @@ const bar = (data) => {
       return {
         id,
         value: count,
-        name: cleanRichText(text)
+        name: translateOptionText ? translateOptionText(text) : cleanRichText(text)
       }
     }) || []
   )
@@ -43,11 +43,12 @@ const dataFormateConfig = {
 
 /**
  * @description: 分题统计图表hook
- * @param {*} chartType
+ * @param {*} questionType
  * @param {*} data
+ * @param {*} translateOptionText - 选项文本翻译函数
  * @return {*} chartRef 图表实例 chartTypeList 图表类型列表 chartType 图表类型 chartData 图表数据
  */
-export default ({ questionType, data }) => {
+export default ({ questionType, data, translateOptionText }) => {
   const chartRef = ref(null)
   const chartTypeList = ref([])
   const chartType = ref('')
@@ -63,7 +64,7 @@ export default ({ questionType, data }) => {
       }
       if (chartType.value) {
         // 根据图表类型获取图表数据
-        chartData.value = dataFormateConfig[chartType.value](data)
+        chartData.value = dataFormateConfig[chartType.value](data, translateOptionText)
       }
     }
   })

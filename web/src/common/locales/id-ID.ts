@@ -390,7 +390,13 @@ export default {
     remarkTip: 'Catatan hanya terlihat oleh diri sendiri',
     groupLabel: 'Grup',
     groupPlaceholder: 'Tidak Dikelompokkan',
-    createButton: 'Mulai Membuat'
+    createButton: 'Mulai Membuat',
+    selectSurveyTypeTitle: 'Silakan pilih jenis survei yang akan dibuat',
+    surveyTypeDescriptions: {
+      normal: 'Riset pasar / Analisis pengguna / Evaluasi produk / Riset kebutuhan',
+      vote: 'Kompetisi bakat / Karyawan terbaik / Paling populer / Pemilihan suara',
+      register: 'Pendaftaran acara / Pendaftaran rapat'
+    }
   },
 
   // Pengaturan Survei
@@ -449,7 +455,45 @@ export default {
     lastWeek: 'Minggu Lalu',
     thisMonth: 'Bulan Ini',
     lastMonth: 'Bulan Lalu',
-    custom: 'Kustom'
+    custom: 'Kustom',
+    dataList: 'Daftar Data',
+    separateStatistics: 'Statistik Terpisah',
+    option: 'Opsi',
+    count: 'Jumlah',
+    percentage: 'Persentase',
+    noDataTitle: 'Tidak Ada Data',
+    noDataDesc: 'Survei Anda saat ini tidak memiliki data, kumpulkan respons sekarang!',
+    exportConfirmTitle: 'Konfirmasi Ekspor',
+    exportContent: 'Konten Ekspor',
+    desensitizedData: 'Data Tersensor',
+    originalData: 'Data Respons Asli',
+    exportNote: 'Catatan:',
+    exportTip1: 'Disarankan untuk mengunduh data tersensor terlebih dahulu, seperti nomor telepon: 1***3.',
+    exportTip2: 'Data respons asli mungkin mengandung informasi sensitif, harap unduh dengan hati-hati.',
+    submissionCount: 'Jumlah Pengiriman',
+    option1: 'Opsi 1',
+    option2: 'Opsi 2',
+    option3: 'Opsi 3',
+    option4: 'Opsi 4',
+    option5: 'Opsi 5'
+  },
+
+  // Jenis Pertanyaan
+  questionTypes: {
+    singleChoice: 'Pilihan Tunggal',
+    multipleChoice: 'Pilihan Ganda',
+    text: 'Pertanyaan Teks',
+    textarea: 'Pertanyaan Teks Multi-baris',
+    textInput: 'Input Teks',
+    textareaInput: 'Input Multi-baris',
+    imageSingleChoice: 'Pilihan Tunggal Gambar',
+    imageMultipleChoice: 'Pilihan Ganda Gambar',
+    dropdown: 'Dropdown',
+    cascader: 'Cascader',
+    binaryChoice: 'Pertanyaan Ya/Tidak',
+    npsScore: 'Skor NPS',
+    rating: 'Rating',
+    vote: 'Vote'
   },
 
   // Pesan Error

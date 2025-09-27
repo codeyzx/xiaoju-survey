@@ -6,10 +6,10 @@
         width="400"
         trigger="hover"
         :disabled="!titlePoppverShow"
-        :content="cleanRichText(StatisticsData.title)"
+        :content="translateQuestionTitle(StatisticsData.title)"
       >
         <template #reference>
-          <p ref="titleRef" class="text" v-html="cleanRichText(StatisticsData.title)"></p>
+          <p ref="titleRef" class="text" v-html="translateQuestionTitle(StatisticsData.title)"></p>
         </template>
       </el-popover>
       <p v-if="questionTypeDesc" class="type">{{ questionTypeDesc }}</p>
@@ -36,7 +36,6 @@
 import { reactive, toRefs, computed, watch, onMounted, onUnmounted, ref } from 'vue'
 import { cloneDeep as _cloneDeep } from 'lodash-es'
 import {
-  separateItemListHead,
   summaryType,
   summaryItemConfig
 } from '@/management/config/analysisConfig'
@@ -46,6 +45,59 @@ import { cleanRichText } from '@/common/xss'
 import { menuItems } from '@/management/config/questionMenuConfig'
 import DataTable from './DataTable.vue'
 import useResizeObserver from '@/management/hooks/useResizeObserver'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
+
+// 翻译选项文本的辅助函数
+const translateOptionText = (text) => {
+  // 匹配类似 "选项1", "选项2" 等模式
+  const match = text.match(/^选项(\d+)$/)
+  if (match) {
+    const optionNumber = match[1]
+    const optionKey = `analysis.option${optionNumber}`
+    return t(optionKey)
+  }
+  return cleanRichText(text)
+}
+
+// 翻译问题标题的辅助函数
+const translateQuestionTitle = (title) => {
+  // 匹配常见的默认标题模式
+  if (title === '标题S' || title === '标题' || title.startsWith('标题')) {
+    return t('common.title', 'Title')
+  }
+  if (title === '单选题' || title === '单选题按钮') {
+    return t('questionTypes.singleChoice', '单选题')
+  }
+  if (title === '多选题' || title === '多选题按钮') {
+    return t('questionTypes.multipleChoice', '多选题')
+  }
+  if (title === '问题') {
+    return t('common.title', 'Question')
+  }
+  // 匹配 "标题" + 数字 的模式
+  const titleWithNumber = title.match(/^标题(\d+)$/)
+  if (titleWithNumber) {
+    return t('common.title') + ' ' + titleWithNumber[1]
+  }
+  return cleanRichText(title)
+}
+
+const separateItemListHead = computed(() => [
+  {
+    title: t('analysis.option'),
+    field: 'text'
+  },
+  {
+    title: t('analysis.count'),
+    field: 'count'
+  },
+  {
+    title: t('analysis.percentage'),
+    field: 'percent'
+  }
+])
 
 const props = defineProps({
   StatisticsData: {
@@ -59,7 +111,25 @@ const questionType = computed(() => {
 })
 
 const questionTypeDesc = computed(() => {
-  return menuItems?.[questionType.value]?.title || ''
+  const originalTitle = menuItems?.[questionType.value]?.title || ''
+  
+  // 翻译问题类型描述
+  const translations = {
+    '单行输入框': t('questionTypes.textInput', '单行输入框'),
+    '多行输入框': t('questionTypes.textareaInput', '多行输入框'),
+    '单项选择': t('questionTypes.singleChoice', '单项选择'),
+    '多项选择': t('questionTypes.multipleChoice', '多项选择'),
+    '图片单选': t('questionTypes.imageSingleChoice', '图片单选'),
+    '图片多选': t('questionTypes.imageMultipleChoice', '图片多选'),
+    '下拉选择': t('questionTypes.dropdown', '下拉选择'),
+    '级联选择': t('questionTypes.cascader', '级联选择'),
+    '是否题': t('questionTypes.binaryChoice', '是否题'),
+    'NPS评分': t('questionTypes.npsScore', 'NPS评分'),
+    '评分题': t('questionTypes.rating', '评分题'),
+    '投票题': t('questionTypes.vote', '投票题')
+  }
+  
+  return translations[originalTitle] || originalTitle
 })
 
 // 表格数据
@@ -94,7 +164,7 @@ const separateItemListBody = computed(() => {
         return {
           id,
           count,
-          text,
+          text: translateOptionText(text),
           percent
         }
       }) || []
@@ -129,15 +199,21 @@ const titleResize = () => {
 
 const { chartRef, chartTypeList, chartType, chartData } = useStatisticsItemChart({
   questionType,
-  data: props?.StatisticsData?.data
+  data: props?.StatisticsData?.data,
+  translateOptionText
 })
 
 onMounted(() => {
   // 需要获取图表dom，所以得在mounted中执行
+  const translations = {
+    submissionCount: t('analysis.submissionCount')
+  }
+  
   const { changeType, resize: chartResize } = useCharts(
     chartRef.value,
     chartType.value,
-    chartData.value
+    chartData.value,
+    translations
   )
 
   const { destroy } = useResizeObserver(chartRef.value, () => {
@@ -147,6 +223,14 @@ onMounted(() => {
 
   // 图型切换
   watch(chartType, () => {
+    changeType(chartType.value, chartData.value)
+  })
+
+  // 监听语言变化，重新计算图表数据
+  watch(() => t('analysis.submissionCount'), () => {
+    const translations = {
+      submissionCount: t('analysis.submissionCount')
+    }
     changeType(chartType.value, chartData.value)
   })
 

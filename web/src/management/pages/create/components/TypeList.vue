@@ -2,7 +2,7 @@
   <div class="left-side">
     <div class="main">
       <nav-header :box-shadow="false" />
-      <div class="new-title">请选择创建的问卷类型</div>
+      <div class="new-title">{{ $t('createForm.selectSurveyTypeTitle') }}</div>
       <ul class="new-cardList">
         <li
           v-for="item in renderData"
@@ -14,9 +14,9 @@
           <img class="img" :src="item.img" alt="类别图片" />
           <div class="container">
             <div class="title-container">
-              <p class="title">{{ item.title }}</p>
+              <p class="title">{{ $t(`surveyTypes.${item.type}`) }}</p>
             </div>
-            <p class="desc">{{ item.desc }}</p>
+            <p class="desc">{{ $t(`createForm.surveyTypeDescriptions.${item.type}`) }}</p>
           </div>
         </li>
       </ul>

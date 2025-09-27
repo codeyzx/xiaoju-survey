@@ -8,16 +8,23 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import 'element-plus/theme-chalk/src/message.scss'
-import { noDataConfig } from '@/management/config/analysisConfig'
 import EmptyIndex from '@/management/components/EmptyIndex.vue'
 import { getStatisticList } from '@/management/api/analysis'
 import StatisticsItem from '../components/StatisticsItem.vue'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const route = useRoute()
+
+const noDataConfig = computed(() => ({
+  title: t('analysis.noDataTitle'),
+  desc: t('analysis.noDataDesc'),
+  img: '/imgs/icons/analysis-empty.webp'
+}))
 
 const data = ref([])
 

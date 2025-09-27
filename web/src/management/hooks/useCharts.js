@@ -25,10 +25,11 @@ echarts.use([
  * @param {Object} el
  * @param {String} type
  * @param {Array} data
+ * @param {Object} translations - 翻译对象
  */
-export default (el, type, data) => {
+export default (el, type, data, translations = {}) => {
   const chart = echarts.init(el)
-  const option = getOption[type](data)
+  const option = getOption[type](data, translations.submissionCount)
 
   chart.setOption(option, true)
 
@@ -37,7 +38,7 @@ export default (el, type, data) => {
   }
 
   const changeType = (type, data) => {
-    chart.setOption(getOption[type](data), true)
+    chart.setOption(getOption[type](data, translations.submissionCount), true)
   }
 
   return { chart, resize, changeType }

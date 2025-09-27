@@ -14,7 +14,7 @@ const color = [
  * @Description: 饼图配置
  * @CreateDate: 2024-04-30
  */
-export default (data) => {
+export default (data, submissionCountText = '提交人数') => {
   return {
     color,
     tooltip: {
@@ -34,7 +34,7 @@ export default (data) => {
     },
     series: [
       {
-        name: '提交人数',
+        name: submissionCountText,
         type: 'pie',
         radius: ['50%', '80%'],
         avoidLabelOverlap: false,

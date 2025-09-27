@@ -22,7 +22,24 @@
 
 <script setup>
 import LeftMenu from '@/management/components/LeftMenu.vue'
-import { analysisType } from '@/management/config/analysisConfig'
+import { analysisTypeMap } from '@/management/config/analysisConfig'
+import { useI18n } from 'vue-i18n'
+import { computed } from 'vue'
+
+const { t } = useI18n()
+
+const analysisType = computed(() => [
+  {
+    value: analysisTypeMap.dataTable,
+    label: t('analysis.dataList'),
+    icon: 'icon-shujuliebiao'
+  },
+  {
+    value: analysisTypeMap.separateStatistics,
+    label: t('analysis.separateStatistics'),
+    icon: 'icon-fentitongji'
+  }
+])
 </script>
 
 <style lang="scss" scoped>
