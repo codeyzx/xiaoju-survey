@@ -102,7 +102,8 @@ const handleMenu = (id: string) => {
 
   :deep(.el-menu-item) {
     width: 200px;
-    height: 36px;
+    height: 48px;
+    min-height: 44px;
 
     >p {
       overflow: hidden;
@@ -134,8 +135,14 @@ const handleMenu = (id: string) => {
       margin: 0;
     }
 
-    &:hover {
+    &:hover,
+    &:focus {
       background-color: #f2f4f7;
+    }
+
+    &:focus {
+      outline: 2px solid #d87900;
+      outline-offset: -2px;
     }
 
     .title-content {
@@ -159,7 +166,7 @@ const handleMenu = (id: string) => {
 
     .title-total {
       font-size: 14px;
-      color: #92949d;
+      color: #666666;
       text-align: right;
       font-weight: 400;
     }
@@ -187,11 +194,16 @@ const handleMenu = (id: string) => {
 .iconfont {
   font-size: 16px;
   margin-right: 10px;
-  color: #faa600 !important;
+  color: #d87900 !important;
 }
 
 .check-item {
-  background: #fef6e6 100% !important;
+  background: #f7eedd 100% !important;
+
+  .title-text {
+    color: #8b4513;
+    font-weight: 600;
+  }
 }
 
 .recycle-bin-item {

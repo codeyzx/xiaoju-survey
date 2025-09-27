@@ -13,7 +13,7 @@
     </div>
     <div class="login-info">
       <LanguageSelector class="language-selector" />
-      <img class="login-info-img" src="/imgs/avatar.webp" />
+      <img class="login-info-img" src="/imgs/avatar.webp" alt="User Avatar" />
       <span class="logout" @click="handleLogout">{{ $t('common.logout') }}</span>
     </div>
   </div>
@@ -21,16 +21,12 @@
 
 <script setup lang="ts">
 import { useUserStore } from '@/management/stores/user'
-import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import LanguageSelector from '@/common/components/LanguageSelector.vue'
 
 const router = useRouter()
 
 const userStore = useUserStore()
-const userInfo = computed(() => {
-  return userStore.userInfo
-})
 
 const handleLogout = () => {
   userStore.logout()
@@ -67,10 +63,13 @@ const handleLogout = () => {
 
       :deep(.el-menu-item, .is-active) {
         border: none !important;
+        min-height: 44px;
+        padding: 8px 16px;
       }
 
       .router-link-active {
-        color: $primary-color;
+        color: #d87900;
+        font-weight: 600;
       }
     }
   }
@@ -92,12 +91,24 @@ const handleLogout = () => {
 
     .logout {
       margin-left: 20px;
+      padding: 4px 8px;
+      border-radius: 4px;
+
+      &:hover,
+      &:focus {
+        background-color: rgba(216, 121, 0, 0.1);
+        outline: none;
+      }
+
+      &:focus {
+        box-shadow: 0 0 0 2px #d87900;
+      }
     }
   }
 
   span {
     cursor: pointer;
-    color: #faa600;
+    color: #d87900;
   }
 }
 </style>

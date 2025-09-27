@@ -1,7 +1,7 @@
 <template>
   <div class="question-list-root">
     <TopNav></TopNav>
-    <div class="content-wrap">
+    <main class="content-wrap" role="main" aria-label="Survey management">
       <SliderBar :menus="spaceMenus" :activeValue="activeValue" @select="handleSpaceSelect" />
       <div class="list-content">
         <div class="top">
@@ -40,7 +40,7 @@
           :total="groupListTotal" v-if="menuType === MenuType.PersonalGroup && !groupId"></GroupList>
 
       </div>
-    </div>
+    </main>
     <SpaceModify v-if="showSpaceModify" :type="modifyType" :visible="showSpaceModify"
       @on-close-codify="onCloseSpaceModify" @update-data="onCloseModifyInTeamWork" />
     <GroupModify v-if="showGroupModify" type="add" :visible="showGroupModify" @on-close-codify="onCloseGroupModify" />
