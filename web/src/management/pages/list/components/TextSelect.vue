@@ -1,6 +1,8 @@
 <template>
   <div class="text-select-root">
-    <el-select v-model="selectValue" :empty-values="[null, undefined]" :placeholder="translatedLabel">
+    <label :for="selectId" class="visually-hidden">{{ translatedLabel }}</label>
+    <el-select v-model="selectValue" :empty-values="[null, undefined]" :placeholder="translatedLabel" :id="selectId"
+      :aria-label="translatedLabel">
       <el-option v-for="item in translatedOptions" :key="item.value" :label="item.label" :value="item.value">
       </el-option>
     </el-select>
@@ -34,6 +36,8 @@ const translatedOptions = computed(() =>
   }))
 )
 
+const selectId = computed(() => `select-${Math.random().toString(36).substr(2, 9)}`)
+
 const selectValue = computed({
   get() {
     return props.value
@@ -45,6 +49,18 @@ const selectValue = computed({
 </script>
 
 <style lang="scss" scoped>
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .el-select {
   width: 105px;
   line-height: 35px;

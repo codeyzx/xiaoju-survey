@@ -18,7 +18,7 @@
       <el-table v-if="total" ref="multipleListTable" class="list-table" :data="dataList"
         :empty-text="$t('common.noData')" row-key="_id" header-row-class-name="tableview-header"
         row-class-name="tableview-row" cell-class-name="tableview-cell" style="width: 100%" v-loading="loading"
-        @row-click="onRowClick">
+        @row-click="onRowClick" :aria-label="$t('surveyList.surveyListTitle')">
         <el-table-column column-key="space" width="20" />
 
         <el-table-column v-for="field in fieldList" :key="field.key" :label="field.title" :column-key="field.key"
