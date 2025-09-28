@@ -491,11 +491,11 @@ export default {
 
   // Create Survey Form
   createForm: {
-    surveyTitleLabel: 'Survey Name',
+    surveyTitleLabel: 'Name',
     surveyTitlePlaceholder: 'Please enter survey name',
     surveyTitleTip:
       'This title will be displayed at the top of the browser when opening the survey',
-    remarkLabel: 'Survey Remark',
+    remarkLabel: 'Remark',
     remarkPlaceholder: 'Please enter remark',
     remarkTip: 'Remark is only visible to yourself',
     groupLabel: 'Group',
@@ -589,6 +589,18 @@ export default {
     exportFailed: 'Export failed, please try again',
     exportProcessing: 'Download file is being calculated, you can go to "Download Center" to check',
     exportSuccess: 'Export successful'
+  },
+
+  // Create Survey
+  create: {
+    title: 'Please select the type of survey to create',
+    categoryImage: 'Category Image',
+    basicSurvey: 'Basic Survey',
+    basicSurveyDesc: 'Market Research / User Analysis / Product Evaluation / Demand Research',
+    vote: 'Vote Selection',
+    voteDesc: 'Talent Competition / Outstanding Employee / Best Popularity / Voting Election',
+    register: 'Online Registration',
+    registerDesc: 'Event Registration / Conference Registration'
   },
 
   // Error Messages

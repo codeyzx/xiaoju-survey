@@ -498,10 +498,10 @@ export default {
 
   // Formulir Buat Survei
   createForm: {
-    surveyTitleLabel: 'Nama Survei',
+    surveyTitleLabel: 'Nama',
     surveyTitlePlaceholder: 'Masukkan nama survei',
     surveyTitleTip: 'Judul ini akan ditampilkan di bagian atas browser saat membuka survei',
-    remarkLabel: 'Catatan Survei',
+    remarkLabel: 'Catatan',
     remarkPlaceholder: 'Masukkan catatan',
     remarkTip: 'Catatan hanya terlihat oleh diri sendiri',
     groupLabel: 'Grup',
@@ -593,6 +593,18 @@ export default {
     exportFailed: 'Ekspor gagal, silakan coba lagi',
     exportProcessing: 'File unduhan sedang dihitung, Anda dapat pergi ke "Pusat Unduhan" untuk memeriksa',
     exportSuccess: 'Ekspor berhasil'
+  },
+
+  // Create Survey
+  create: {
+    title: 'Silakan pilih jenis survei yang akan dibuat',
+    categoryImage: 'Gambar Kategori',
+    basicSurvey: 'Survei Dasar',
+    basicSurveyDesc: 'Riset Pasar / Analisis Pengguna / Evaluasi Produk / Riset Kebutuhan',
+    vote: 'Pemilihan Suara',
+    voteDesc: 'Kompetisi Bakat / Karyawan Terbaik / Popularitas Terbaik / Pemilihan Suara',
+    register: 'Pendaftaran Online',
+    registerDesc: 'Pendaftaran Acara / Pendaftaran Konferensi'
   },
 
   // Pesan Error

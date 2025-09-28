@@ -2,7 +2,7 @@
   <div class="left-side">
     <div class="main">
       <nav-header :box-shadow="false" />
-      <div class="new-title">请选择创建的问卷类型</div>
+      <div class="new-title">{{ t('create.title') }}</div>
       <ul class="new-cardList">
         <li
           v-for="item in renderData"
@@ -11,12 +11,12 @@
           @click="handleSelectType(item.type)"
         >
           <div class="selected-border" v-if="selectType === item.type" />
-          <img class="img" :src="item.img" alt="类别图片" />
+          <img class="img" :src="item.img" :alt="t('create.categoryImage')" />
           <div class="container">
             <div class="title-container">
-              <p class="title">{{ item.title }}</p>
+              <p class="title">{{ t(`create.${item.type === 'normal' ? 'basicSurvey' : item.type}`) }}</p>
             </div>
-            <p class="desc">{{ item.desc }}</p>
+            <p class="desc">{{ t(`create.${item.type === 'normal' ? 'basicSurvey' : item.type}Desc`) }}</p>
           </div>
         </li>
       </ul>
@@ -26,9 +26,12 @@
 
 <script setup lang="ts">
 import NavHeader from './NavHeader.vue'
+import { useI18n } from 'vue-i18n'
 
 import { SURVEY_TYPE_LIST } from '../types'
 import { computed } from 'vue'
+
+const { t } = useI18n()
 
 interface Props {
   selectType?: string

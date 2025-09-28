@@ -6,12 +6,16 @@
       </div>
       <div class="return no-logo-return icon-fanhui" @click="onBack">{{ t('common.back') }}</div>
     </div>
+    <div class="right">
+      <LanguageSelector class="language-selector" />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
+import LanguageSelector from '@/common/components/LanguageSelector.vue'
 
 interface Props {
   boxShadow?: boolean
@@ -82,6 +86,16 @@ const toHomePage = () => {
 
     .no-logo-return {
       left: 20px;
+    }
+  }
+
+  .right {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+
+    .language-selector {
+      font-size: 14px;
     }
   }
 }

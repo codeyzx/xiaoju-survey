@@ -474,10 +474,10 @@ export default {
 
   // 创建问卷表单
   createForm: {
-    surveyTitleLabel: '问卷名称',
+    surveyTitleLabel: '名称',
     surveyTitlePlaceholder: '请输入问卷名称',
     surveyTitleTip: '该标题可在打开问卷的浏览器顶部展示',
-    remarkLabel: '问卷备注',
+    remarkLabel: '备注',
     remarkPlaceholder: '请输入备注',
     remarkTip: '备注仅自己可见',
     groupLabel: '分组',
@@ -570,6 +570,18 @@ export default {
     exportFailed: '导出失败，请重试',
     exportProcessing: '下载文件计算中，可前往“下载中心”查看',
     exportSuccess: '导出成功'
+  },
+
+  // Create Survey
+  create: {
+    title: '请选择创建的问卷类型',
+    categoryImage: '类别图片',
+    basicSurvey: '基础调查',
+    basicSurveyDesc: '市场调研 / 用户分析 / 产品测评 / 需求调研',
+    vote: '投票评选',
+    voteDesc: '才艺比赛 / 优秀员工 / 最佳人气 / 投票选举',
+    register: '在线报名',
+    registerDesc: '活动报名 / 会议报名'
   },
 
   // 错误消息

@@ -1,7 +1,7 @@
 <template>
   <div class="right-side">
     <p class="type-title">{{ title }}</p>
-    <el-form class="new-form" label-position="right" ref="ruleForm" :model="form" label-width="100px" :rules="rules"
+    <el-form class="new-form" label-position="right" ref="ruleForm" :model="form" label-width="120px" :rules="rules"
       @submit.prevent>
       <el-form-item prop="title" :label="$t('createForm.surveyTitleLabel')">
         <el-input v-model="form.title" :class="form.title ? 'nonempty' : 'empty'"
@@ -61,8 +61,8 @@ const state = reactive({
   },
   canSubmit: true,
   form: {
-    title: t('createForm.surveyTitlePlaceholder'),
-    remark: t('createForm.remarkPlaceholder'),
+    title: '',
+    remark: '',
     groupId:
       groupId.value === GroupState.All || groupId.value === GroupState.Not ? '' : groupId.value
   }
@@ -70,7 +70,17 @@ const state = reactive({
 const { rules, canSubmit, form } = toRefs(state)
 
 const title = computed(() => {
-  return SURVEY_TYPE_LIST.find((item) => item.type === props.selectType)?.title
+  const type = props.selectType
+  switch (type) {
+    case 'normal':
+      return t('create.basicSurvey')
+    case 'vote':
+      return t('create.vote')
+    case 'register':
+      return t('create.register')
+    default:
+      return t('create.basicSurvey')
+  }
 })
 
 const checkForm = (fn: Function) => {
