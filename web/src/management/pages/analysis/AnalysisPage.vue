@@ -2,6 +2,15 @@
   <div class="analysis-page">
     <leftMenu class="left"></leftMenu>
     <div class="right">
+      <div class="navbar">
+        <div class="left-group">
+          <BackPanel></BackPanel>
+          <TitlePanel :style="{ marginLeft: '30px' }" :title="title"></TitlePanel>
+        </div>
+        <div class="right-group">
+          <LanguageSelector class="language-selector" />
+        </div>
+      </div>
       <div class="analysis-tabs">
         <router-link
           v-for="item in analysisType"
@@ -10,7 +19,7 @@
           :to="{ name: item.value }"
         >
           <i class="iconfont" :class="item.icon"></i>
-          <span>{{ item.label }}</span>
+          <span>{{ $t(item.label) }}</span>
         </router-link>
       </div>
       <div class="content-wrapper">
@@ -21,8 +30,18 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { useEditStore } from '@/management/stores/edit'
 import LeftMenu from '@/management/components/LeftMenu.vue'
+import BackPanel from '../edit/modules/generalModule/BackPanel.vue'
+import TitlePanel from '../edit/modules/generalModule/TitlePanel.vue'
+import LanguageSelector from '@/common/components/LanguageSelector.vue'
 import { analysisType } from '@/management/config/analysisConfig'
+
+const { t } = useI18n()
+const editStore = useEditStore()
+const title = computed(() => editStore.schema?.metaData?.title || '')
 </script>
 
 <style lang="scss" scoped>
@@ -46,6 +65,27 @@ import { analysisType } from '@/management/config/analysisConfig'
     flex-direction: column;
     overflow: hidden;
     background-color: #f6f7f9;
+
+    .navbar {
+      width: 100%;
+      height: 56px;
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      background-color: #fff;
+      padding-left: 20px;
+      padding-right: 20px;
+      
+      > div {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+      
+      .language-selector {
+        margin-right: 10px;
+      }
+    }
 
     .analysis-tabs {
       flex: none;

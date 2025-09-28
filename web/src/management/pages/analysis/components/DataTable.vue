@@ -7,7 +7,7 @@
       header-row-class-name="thead-cell"
       class="table-border"
       v-loading="props.mainTableLoading"
-      element-loading-text="数据处理中，请稍等..."
+      :element-loading-text="t('analysis.processingData')"
     >
       <el-table-column
         v-for="item in props.tableData.listHead"
@@ -59,8 +59,11 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import ImagePreview from './ImagePreview.vue'
 import { cleanRichTextWithMediaTag } from '@/common/xss'
+
+const { t } = useI18n()
 
 const props = defineProps({
   tableData: {
@@ -88,7 +91,7 @@ const getContent = (content) => {
   if (typeof content !== 'string') {
     content = content + ''
   }
-  return cleanRichTextWithMediaTag(content) || '未知'
+    return cleanRichTextWithMediaTag(content) || t('common.unknown')
 }
 const setPopoverContent = (content) => {
   popoverContent.value = content

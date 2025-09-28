@@ -4,12 +4,17 @@
       <BackPanel></BackPanel>
       <TitlePanel :style="{ marginLeft: '30px' }" :title="title"></TitlePanel>
     </div>
+    <div class="right-group">
+      <LanguageSelector class="language-selector" />
+    </div>
   </div>
 </template>    
 <script lang="ts" setup>
 import { defineProps } from 'vue'
 import BackPanel from '../../edit/modules/generalModule/BackPanel.vue'
 import TitlePanel from '../../edit/modules/generalModule/TitlePanel.vue'
+import LanguageSelector from '@/common/components/LanguageSelector.vue'
+
 defineProps({
   title: {
     type: String,
@@ -23,6 +28,7 @@ defineProps({
   height: 56px;
   position: relative;
   display: flex;
+  justify-content: space-between;
   background-color: #fff;
   > div {
     display: flex;
@@ -31,6 +37,13 @@ defineProps({
   }
   .left-group {
     margin-left: 20px;
+  }
+  .right-group {
+    margin-right: 20px;
+    
+    .language-selector {
+      margin-right: 10px;
+    }
   }
 }
 </style>

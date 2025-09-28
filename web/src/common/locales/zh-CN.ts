@@ -80,7 +80,8 @@ export default {
     enterDistributionName: '请输入投放名称',
     enterAccountSearch: '请输入账号名搜索',
     confirmDeleteGroup: '删除分组后，属于该分组的问卷将会自动更换到"未分组"下，是否确认本次删除？',
-    deleteFailedRetry: '删除失败，请重试'
+    deleteFailedRetry: '删除失败，请重试',
+    unknown: '未知'
   },
 
   // 登录页面
@@ -543,7 +544,32 @@ export default {
     lastWeek: '上周',
     thisMonth: '本月',
     lastMonth: '上月',
-    custom: '自定义'
+    custom: '自定义',
+    dataTable: '数据列表',
+    separateStatistics: '分题统计',
+    noDataTitle: '暂无数据',
+    noDataDesc: '您的问卷当前还没有数据，快去回收问卷吧！',
+    optionColumn: '选项',
+    countColumn: '数量',
+    percentColumn: '占比',
+    processingData: '数据处理中，请稍等...',
+    name: '姓名',
+    submissionTime: '提交时间',
+    responseTime: '答题耗时（秒）',
+    exportConfirm: '导出确认',
+    exportContent: '导出内容',
+    maskedData: '脱敏数据',
+    originalData: '原回收数据',
+    exportNote: '注：',
+    maskedDataTip: '推荐优先下载脱敏数据，如手机号：1***3。',
+    originalDataTip: '原回收数据可能存在敏感信息，请谨慎下载。',
+    cancel: '取消',
+    confirm: '确认',
+    noSurveyParams: '没有传入问卷参数~',
+    queryDataFailed: '查询回收数据失败，请重试',
+    exportFailed: '导出失败，请重试',
+    exportProcessing: '下载文件计算中，可前往“下载中心”查看',
+    exportSuccess: '导出成功'
   },
 
   // 错误消息

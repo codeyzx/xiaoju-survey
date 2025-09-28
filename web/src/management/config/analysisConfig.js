@@ -1,22 +1,22 @@
 import { menuItems } from './questionMenuConfig'
 
 export const noDataConfig = {
-  title: '暂无数据',
-  desc: '您的问卷当前还没有数据，快去回收问卷吧！',
+  title: 'analysis.noDataTitle',
+  desc: 'analysis.noDataDesc',
   img: '/imgs/icons/analysis-empty.webp'
 }
 
 export const separateItemListHead = [
   {
-    title: '选项',
+    title: 'analysis.optionColumn',
     field: 'text'
   },
   {
-    title: '数量',
+    title: 'analysis.countColumn',
     field: 'count'
   },
   {
-    title: '占比',
+    title: 'analysis.percentColumn',
     field: 'percent'
   }
 ]
@@ -36,12 +36,12 @@ export const analysisTypeMap = {
 export const analysisType = [
   {
     value: analysisTypeMap.dataTable,
-    label: '数据列表',
+    label: 'analysis.dataTable',
     icon: 'icon-shujuliebiao'
   },
   {
     value: analysisTypeMap.separateStatistics,
-    label: '分题统计',
+    label: 'analysis.separateStatistics',
     icon: 'icon-fentitongji'
   }
 ]

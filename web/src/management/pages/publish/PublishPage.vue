@@ -2,25 +2,26 @@
   <div class="publish-result-page">
     <LeftMenu class="left" />
     <div class="right">
-      <template v-if="curStatus !== 'new'">
-        <div class="preview-container" :style="{ backgroundImage: `url('${backgroundImage}')` }">
-          <iframe :src="mainChannel.fullUrl"></iframe>
-        </div>
-        <div class="container-content">
-          <span class="launch-tip"
-            >说明：若您的问卷投放对象，涉及14周岁以下的用户，需征得其监护人的同意。</span
-          >
-          <h2>问卷链接</h2>
-          <div class="main-channel-wrap">
-            <ChannelRow
-              :disable-delete="true"
-              :data="mainChannel"
-              :style-wrap="{ marginBottom: '8px' }"
-            />
+      <Navbar :title="(schema?.metaData as any)?.title || ''" />
+      <div class="content">
+        <template v-if="curStatus !== 'new'">
+          <div class="preview-container" :style="{ backgroundImage: `url('${backgroundImage}')` }">
+            <iframe :src="mainChannel.fullUrl"></iframe>
           </div>
-        </div>
-      </template>
-      <EmptyIndex v-else :data="defaultConfig" />
+          <div class="container-content">
+            <span class="launch-tip">{{ $t('publish.disclaimer') }}</span>
+            <h2>{{ $t('publish.surveyLink') }}</h2>
+            <div class="main-channel-wrap">
+              <ChannelRow
+                :disable-delete="true"
+                :data="mainChannel"
+                :style-wrap="{ marginBottom: '8px' }"
+              />
+            </div>
+          </div>
+        </template>
+        <EmptyIndex v-else :data="defaultConfig.value" />
+      </div>
     </div>
   </div>
 </template>
@@ -29,6 +30,7 @@ import { computed, onMounted, toRef } from 'vue'
 import { useEditStore } from '@/management/stores/edit'
 import { useRoute, useRouter } from 'vue-router'
 import { get as _get } from 'lodash-es'
+import { useI18n } from 'vue-i18n'
 
 import { ElMessage } from 'element-plus'
 import 'element-plus/theme-chalk/src/message.scss'
@@ -36,13 +38,15 @@ import 'element-plus/theme-chalk/src/message.scss'
 import EmptyIndex from '@/management/components/EmptyIndex.vue'
 import LeftMenu from '@/management/components/LeftMenu.vue'
 import ChannelRow from './components/ChannelRow.vue'
+import Navbar from './components/Navbar.vue'
 
+const { t } = useI18n()
 const backgroundImage = '/imgs/phone-bg.webp'
-const defaultConfig = {
-  title: '问卷未发布',
-  desc: '点击发布后，问卷就可以对外投放了哦！',
+const defaultConfig = computed(() => ({
+  title: t('publish.unpublishedTitle'),
+  desc: t('publish.unpublishedDesc'),
   img: '/imgs/icons/unpublished.webp'
-}
+}))
 
 const editStore = useEditStore()
 const { schema, init, setSurveyId } = editStore
@@ -92,11 +96,16 @@ onMounted(async () => {
     overflow: hidden;
     padding-left: 80px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-
+    flex-direction: column;
     background: #f6f7f9;
-    padding: 30px 40px 50px 40px;
+
+    .content {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 40px 50px 40px;
+    }
   }
 
   .preview-container {

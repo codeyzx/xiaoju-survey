@@ -97,7 +97,8 @@ export default {
     enterAccountSearch: 'Masukkan nama akun untuk mencari',
     confirmDeleteGroup:
       'Setelah menghapus grup, survei dalam grup ini akan secara otomatis dipindahkan ke "Tidak Dikelompokkan". Apakah Anda yakin untuk menghapus kali ini?',
-    deleteFailedRetry: 'Gagal menghapus, silakan coba lagi'
+    deleteFailedRetry: 'Gagal menghapus, silakan coba lagi',
+    unknown: 'Tidak Diketahui'
   },
 
   // Halaman Login
@@ -565,7 +566,33 @@ export default {
     lastWeek: 'Minggu Lalu',
     thisMonth: 'Bulan Ini',
     lastMonth: 'Bulan Lalu',
-    custom: 'Kustom'
+    custom: 'Kustom',
+    dataTable: 'Tabel Data',
+    separateStatistics: 'Statistik Terpisah',
+    noDataTitle: 'Tidak Ada Data',
+    noDataDesc: 'Survei Anda saat ini belum memiliki data, ayo kumpulkan respons!',
+    optionColumn: 'Opsi',
+    countColumn: 'Jumlah',
+    percentColumn: 'Persentase',
+    processingData: 'Memproses data, harap tunggu...',
+    unknown: 'Tidak Diketahui',
+    name: 'Nama',
+    submissionTime: 'Waktu Pengiriman',
+    responseTime: 'Waktu Respons (detik)',
+    exportConfirm: 'Konfirmasi Ekspor',
+    exportContent: 'Konten Ekspor',
+    maskedData: 'Data Tersembunyi',
+    originalData: 'Data Asli',
+    exportNote: 'Catatan:',
+    maskedDataTip: 'Disarankan untuk mengunduh data tersembunyi terlebih dahulu, seperti nomor telepon: 1***3.',
+    originalDataTip: 'Data asli mungkin berisi informasi sensitif, harap unduh dengan hati-hati.',
+    cancel: 'Batal',
+    confirm: 'Konfirmasi',
+    noSurveyParams: 'Tidak ada parameter survei yang diteruskan~',
+    queryDataFailed: 'Gagal meminta data yang dikumpulkan, silakan coba lagi',
+    exportFailed: 'Ekspor gagal, silakan coba lagi',
+    exportProcessing: 'File unduhan sedang dihitung, Anda dapat pergi ke "Pusat Unduhan" untuk memeriksa',
+    exportSuccess: 'Ekspor berhasil'
   },
 
   // Pesan Error
@@ -719,6 +746,7 @@ export default {
     copyCode: 'Salin Kode',
     copied: 'Disalin',
     collecting: 'Mengumpulkan',
-    paused: 'Dijeda'
+    paused: 'Dijeda',
+    disclaimer: 'Catatan: Jika survei Anda menargetkan pengguna di bawah 14 tahun, diperlukan persetujuan orang tua.'
   }
 }

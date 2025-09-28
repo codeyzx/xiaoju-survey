@@ -37,7 +37,6 @@ import { reactive, toRefs, computed, watch, onMounted, onUnmounted, ref } from '
 import { cloneDeep as _cloneDeep } from 'lodash-es'
 import { useI18n } from 'vue-i18n'
 import {
-  separateItemListHead,
   summaryType,
   summaryItemConfig
 } from '@/management/config/analysisConfig'
@@ -47,6 +46,23 @@ import { cleanRichText } from '@/common/xss'
 import { menuItems } from '@/management/config/questionMenuConfig'
 import DataTable from './DataTable.vue'
 import useResizeObserver from '@/management/hooks/useResizeObserver'
+
+const { t } = useI18n()
+
+const separateItemListHead = computed(() => [
+  {
+    title: t('analysis.optionColumn'),
+    field: 'text'
+  },
+  {
+    title: t('analysis.countColumn'),
+    field: 'count'
+  },
+  {
+    title: t('analysis.percentColumn'),
+    field: 'percent'
+  }
+])
 
 const props = defineProps({
   StatisticsData: {
@@ -115,7 +131,7 @@ const separateItemListBody = computed(() => {
 const separateItemState = reactive({
   tableData: {
     total: 0,
-    listHead: separateItemListHead,
+    listHead: separateItemListHead.value,
     listBody: separateItemListBody
   },
   tableMinHeight: '0px'
@@ -156,6 +172,11 @@ onMounted(() => {
   watch(chartType, () => {
     changeType(chartType.value, chartData.value)
   })
+
+  // Watch for language changes and update table headers
+  watch(separateItemListHead, (newHeaders) => {
+    separateItemState.tableData.listHead = newHeaders
+  }, { deep: true })
 
   // 销毁resizeObserver
   onUnmounted(destroy)

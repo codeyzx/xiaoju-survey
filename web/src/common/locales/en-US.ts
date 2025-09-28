@@ -89,7 +89,8 @@ export default {
     enterAccountSearch: 'Please enter account name to search',
     confirmDeleteGroup:
       'After deleting the group, the surveys in this group will be automatically moved to "Ungrouped". Are you sure to delete this time?',
-    deleteFailedRetry: 'Delete failed, please try again'
+    deleteFailedRetry: 'Delete failed, please try again',
+    unknown: 'Unknown'
   },
 
   // Login Page
@@ -561,7 +562,33 @@ export default {
     lastWeek: 'Last Week',
     thisMonth: 'This Month',
     lastMonth: 'Last Month',
-    custom: 'Custom'
+    custom: 'Custom',
+    dataTable: 'Data Table',
+    separateStatistics: 'Separate Statistics',
+    noDataTitle: 'No Data Available',
+    noDataDesc: 'Your survey currently has no data, go collect responses!',
+    optionColumn: 'Option',
+    countColumn: 'Count',
+    percentColumn: 'Percentage',
+    processingData: 'Processing data, please wait...',
+    unknown: 'Unknown',
+    name: 'Name',
+    submissionTime: 'Submission Time',
+    responseTime: 'Response Time (seconds)',
+    exportConfirm: 'Export Confirmation',
+    exportContent: 'Export Content',
+    maskedData: 'Masked Data',
+    originalData: 'Original Data',
+    exportNote: 'Note:',
+    maskedDataTip: 'It is recommended to download masked data first, such as phone number: 1***3.',
+    originalDataTip: 'Original data may contain sensitive information, please download with caution.',
+    cancel: 'Cancel',
+    confirm: 'Confirm',
+    noSurveyParams: 'No survey parameters passed~',
+    queryDataFailed: 'Failed to query recycled data, please try again',
+    exportFailed: 'Export failed, please try again',
+    exportProcessing: 'Download file is being calculated, you can go to "Download Center" to check',
+    exportSuccess: 'Export successful'
   },
 
   // Error Messages
@@ -715,6 +742,7 @@ export default {
     copyCode: 'Copy Code',
     copied: 'Copied',
     collecting: 'Collecting',
-    paused: 'Paused'
+    paused: 'Paused',
+    disclaimer: 'Note: If your survey targets users under 14 years old, parental consent is required.'
   }
 }
