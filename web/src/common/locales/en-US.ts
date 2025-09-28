@@ -450,7 +450,42 @@ export default {
     cascaderTitle: 'Cascader',
     // Form placeholders and tips
     limitCharacters: 'Limit {n} characters',
-    guidanceValidationWarning: 'Guidance text cannot exceed 20 characters, please modify and save again'
+    guidanceValidationWarning: 'Guidance text cannot exceed 20 characters, please modify and save again',
+    // Logic settings
+    displayLogic: 'Display Logic',
+    jumpLogic: 'Jump Logic',
+    addDisplayLogic: 'Add Display Logic',
+    addJumpLogic: 'Add Jump Logic',
+    ifCondition: 'If',
+    selectedOption: 'selected',
+    thenDisplay: 'then display',
+    thenJump: 'then jump to',
+    andCondition: 'and',
+    logicConflictMessage: 'Display logic and jump logic cannot be configured at the same time',
+    pleaseSelectQuestion: 'Please select question',
+    pleaseSelectOption: 'Please select option',
+    pleaseSelectTarget: 'Please select target',
+    noData: 'No data',
+    // Common UI elements
+    hint: 'Hint',
+    confirm: 'Confirm',
+    cancel: 'Cancel',
+    // Jump logic flow nodes
+    startNode: 'Start',
+    endNode: 'End',
+    titleNode: 'Title',
+    optionLabel: 'Option',
+    zoomOut: 'Zoom Out',
+    zoomOutTitle: 'Zoom out flow chart',
+    zoomIn: 'Zoom In',
+    zoomInTitle: 'Zoom in flow chart', 
+    resetZoom: 'Fit',
+    resetZoomTitle: 'Reset to original size',
+    deleteConfirm: 'Are you sure you want to delete?',
+    deleteTitle: 'Delete Confirmation',
+    confirmDelete: 'Confirm',
+    cancelDelete: 'Cancel',
+    cannotDeleteMessage: 'Default connection lines cannot be deleted'
   },
 
   // Create Survey Form

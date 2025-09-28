@@ -14,7 +14,7 @@
     </div>
 
     <el-button type="primary" plain class="add" @click="handleAdd">
-      <i-ep-plus class="plus-icon" /> 新增显示逻辑
+      <i-ep-plus class="plus-icon" /> {{ $t('editor.addDisplayLogic') }}
     </el-button>
   </div>
 </template>

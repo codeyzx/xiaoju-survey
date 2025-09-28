@@ -3,7 +3,7 @@ import { Operator } from '@/common/logicEngine/BasicType'
 import { cleanRichText } from '@/common/xss'
 import { CHOICES } from '@/common/typeEnum'
 
-export const generateNodes = (questionDataList: [any]) => {
+export const generateNodes = (questionDataList: [any], t?: Function) => {
   let x = 50
   const y = 300
   const startNode = [
@@ -12,7 +12,7 @@ export const generateNodes = (questionDataList: [any]) => {
       type: 'start-node',
       x: 50,
       y,
-      text: '开始'
+      text: t ? t('editor.startNode') : '开始'
     }
   ]
   const nodes: any[] = questionDataList.map((item) => {
@@ -45,7 +45,7 @@ export const generateNodes = (questionDataList: [any]) => {
       type: 'end-node',
       x: x + 200,
       y,
-      text: '结束'
+      text: t ? t('editor.endNode') : '结束'
     }
   ]
   return startNode.concat(nodes).concat(endNode)

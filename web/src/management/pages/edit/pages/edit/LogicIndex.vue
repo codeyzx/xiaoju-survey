@@ -5,10 +5,10 @@
     :before-leave="beforeTabLeave"
     @tab-change="handleChange"
   >
-    <el-tab-pane label="显示逻辑" name="showLogic">
+    <el-tab-pane :label="$t('editor.displayLogic')" name="showLogic">
       <ShowLogic v-if="activeName == 'showLogic'" />
     </el-tab-pane>
-    <el-tab-pane label="跳转逻辑" name="jumpLogic" class="logic-wrapper">
+    <el-tab-pane :label="$t('editor.jumpLogic')" name="jumpLogic" class="logic-wrapper">
       <JumpLogic v-if="activeName == 'jumpLogic'" />
     </el-tab-pane>
   </el-tabs>
@@ -16,11 +16,14 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
 import ShowLogic from '../../modules/logicModule/ShowLogic.vue'
 import JumpLogic from '../../modules/logicModule/JumpLogic.vue'
 import { ElMessageBox } from 'element-plus'
 import { useEditStore } from '@/management/stores/edit'
+
+const { t } = useI18n()
 const editStore = useEditStore()
 const { showLogicEngine, jumpLogicEngine } = storeToRefs(editStore)
 const props = defineProps({
@@ -35,9 +38,9 @@ const beforeTabLeave = async () => {
   if (activeName.value === 'showLogic' && !showLogicEngine.value.rules.length) return true
   if (activeName.value === 'jumpLogic' && !jumpLogicEngine.value.rules.length) return true
   try {
-    await ElMessageBox.confirm('显示逻辑和跳转逻辑无法同时配置', '提示', {
-      confirmButtonText: '确定',
-      cancelButtonText: '取消',
+    await ElMessageBox.confirm(t('editor.logicConflictMessage'), t('editor.hint'), {
+      confirmButtonText: t('editor.confirm'),
+      cancelButtonText: t('editor.cancel'),
       type: 'warning'
     })
     return true

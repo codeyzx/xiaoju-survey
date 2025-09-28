@@ -17,15 +17,15 @@
       ></ConditionView>
       <div class="target-wrapper">
         <div class="line">
-          <span class="desc">则显示</span>
+          <span class="desc">{{ $t('editor.thenDisplay') }}</span>
           <el-form-item
             prop="target"
-            :rules="[{ required: true, message: '请选择目标', trigger: 'change' }]"
+            :rules="[{ required: true, message: $t('editor.pleaseSelectTarget'), trigger: 'change' }]"
           >
             <el-select
               class="select field-select"
               v-model="ruleTarget"
-              placeholder="请选择"
+              :placeholder="$t('editor.pleaseSelect')"
               @change="(val: any) => handleChange(ruleNode, 'target', val)"
             >
               <el-option

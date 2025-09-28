@@ -2,29 +2,29 @@
   <div
     class="condition-wrapper"
     :class="{ 'is-last': isLastCondition }"
-    :data-content-before="!isLastCondition ? '且' : ''"
+    :data-content-before="!isLastCondition ? $t('editor.andCondition') : ''"
   >
-    <span class="desc">如果</span>
+    <span class="desc">{{ $t('editor.ifCondition') }}</span>
     <el-form-item
       :prop="`conditions[${index}].field`"
-      :rules="[{ required: true, message: '请选择题目', trigger: 'change' }]"
+      :rules="[{ required: true, message: $t('editor.pleaseSelectQuestion'), trigger: 'change' }]"
     >
       <el-select
         class="select field-select"
         v-model="conditionField"
-        placeholder="请选择题目"
+        :placeholder="$t('editor.pleaseSelectQuestion')"
         @change="(val: any) => handleChange(conditionNode, 'field', val)"
       >
         <el-option v-for="{ label, value } in fieldList" :key="value" :label="label" :value="value">
         </el-option>
-        <template #empty> 无数据 </template>
+        <template #empty> {{ $t('editor.noData') }} </template>
       </el-select>
     </el-form-item>
-    <span class="desc">选择了</span>
+    <span class="desc">{{ $t('editor.selectedOption') }}</span>
     <el-form-item
       class="select value-select"
       :prop="`conditions[${index}].value`"
-      :rules="[{ required: true, message: '请选择选项', trigger: 'change' }]"
+      :rules="[{ required: true, message: $t('editor.pleaseSelectOption'), trigger: 'change' }]"
     >
       <el-select
         v-model="conditionValue"

@@ -10,6 +10,7 @@ import '@logicflow/core/es/index.css'
 
 import { useEditStore } from '@/management/stores/edit'
 import { RuleNode, ConditionNode } from '@/common/logicEngine/RuleBuild'
+import { useI18n } from 'vue-i18n'
 
 import {
   generateNodes,
@@ -20,6 +21,7 @@ import {
 
 import NodeExtension from './components/nodeExtension/index'
 
+const { t } = useI18n()
 const editStore = useEditStore()
 
 const jumpLogicEngine = computed(() => {
@@ -103,7 +105,7 @@ const containerRef = ref<HTMLDivElement | null>(null)
 const initGraph = (questionDataList: any) => {
   const list = toRaw(questionDataList)
   if (list.length) {
-    const nodes = generateNodes(list)
+    const nodes = generateNodes(list, t)
     let models: any[] = []
     nodes.forEach((item: any) => {
       const nodeModel = lfRef.value?.addNode(item)
@@ -207,9 +209,9 @@ onMounted(() => {
           {
             keys: ['backspace'],
             callback: () => {
-              ElMessageBox.confirm('确定要删除吗？', '删除提示', {
-                confirmButtonText: '确定',
-                cancelButtonText: '取消',
+              ElMessageBox.confirm(t('editor.deleteConfirm'), t('editor.deleteTitle'), {
+                confirmButtonText: t('editor.confirmDelete'),
+                cancelButtonText: t('editor.cancelDelete'),
                 type: 'warning'
               })
                 .then(async () => {
@@ -220,7 +222,7 @@ onMounted(() => {
                     const { sourceNodeId, sourceAnchorId } = edge
                     if (sourceAnchorId?.split('_right')[0] === sourceNodeId) {
                       ElMessage({
-                        message: '题目答完跳转的连接线不可以删除',
+                        message: t('editor.cannotDeleteMessage'),
                         type: 'warning'
                       })
                     } else {
@@ -279,8 +281,8 @@ onMounted(() => {
     control.addItem({
       key: 'zoom-out',
       iconClass: 'iconfont icon-suoxiao',
-      title: '缩小流程图',
-      text: '缩小',
+      title: t('editor.zoomOutTitle'),
+      text: t('editor.zoomOut'),
       onClick: () => {
         lf.zoom(false)
       }
@@ -288,8 +290,8 @@ onMounted(() => {
     control.addItem({
       key: 'zoom-in',
       iconClass: 'iconfont icon-fangda',
-      title: '放大流程图',
-      text: '放大',
+      title: t('editor.zoomInTitle'),
+      text: t('editor.zoomIn'),
       onClick: () => {
         lf.zoom(true)
       }
@@ -297,8 +299,8 @@ onMounted(() => {
     control.addItem({
       key: 'reset',
       iconClass: 'iconfont icon-shiying',
-      title: '恢复流程原有尺寸',
-      text: '适应',
+      title: t('editor.resetZoomTitle'),
+      text: t('editor.resetZoom'),
       onClick: () => {
         lf.resetZoom()
       }

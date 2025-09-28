@@ -457,7 +457,42 @@ export default {
     cascaderTitle: 'Bertingkat',
     // Form placeholders and tips
     limitCharacters: 'Batas {n} karakter',
-    guidanceValidationWarning: 'Teks panduan tidak boleh melebihi 20 karakter, silakan ubah dan simpan lagi'
+    guidanceValidationWarning: 'Teks panduan tidak boleh melebihi 20 karakter, silakan ubah dan simpan lagi',
+    // Logic settings
+    displayLogic: 'Logika Tampilan',
+    jumpLogic: 'Logika Lompat',
+    addDisplayLogic: 'Tambah Logika Tampilan',
+    addJumpLogic: 'Tambah Logika Lompat',
+    ifCondition: 'Jika',
+    selectedOption: 'dipilih',
+    thenDisplay: 'maka tampilkan',
+    thenJump: 'maka lompat ke',
+    andCondition: 'dan',
+    logicConflictMessage: 'Logika tampilan dan logika lompat tidak dapat dikonfigurasi bersamaan',
+    pleaseSelectQuestion: 'Silakan pilih pertanyaan',
+    pleaseSelectOption: 'Silakan pilih opsi',
+    pleaseSelectTarget: 'Silakan pilih target',
+    noData: 'Tidak ada data',
+    // Common UI elements
+    hint: 'Petunjuk',
+    confirm: 'Konfirmasi',
+    cancel: 'Batal',
+    // Jump logic flow nodes
+    startNode: 'Mulai',
+    endNode: 'Selesai',
+    titleNode: 'Judul',
+    optionLabel: 'Opsi',
+    zoomOut: 'Perkecil',
+    zoomOutTitle: 'Perkecil diagram alur',
+    zoomIn: 'Perbesar',
+    zoomInTitle: 'Perbesar diagram alur',
+    resetZoom: 'Sesuaikan',
+    resetZoomTitle: 'Kembalikan ke ukuran asli',
+    deleteConfirm: 'Apakah Anda yakin ingin menghapus?',
+    deleteTitle: 'Konfirmasi Hapus',
+    confirmDelete: 'Konfirmasi',
+    cancelDelete: 'Batal',
+    cannotDeleteMessage: 'Garis koneksi default tidak dapat dihapus'
   },
 
   // Formulir Buat Survei

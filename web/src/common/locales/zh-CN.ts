@@ -433,7 +433,42 @@ export default {
     cascaderTitle: '多级联动',
     // Form placeholders and tips
     limitCharacters: '限制{n}字',
-    guidanceValidationWarning: '引导提示文案字数不能超过20个字，请修改后重新保存'
+    guidanceValidationWarning: '引导提示文案字数不能超过20个字，请修改后重新保存',
+    // Logic settings
+    displayLogic: '显示逻辑',
+    jumpLogic: '跳转逻辑',
+    addDisplayLogic: '新增显示逻辑',
+    addJumpLogic: '新增跳转逻辑',
+    ifCondition: '如果',
+    selectedOption: '选择了',
+    thenDisplay: '则显示',
+    thenJump: '则跳转',
+    andCondition: '且',
+    logicConflictMessage: '显示逻辑和跳转逻辑无法同时配置',
+    pleaseSelectQuestion: '请选择题目',
+    pleaseSelectOption: '请选择选项',
+    pleaseSelectTarget: '请选择目标',
+    noData: '无数据',
+    // Common UI elements
+    hint: '提示',
+    confirm: '确定',
+    cancel: '取消',
+    // Jump logic flow nodes
+    startNode: '开始',
+    endNode: '结束',
+    titleNode: '标题',
+    optionLabel: '选项',
+    zoomOut: '缩小',
+    zoomOutTitle: '缩小流程图',
+    zoomIn: '放大', 
+    zoomInTitle: '放大流程图',
+    resetZoom: '适应',
+    resetZoomTitle: '恢复流程原有尺寸',
+    deleteConfirm: '确定要删除吗？',
+    deleteTitle: '删除提示',
+    confirmDelete: '确定',
+    cancelDelete: '取消',
+    cannotDeleteMessage: '题目答完跳转的连接线不可以删除'
   },
 
   // 创建问卷表单
