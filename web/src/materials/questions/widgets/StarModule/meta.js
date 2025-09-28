@@ -2,6 +2,7 @@ import basicConfig from '@materials/questions/common/config/basicConfig'
 
 const meta = {
   title: '评分',
+  titleKey: 'editor.starRatingTitle',
   type: 'radio-star',
   componentName: 'StarModule',
   attrs: [

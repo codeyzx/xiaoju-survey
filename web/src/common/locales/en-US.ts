@@ -377,7 +377,80 @@ export default {
     collaborate: 'Collaborate',
     history: 'History',
     modificationHistory: 'Modification History',
-    publishHistory: 'Publish History'
+    publishHistory: 'Publish History',
+    questionTypeSelection: 'Question Types',
+    questionOutline: 'Question Outline',
+    pageNumber: 'Page {n}',
+    // Question types for TypeList
+    typeListSingleLineInput: 'Text Input',
+    typeListMultiLineInput: 'Multi-line Text',
+    typeListSingleChoice: 'Single Choice',
+    typeListMultipleChoice: 'Multiple Choice',
+    typeListTrueFalse: 'True/False',
+    typeListStarRating: 'Star Rating',
+    typeListNpsRating: 'NPS Rating',
+    typeListVoteQuestion: 'Vote',
+    typeListCascaderQuestion: 'Cascader',
+    // Question categories
+    inputQuestions: 'Input Questions',
+    choiceQuestions: 'Choice Questions',
+    advancedQuestions: 'Advanced Questions',
+    // Settings tabs
+    singleQuestionSettings: 'Question Settings',
+    surveySettings: 'Survey Settings',
+    // Settings messages
+    selectQuestionToEdit: 'Select a question type to edit',
+    tryItOut: 'Come on! Give it a try~',
+    // Additional settings
+    themeSettings: 'Theme Settings',
+    styleSettings: 'Style Settings',
+    advancedSettings: 'Advanced Settings',
+    optionAdvancedSettings: 'Option Advanced Settings',
+    ratingAdvancedSettings: 'Rating Advanced Settings',
+    // Main navigation
+    contentSettings: 'Content Settings',
+    logicSettings: 'Logic Settings',
+    // Form configurations
+    basicConfiguration: 'Basic Configuration',
+    requiredField: 'Required',
+    showType: 'Show Type',
+    showIndex: 'Show Index',
+    showSpliter: 'Show Splitter',
+    showSpliterTip: 'Splitter line below the question, displayed only on mobile.',
+    // Question specific configs
+    optionConfiguration: 'Option Configuration',
+    contentLimitFormat: 'Content Limit Format',
+    numberLimit: 'Number Limit',
+    characterLimit: 'Character Limit',
+    guidanceText: 'Guidance Text',
+    ratingDisplayStyle: 'Rating Display Style',
+    npsMinValue: 'NPS Scale Min Value',
+    npsMaxValue: 'NPS Scale Max Value',
+    npsTwoLevelText: 'NPS Two-level Text',
+    // Validation options
+    pleaseSelect: 'Please Select',
+    phoneNumber: 'Phone Number',
+    idCard: 'ID Card',
+    numberValidation: 'Number',
+    email: 'Email',
+    licensePlate: 'License Plate',
+    // Input placeholders and tips
+    inputPlaceholder: 'Limit {n} characters',
+    charactersLimit: 'Limit {n} characters',
+    guidanceTextTip: 'Guidance text cannot exceed {n} characters, please modify and save again',
+    // Question type titles
+    singleLineInputTitle: 'Single Line Input',
+    multiLineInputTitle: 'Multi-line Input',
+    singleChoiceTitle: 'Single Choice',
+    multipleChoiceTitle: 'Multiple Choice',
+    trueFalseTitle: 'True/False',
+    starRatingTitle: 'Star Rating',
+    npsRatingTitle: 'NPS Rating',
+    voteTitle: 'Vote',
+    cascaderTitle: 'Cascader',
+    // Form placeholders and tips
+    limitCharacters: 'Limit {n} characters',
+    guidanceValidationWarning: 'Guidance text cannot exceed 20 characters, please modify and save again'
   },
 
   // Create Survey Form

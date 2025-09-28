@@ -2,7 +2,7 @@
   <el-collapse class="question-type-wrapper" v-model="activeNames">
     <el-collapse-item
       v-for="(item, index) of questionMenuConfig"
-      :title="item.title"
+      :title="$t(item.titleKey)"
       :name="index"
       :key="index"
     >
@@ -28,7 +28,7 @@
               @mouseleave="isShowPreviewImage = false"
               @mousedown="isShowPreviewImage = false"
             ></i>
-            <p class="text">{{ element.title }}</p>
+            <p class="text">{{ $t(element.titleKey) }}</p>
           </div>
         </template>
       </draggable>

@@ -3,6 +3,7 @@ import basicConfig from '@materials/questions/common/config/basicConfig'
 
 const meta = {
   title: '多级联动',
+  titleKey: 'editor.cascaderTitle',
   type: 'cascader',
   componentName: 'CascaderModule',
   attrs: [

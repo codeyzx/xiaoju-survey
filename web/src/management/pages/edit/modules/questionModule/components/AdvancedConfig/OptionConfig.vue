@@ -1,9 +1,9 @@
 <template>
   <div>
-    <span class="primary-color" @click="openOptionConfig"> 高级设置 > </span>
+    <span class="primary-color" @click="openOptionConfig"> {{ $t('editor.advancedSettings') }} > </span>
 
     <el-dialog
-      title="选项高级设置"
+      :title="$t('editor.optionAdvancedSettings')"
       class="option-config-wrapper"
       v-model="configVisible"
       :append-to-body="true"

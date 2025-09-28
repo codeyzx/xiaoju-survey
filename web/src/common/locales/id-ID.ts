@@ -384,7 +384,80 @@ export default {
     collaborate: 'Kolaborasi',
     history: 'Riwayat',
     modificationHistory: 'Riwayat Modifikasi',
-    publishHistory: 'Riwayat Publikasi'
+    publishHistory: 'Riwayat Publikasi',
+    questionTypeSelection: 'Jenis Pertanyaan',
+    questionOutline: 'Garis Besar Pertanyaan',
+    pageNumber: 'Halaman {n}',
+    // Question types for TypeList
+    typeListSingleLineInput: 'Input Teks',
+    typeListMultiLineInput: 'Teks Multi-baris',
+    typeListSingleChoice: 'Pilihan Tunggal',
+    typeListMultipleChoice: 'Pilihan Ganda',
+    typeListTrueFalse: 'Benar/Salah',
+    typeListStarRating: 'Rating Bintang',
+    typeListNpsRating: 'Rating NPS',
+    typeListVoteQuestion: 'Voting',
+    typeListCascaderQuestion: 'Bertingkat',
+    // Question categories
+    inputQuestions: 'Pertanyaan Input',
+    choiceQuestions: 'Pertanyaan Pilihan',
+    advancedQuestions: 'Pertanyaan Lanjutan',
+    // Settings tabs
+    singleQuestionSettings: 'Pengaturan Pertanyaan',
+    surveySettings: 'Pengaturan Survei',
+    // Settings messages
+    selectQuestionToEdit: 'Pilih jenis pertanyaan untuk diedit',
+    tryItOut: 'Ayo! Coba lihat~',
+    // Additional settings
+    themeSettings: 'Pengaturan Tema',
+    styleSettings: 'Pengaturan Gaya',
+    advancedSettings: 'Pengaturan Lanjutan',
+    optionAdvancedSettings: 'Pengaturan Lanjutan Opsi',
+    ratingAdvancedSettings: 'Pengaturan Lanjutan Rating',
+    // Main navigation
+    contentSettings: 'Pengaturan Konten',
+    logicSettings: 'Pengaturan Logika',
+    // Form configurations
+    basicConfiguration: 'Konfigurasi Dasar',
+    requiredField: 'Wajib',
+    showType: 'Tampilkan Jenis',
+    showIndex: 'Tampilkan Indeks',
+    showSpliter: 'Tampilkan Pemisah',
+    showSpliterTip: 'Garis pemisah di bawah pertanyaan, hanya ditampilkan di mobile.',
+    // Question specific configs
+    optionConfiguration: 'Konfigurasi Opsi',
+    contentLimitFormat: 'Format Batas Konten',
+    numberLimit: 'Batas Angka',
+    characterLimit: 'Batas Karakter',
+    guidanceText: 'Teks Panduan',
+    ratingDisplayStyle: 'Gaya Tampilan Rating',
+    npsMinValue: 'Nilai Min Skala NPS',
+    npsMaxValue: 'Nilai Max Skala NPS',
+    npsTwoLevelText: 'Teks Dua Level NPS',
+    // Validation options
+    pleaseSelect: 'Silakan Pilih',
+    phoneNumber: 'Nomor Telepon',
+    idCard: 'Kartu Identitas',
+    numberValidation: 'Angka',
+    email: 'Email',
+    licensePlate: 'Plat Nomor',
+    // Input placeholders and tips
+    inputPlaceholder: 'Batas {n} karakter',
+    charactersLimit: 'Batas {n} karakter',
+    guidanceTextTip: 'Teks panduan tidak boleh melebihi {n} karakter, silakan ubah dan simpan lagi',
+    // Question type titles
+    singleLineInputTitle: 'Input Baris Tunggal',
+    multiLineInputTitle: 'Input Multi-baris',
+    singleChoiceTitle: 'Pilihan Tunggal',
+    multipleChoiceTitle: 'Pilihan Ganda',
+    trueFalseTitle: 'Benar/Salah',
+    starRatingTitle: 'Rating Bintang',
+    npsRatingTitle: 'Rating NPS',
+    voteTitle: 'Voting',
+    cascaderTitle: 'Bertingkat',
+    // Form placeholders and tips
+    limitCharacters: 'Batas {n} karakter',
+    guidanceValidationWarning: 'Teks panduan tidak boleh melebihi 20 karakter, silakan ubah dan simpan lagi'
   },
 
   // Formulir Buat Survei

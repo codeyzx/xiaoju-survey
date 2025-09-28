@@ -1,79 +1,81 @@
+import { createI18n } from 'vue-i18n'
+
 export const menuItems = {
   text: {
     type: 'text',
     snapshot: '/imgs/question-type-snapshot/iL84te6xxU1657702189333.webp',
     path: 'InputModule',
     icon: 'tixing-danhangshuru',
-    title: '单行输入框'
+    titleKey: 'editor.typeListSingleLineInput'
   },
   textarea: {
     type: 'textarea',
     snapshot: '/imgs/question-type-snapshot/11iAo3ca0u1657702225416.webp',
     path: 'TextareaModule',
     icon: 'tixing-duohangshuru',
-    title: '多行输入框'
+    titleKey: 'editor.typeListMultiLineInput'
   },
   radio: {
     type: 'radio',
     snapshot: '/imgs/question-type-snapshot/TgeRDfURJZ1657702220602.webp',
     icon: 'tixing-danxuan',
     path: 'RadioModule',
-    title: '单项选择'
+    titleKey: 'editor.typeListSingleChoice'
   },
   checkbox: {
     type: 'checkbox',
     path: 'CheckboxModule',
     snapshot: '/imgs/question-type-snapshot/Md2YmzBBpV1657702223744.webp',
     icon: 'tixing-duoxuan',
-    title: '多项选择'
+    titleKey: 'editor.typeListMultipleChoice'
   },
   'binary-choice': {
     type: 'binary-choice',
     snapshot: '/imgs/question-type-snapshot/blW8U1ckzd1657702223023.webp',
     path: 'BinaryChoiceModule',
     icon: 'tixing-panduanti',
-    title: '判断题'
+    titleKey: 'editor.typeListTrueFalse'
   },
   'radio-star': {
     type: 'radio-star',
     snapshot: '/imgs/question-type-snapshot/7CU6tn4XqT1657702221208.webp',
     path: 'StarModule',
     icon: 'tixing-pingfen',
-    title: '评分'
+    titleKey: 'editor.typeListStarRating'
   },
   'radio-nps': {
     type: 'radio-nps',
     path: 'NpsModule',
     snapshot: '/imgs/question-type-snapshot/radio-nps.webp',
     icon: 'NPSpingfen',
-    title: 'nps评分'
+    titleKey: 'editor.typeListNpsRating'
   },
   vote: {
     type: 'vote',
     path: 'VoteModule',
     snapshot: '/imgs/question-type-snapshot/nGTscsZlwn1657702222857.webp',
     icon: 'tixing-toupiao',
-    title: '投票'
+    titleKey: 'editor.typeListVoteQuestion'
   },
   cascader: {
     type: 'cascader',
     path: 'CascaderModule',
     snapshot: '/imgs/question-type-snapshot/cascader.webp',
     icon: 'cascader-select',
-    title: '多级联动'
+    titleKey: 'editor.typeListCascaderQuestion'
   }
 }
 
 const menuGroup = [
   {
-    title: '输入类题型',
+    titleKey: 'editor.inputQuestions',
     questionList: ['text', 'textarea']
   },
   {
-    title: '选择类题型',
+    titleKey: 'editor.choiceQuestions',
     questionList: ['radio', 'checkbox', 'binary-choice', 'radio-star', 'radio-nps', 'vote']
   }, {
-    title: '高级题型',
+    titleKey: 'editor.advancedQuestions',
     questionList: ['cascader']
   }
 ]

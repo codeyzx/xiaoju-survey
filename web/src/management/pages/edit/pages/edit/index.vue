@@ -5,7 +5,7 @@
         <el-radio-button
           v-for="item in routes"
           :key="item.router"
-          :label="item.text"
+          :label="$t(item.textKey)"
           :value="item.router"
         />
       </el-radio-group>
@@ -22,11 +22,13 @@ const { setCurrentEditOne } = editStore
 const routes = [
   {
     text: '内容设置',
+    textKey: 'editor.contentSettings',
     router: 'QuestionEditIndex',
     key: 'questionEdit'
   },
   {
     text: '逻辑设置',
+    textKey: 'editor.logicSettings',
     router: 'LogicIndex',
     key: 'logicEdit'
   }

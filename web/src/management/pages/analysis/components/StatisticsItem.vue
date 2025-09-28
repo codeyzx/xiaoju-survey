@@ -35,6 +35,7 @@
 <script setup>
 import { reactive, toRefs, computed, watch, onMounted, onUnmounted, ref } from 'vue'
 import { cloneDeep as _cloneDeep } from 'lodash-es'
+import { useI18n } from 'vue-i18n'
 import {
   separateItemListHead,
   summaryType,
@@ -59,7 +60,13 @@ const questionType = computed(() => {
 })
 
 const questionTypeDesc = computed(() => {
-  return menuItems?.[questionType.value]?.title || ''
+  const item = menuItems?.[questionType.value]
+  if (item?.titleKey) {
+    // Use i18n to get translated title
+    const { t } = useI18n()
+    return t(item.titleKey)
+  }
+  return ''
 })
 
 // 表格数据

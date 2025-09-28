@@ -1,6 +1,6 @@
 <template>
   <el-input
-    :placeholder="formConfig.placeholder"
+    :placeholder="formConfig.placeholderKey ? $t(formConfig.placeholderKey, { n: 20 }) : formConfig.placeholder"
     v-model="modelValue"
     :maxlength="formConfig.maxLength"
     @blur="handleInputBlur"

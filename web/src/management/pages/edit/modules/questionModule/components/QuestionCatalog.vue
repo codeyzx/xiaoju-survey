@@ -1,7 +1,7 @@
 <template>
   <div class="question-catalog-wrapper">
     <el-collapse>
-      <el-collapse-item v-for="(v, i) in renderData" :key="v" :title="`第${i + 1}页`" :name="i + 1">
+      <el-collapse-item v-for="(v, i) in renderData" :key="v" :title="$t('editor.pageNumber', { n: i + 1 })" :name="i + 1">
         <draggable
           v-model="renderData[i]"
           itemKey="field"

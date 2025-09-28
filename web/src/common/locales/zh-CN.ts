@@ -360,7 +360,80 @@ export default {
     collaborate: '协作',
     history: '历史',
     modificationHistory: '修改历史',
-    publishHistory: '发布历史'
+    publishHistory: '发布历史',
+    questionTypeSelection: '题型选择',
+    questionOutline: '题目大纲',
+    pageNumber: '第{n}页',
+    // Question types for TypeList
+    typeListSingleLineInput: '单行输入框',
+    typeListMultiLineInput: '多行输入框',
+    typeListSingleChoice: '单项选择',
+    typeListMultipleChoice: '多项选择',
+    typeListTrueFalse: '判断题',
+    typeListStarRating: '评分',
+    typeListNpsRating: 'NPS评分',
+    typeListVoteQuestion: '投票',
+    typeListCascaderQuestion: '多级联动',
+    // Question categories
+    inputQuestions: '输入类题型',
+    choiceQuestions: '选择类题型',
+    advancedQuestions: '高级题型',
+    // Settings tabs
+    singleQuestionSettings: '单题设置',
+    surveySettings: '整卷设置',
+    // Settings messages
+    selectQuestionToEdit: '选中题型可以编辑',
+    tryItOut: '来！试试看～',
+    // Additional settings
+    themeSettings: '主题设置',
+    styleSettings: '样式设置',
+    advancedSettings: '高级设置',
+    optionAdvancedSettings: '选项高级设置',
+    ratingAdvancedSettings: '评分高级设置',
+    // Main navigation
+    contentSettings: '内容设置',
+    logicSettings: '逻辑设置',
+    // Form configurations
+    basicConfiguration: '基础配置',
+    requiredField: '必填',
+    showType: '显示类型',
+    showIndex: '显示序号',
+    showSpliter: '显示分割线',
+    showSpliterTip: '题目下方分割线，仅在移动端展示。',
+    // Question specific configs
+    optionConfiguration: '选项配置',
+    contentLimitFormat: '内容限制格式',
+    numberLimit: '数字限制',
+    characterLimit: '字数限制',
+    guidanceText: '引导提示文案',
+    ratingDisplayStyle: '评分显示样式',
+    npsMinValue: 'NPS量表最小值',
+    npsMaxValue: 'NPS量表最大值',
+    npsTwoLevelText: 'NPS两级文案',
+    // Validation options
+    pleaseSelect: '请选择',
+    phoneNumber: '手机号',
+    idCard: '身份证',
+    numberValidation: '数字',
+    email: '邮箱',
+    licensePlate: '车牌号',
+    // Input placeholders and tips
+    inputPlaceholder: '限制{n}字',
+    charactersLimit: '限制{n}字',
+    guidanceTextTip: '引导提示文案字数不能超过{n}个字，请修改后重新保存',
+    // Question type titles
+    singleLineInputTitle: '单行输入框',
+    multiLineInputTitle: '多行输入框',
+    singleChoiceTitle: '单选',
+    multipleChoiceTitle: '多选',
+    trueFalseTitle: '判断题',
+    starRatingTitle: '评分',
+    npsRatingTitle: 'nps评分',
+    voteTitle: '投票',
+    cascaderTitle: '多级联动',
+    // Form placeholders and tips
+    limitCharacters: '限制{n}字',
+    guidanceValidationWarning: '引导提示文案字数不能超过20个字，请修改后重新保存'
   },
 
   // 创建问卷表单

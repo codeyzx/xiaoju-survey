@@ -3,15 +3,15 @@
     <div class="customed-checkbox" v-for="item in formConfig.options" :key="item.key">
       <el-checkbox
         v-model="optionsValue[item.key]"
-        :label="item.label"
+        :label="item.labelKey ? $t(item.labelKey) : item.label"
         @change="handleCheckboxChange(item.key, $event)"
       >
       </el-checkbox>
-      <el-tooltip v-if="item.tip" class="tooltip" effect="dark" placement="right">
+      <el-tooltip v-if="item.tip || item.tipKey" class="tooltip" effect="dark" placement="right">
         <template #content>
-          <div v-plain-text="item.tip"></div>
+          <div v-plain-text="item.tipKey ? $t(item.tipKey) : item.tip"></div>
         </template>
-        <i-ep-questionFilled v-if="item.tip" class="icon-tip" />
+        <i-ep-questionFilled v-if="item.tip || item.tipKey" class="icon-tip" />
       </el-tooltip>
     </div>
   </div>

@@ -1,9 +1,9 @@
 <template>
   <div class="setter-wrapper">
     <el-tabs v-model="confType" type="border-card" stretch>
-      <el-tab-pane name="baseConf" label="单题设置">
-        <div v-if="currentEditMeta?.title" class="setter-title">
-          {{ currentEditMeta?.title || '' }}
+      <el-tab-pane name="baseConf" :label="$t('editor.singleQuestionSettings')">
+        <div v-if="currentEditMeta?.title || currentEditMeta?.titleKey" class="setter-title">
+          {{ currentEditMeta?.titleKey ? $t(currentEditMeta.titleKey) : (currentEditMeta?.title || '') }}
         </div>
 
         <div
@@ -11,8 +11,8 @@
           v-if="editStore.currentEditOne === 'mainTitle' || editStore.currentEditOne === null"
         >
           <img src="/imgs/icons/unselected.webp" />
-          <h4 class="tipFont">选中题型可以编辑</h4>
-          <span class="tip">来！试试看～</span>
+          <h4 class="tipFont">{{ $t('editor.selectQuestionToEdit') }}</h4>
+          <span class="tip">{{ $t('editor.tryItOut') }}</span>
         </div>
 
         <SetterField
@@ -22,7 +22,7 @@
           @form-change="handleFormChange"
         />
       </el-tab-pane>
-      <el-tab-pane name="globalBaseConf" label="整卷设置">
+      <el-tab-pane name="globalBaseConf" :label="$t('editor.surveySettings')">
         <SetterField
           :form-config-list="[basicConfig]"
           :module-config="editStore.editGlobalBaseConf.globalBaseConfig"

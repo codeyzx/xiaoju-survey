@@ -2,6 +2,7 @@ import basicConfig from '@materials/questions/common/config/basicConfig'
 
 const meta = {
   title: '单选',
+  titleKey: 'editor.singleChoiceTitle',
   type: 'radio',
   componentName: 'RadioModule',
   attrs: [

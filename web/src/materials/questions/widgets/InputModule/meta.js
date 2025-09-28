@@ -2,6 +2,7 @@ import basicConfig from '@materials/questions/common/config/basicConfig'
 
 export const meta = {
   title: '单行输入框',
+  titleKey: 'editor.singleLineInputTitle',
   type: 'text',
   componentName: 'InputModule',
   attrs: [
@@ -96,31 +97,38 @@ export const meta = {
     {
       name: 'valid',
       title: '内容限制格式',
+      titleKey: 'editor.contentLimitFormat',
       type: 'SelectSetter',
       key: 'valid',
       options: [
         {
           label: '请选择',
+          labelKey: 'editor.pleaseSelect',
           value: ''
         },
         {
           label: '手机号',
+          labelKey: 'editor.phoneNumber',
           value: 'm'
         },
         {
           label: '身份证',
+          labelKey: 'editor.idCard',
           value: 'idcard'
         },
         {
           label: '数字',
+          labelKey: 'editor.numberValidation',
           value: 'n'
         },
         {
           label: '邮箱',
+          labelKey: 'editor.email',
           value: 'e'
         },
         {
           label: '车牌号',
+          labelKey: 'editor.licensePlate',
           value: 'licensePlate'
         }
       ]
@@ -128,6 +136,7 @@ export const meta = {
     {
       name: 'numberRange',
       title: '数字限制',
+      titleKey: 'editor.numberLimit',
       type: 'RangeSetter',
       key: 'numberRange',
       value: [],
@@ -136,6 +145,7 @@ export const meta = {
     {
       name: 'textRange',
       title: '字数限制',
+      titleKey: 'editor.characterLimit',
       type: 'RangeSetter',
       key: 'textRange',
       value: []
@@ -143,10 +153,13 @@ export const meta = {
     {
       name: 'placeholder',
       title: '引导提示文案',
+      titleKey: 'editor.guidanceText',
       type: 'InputSetter',
       placeholder: '限制20字',
+      placeholderKey: 'editor.limitCharacters',
       key: 'placeholder',
       tip: '限制20字',
+      tipKey: 'editor.limitCharacters',
       validate(value) {
         if (value && value.length > 20) {
           console.warn('引导提示文案字数不能超过20个字，请修改后重新保存')

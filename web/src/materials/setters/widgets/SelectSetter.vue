@@ -10,8 +10,8 @@
   >
     <el-option
       v-for="item in options"
-      :label="`${item.index ? item.index + '.' : ''}${item.label}`"
-      :title="item.label"
+      :label="`${item.index ? item.index + '.' : ''}${item.labelKey ? $t(item.labelKey) : item.label}`"
+      :title="item.labelKey ? $t(item.labelKey) : item.label"
       :value="item.value"
       :key="item.value"
     />

@@ -1,6 +1,6 @@
 <template>
   <div class="tab-box">
-    <div class="title">主题设置</div>
+    <div class="title">{{ $t('editor.themeSettings') }}</div>
     <div class="content">
       <div class="tag-list">
         <el-tag

@@ -2,6 +2,7 @@ import basicConfig from '@materials/questions/common/config/basicConfig'
 
 const meta = {
   title: '投票',
+  titleKey: 'editor.voteTitle',
   type: 'vote',
   componentName: 'VoteModule',
   attrs: [

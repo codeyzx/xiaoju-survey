@@ -1,10 +1,10 @@
 <template>
   <el-form class="config-form" @submit.prevent>
     <div v-for="(item, index) in formFieldData" :key="`${item.key}${index}`" class="group-wrap">
-      <div v-if="item.title" class="group-title">
-        {{ item.title }}
+      <div v-if="item.title || item.titleKey" class="group-title">
+        {{ item.titleKey ? $t(item.titleKey) : item.title }}
 
-        <el-tooltip v-if="item.tip" :content="item.tip" placement="right">
+        <el-tooltip v-if="item.tip || item.tipKey" :content="item.tipKey ? $t(item.tipKey) : item.tip" placement="right">
           <i-ep-questionFilled class="icon-tip" />
         </el-tooltip>
       </div>

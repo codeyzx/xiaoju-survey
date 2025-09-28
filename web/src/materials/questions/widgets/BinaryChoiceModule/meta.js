@@ -2,6 +2,7 @@ import basicConfig from '@materials/questions/common/config/basicConfig'
 
 const meta = {
   title: '判断题',
+  titleKey: 'editor.trueFalseTitle',
   type: 'binary-choice',
   componentName: 'BinaryChoiceModule',
   attrs: [

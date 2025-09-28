@@ -1,6 +1,6 @@
 <template>
   <div class="setter-wrapper">
-    <div class="setter-title">样式设置</div>
+    <div class="setter-title">{{ $t('editor.styleSettings') }}</div>
     <div class="setter-content">
       <el-collapse v-model="collapse">
         <el-collapse-item

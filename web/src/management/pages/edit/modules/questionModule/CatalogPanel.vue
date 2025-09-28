@@ -1,9 +1,9 @@
 <template>
   <el-tabs type="border-card" v-model="tabSelected" stretch class="tab-box">
-    <el-tab-pane label="题型选择">
+    <el-tab-pane :label="$t('editor.questionTypeSelection')">
       <TypeList />
     </el-tab-pane>
-    <el-tab-pane label="题目大纲">
+    <el-tab-pane :label="$t('editor.questionOutline')">
       <QuestionCatalog />
     </el-tab-pane>
   </el-tabs>

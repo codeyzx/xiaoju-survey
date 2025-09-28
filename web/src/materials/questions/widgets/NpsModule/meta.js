@@ -3,6 +3,7 @@ import basicConfig from '@materials/questions/common/config/basicConfig'
 
 const meta = {
   title: 'nps评分',
+  titleKey: 'editor.npsRatingTitle',
   type: 'radio-nps',
   componentName: 'NpsModule',
   attrs: [
