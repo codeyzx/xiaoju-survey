@@ -1,13 +1,8 @@
 <template>
   <div class="qrcode">
     <div class="qcode-mask">
-      <el-popover
-        ref="popover"
-        :popper-class="'serve-qrcode-popover'"
-        placement="top"
-        trigger="hover"
-      >
-        <img :src="qRCodeImg" width="120" height="120" />
+      <el-popover ref="popover" :popper-class="'serve-qrcode-popover'" placement="top" trigger="hover">
+        <img :src="qRCodeImg" width="120" height="120" loading="lazy" alt="QR Code" />
         <template #reference>
           <el-button>
             <i style="font-size: 24px" class="iconfont icon-erweima"></i>
@@ -75,6 +70,7 @@ watch(
       font-size: 12px;
       text-align: center;
       transition: all 0.2s;
+
       &:hover {
         background: $background-color-gray;
         color: #6e707c;

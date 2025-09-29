@@ -23,16 +23,18 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/survey',
     name: 'survey',
-    component: () => import('../pages/list/index.vue'),
+    component: () => import(/* webpackChunkName: "survey-list" */ '../pages/list/index.vue'),
     meta: {
       needLogin: true,
-      title: '问卷列表'
+      title: '问卷列表',
+      preload: true // Mark as critical route
     }
   },
   {
     path: '/download',
     name: 'download',
-    component: () => import('../pages/download/DownloadPage.vue'),
+    component: () =>
+      import(/* webpackChunkName: "download" */ '../pages/download/DownloadPage.vue'),
     meta: {
       needLogin: true
     }
@@ -44,7 +46,7 @@ const routes: RouteRecordRaw[] = [
       permissions: [SurveyPermissions.SurveyManage]
     },
     name: 'QuestionEdit',
-    component: () => import('../pages/edit/index.vue'),
+    component: () => import(/* webpackChunkName: "question-edit" */ '../pages/edit/index.vue'),
     children: [
       {
         path: '',

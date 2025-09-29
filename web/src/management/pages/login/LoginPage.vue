@@ -4,7 +4,7 @@
     'background-size': 'cover'
   }">
     <div class="login-top">
-      <img src="/imgs/Logo.webp" alt="logo" />
+      <img src="/imgs/Logo.webp" alt="logo" loading="lazy" />
       <div class="login-top-right">
         <LanguageSelector />
       </div>

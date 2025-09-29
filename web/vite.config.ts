@@ -9,6 +9,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
+import compression from 'vite-plugin-compression'
 
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
@@ -72,7 +73,11 @@ export default defineConfig({
       'node-forge',
       '@logicflow/core',
       '@logicflow/extension'
-    ]
+    ],
+    force: true,
+    esbuildOptions: {
+      target: 'es2020'
+    }
   },
   plugins: [
     vue(),
@@ -100,7 +105,12 @@ export default defineConfig({
     Icons({
       autoInstall: true
     }),
-    mpaPlugin
+    mpaPlugin,
+    compression({
+      algorithm: 'gzip',
+      threshold: 1024,
+      deleteOriginFile: false
+    })
   ],
   resolve: {
     alias: {
@@ -112,6 +122,7 @@ export default defineConfig({
   },
   appType: 'mpa',
   css: {
+    devSourcemap: false,
     preprocessorOptions: {
       scss: {
         api: 'modern-compiler',
@@ -140,28 +151,52 @@ export default defineConfig({
     }
   },
   build: {
+    target: 'es2020',
+    minify: 'terser',
+    cssMinify: true,
+    sourcemap: false,
+    chunkSizeWarningLimit: 1000,
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+        pure_funcs: ['console.log']
+      }
+    },
     rollupOptions: {
       output: {
         assetFileNames: '[ext]/[name]-[hash].[ext]',
         chunkFileNames: 'js/[name]-[hash].js',
         entryFileNames: 'js/[name]-[hash].js',
         manualChunks(id) {
-          // 建议根据项目生产实际情况进行优化，部分可走cdn或进行小资源包合并
+          // 优化chunk拆分策略
           if (id.includes('element-plus')) {
             return 'element-plus'
           }
-          if (id.includes('wangeditor')) {
+          if (id.includes('@wangeditor')) {
             return 'wangeditor'
           }
-          if (id.includes('node-forg')) {
-            return 'node-forg'
+          if (id.includes('node-forge')) {
+            return 'node-forge'
           }
           if (id.includes('echarts')) {
             return 'echarts'
           }
-
+          if (id.includes('vue-router')) {
+            return 'vue-router'
+          }
+          if (id.includes('vue-i18n')) {
+            return 'vue-i18n'
+          }
+          if (id.includes('lodash-es')) {
+            return 'lodash'
+          }
+          if (id.includes('@logicflow')) {
+            return 'logicflow'
+          }
+          // 将剩余的node_modules分组到vendor chunk
           if (id.includes('node_modules')) {
-            return 'packages'
+            return 'vendor'
           }
         }
       }

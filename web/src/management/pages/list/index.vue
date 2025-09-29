@@ -88,7 +88,7 @@
       <div class="ai-generate-header">
 
         <div class="nav-left">
-          <img src="/imgs/s-logo.webp" class="logo" />
+          <img src="/imgs/s-logo.webp" class="logo" loading="lazy" alt="Logo" />
           <el-button link @click="showAIGenerate = false">
             <i class="iconfont icon-fanhui"></i>
             {{ $t('common.back') }}
@@ -109,24 +109,26 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, defineAsyncComponent } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { ElMessage } from 'element-plus'
+// Critical components - loaded immediately
 import BaseList from './components/BaseList.vue'
-import RecycleBinList from './components/RecycleBinList.vue'
-import SpaceList from './components/SpaceList.vue'
-import GroupList from './components/GroupList.vue'
 import SliderBar from './components/SliderBar.vue'
-import SpaceModify from './components/SpaceModify.vue'
-import GroupModify from './components/GroupModify.vue'
-import TextImport from './components/TextImport.vue'
-import ExcelImport from './components/ExcelImport.vue'
-import AIGenerate from './components/AIGenerate.vue'
-
 import TopNav from '@/management/components/TopNav.vue'
-import CreateForm from '@/management/components/CreateForm.vue';
+
+// Non-critical components - loaded lazily
+const RecycleBinList = defineAsyncComponent(() => import('./components/RecycleBinList.vue'))
+const SpaceList = defineAsyncComponent(() => import('./components/SpaceList.vue'))
+const GroupList = defineAsyncComponent(() => import('./components/GroupList.vue'))
+const SpaceModify = defineAsyncComponent(() => import('./components/SpaceModify.vue'))
+const GroupModify = defineAsyncComponent(() => import('./components/GroupModify.vue'))
+const TextImport = defineAsyncComponent(() => import('./components/TextImport.vue'))
+const ExcelImport = defineAsyncComponent(() => import('./components/ExcelImport.vue'))
+const AIGenerate = defineAsyncComponent(() => import('./components/AIGenerate.vue'))
+const CreateForm = defineAsyncComponent(() => import('@/management/components/CreateForm.vue'))
 import { MenuType } from '@/management/utils/workSpace'
 
 import { useWorkSpaceStore } from '@/management/stores/workSpace'
